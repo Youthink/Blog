@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>Linux 目录文件权限的查看和修改</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    Linux 目录文件权限的查看和修改
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2017-11-12T07:37:17.000Z" itemprop="datePublished">2017-11-12</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2017-11-12T07:37:17.000Z" itemprop="dateUpdated">2017-11-12</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flfce9uxqbj30ae070myk.jpg" alt=""></p>
+<h2 id="查看文件权限"><a href="#查看文件权限" class="headerlink" title="查看文件权限"></a>查看文件权限</h2><ul>
+<li><p>第一部分的三个 rw- 代表的是 <code>所有者（user）</code>拥有的权限</p>
+</li>
+<li><p>中间的三个三个 r– 代表的是 <code>组群（group）</code> 拥有的权限</p>
+</li>
+<li><p>最后那三个 r– 代表的是 <code>其他人（other）</code> 拥有的权限</p>
+<p><code>r</code> 表示文件可以被读（read）<br><code>w</code> 表示文件可以被写（write）<br><code>x</code> 表示文件可以被执行（如果它是程序的话）<br><code>-</code> 表示相应的权限还没有被授予</p>
+</li>
+</ul>
+<p>  <code>u</code> 代表所有者（user）<br>  <code>g</code> 代表所有者所在的组群（group）<br>  <code>o</code> 代表其他人，但不是u和g （other）<br>  <code>a</code> 代表全部的人，也就是包括u，g和o<br>  <code>r</code> 表示文件可以被读（read）<br>  <code>w</code> 表示文件可以被写（write）<br>  <code>x</code> 表示文件可以被执行（如果它是程序的话）<br>　　<br>其中：<code>rwx</code> 也可以用数字来代替</p>
+<p>   <code>r</code> ————4<br>   <code>w</code> ————2<br>   <code>x</code> ————1<br>   <code>-</code> ————0</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-rw------- (600) 只有所有者才有读和写的权限</span><br><span class="line">-rw-r--r-- (644) 只有所有者才有读和写的权限，组群和其他人只有读的权限</span><br><span class="line">-rwx------ (700) 只有所有者才有读，写，执行的权限</span><br><span class="line">-rwxr-xr-x (755) 只有所有者才有读，写，执行的权限，组群和其他人只有读和执行的权限</span><br><span class="line">-rwx--x--x (711) 只有所有者才有读，写，执行的权限，组群和其他人只有执行的权限</span><br><span class="line">-rw-rw-rw- (666) 每个人都有读写的权限</span><br><span class="line">-rwxrwxrwx (777) 每个人都有读写和执行的权限</span><br></pre></td></tr></table></figure>
+<h2 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod 700 /mnt/fileA</span><br><span class="line">//注：仅把fileA目录的权限设置为700</span><br><span class="line"></span><br><span class="line">chmod -R 744 /mnt/fileA</span><br><span class="line">//注：表示将整个/mnt/fileA目录与其中的文件和子目录的权限都设置为744</span><br></pre></td></tr></table></figure>
+<p>使用命令chown改变目录或文件的所有权</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown 用户名 + 文件</span><br><span class="line"></span><br><span class="line">chown 组名: + 文件</span><br><span class="line"></span><br><span class="line">chown 用户组:用户名 + 文件</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://zhaoyuqiang.blog.51cto.com/6328846/1214718" target="_blank" rel="noopener">菜鸟Linux攻略–目录文件权限的查看和修改（详细）</a></p>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>移动端开发的各种坑汇总</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    移动端开发的各种坑汇总
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2017-03-28T16:00:00.000Z" itemprop="datePublished">2017-03-29</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2017-04-06T09:37:00.000Z" itemprop="dateUpdated">2017-04-06</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <blockquote>
+<p>欢迎补充或者提出新的解决方案。😊</p>
+</blockquote>
+<h2 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h2><h4 id="1、手机晃动时，如果页面上有输入框会触发系统默认的-“取消键入”-功能"><a href="#1、手机晃动时，如果页面上有输入框会触发系统默认的-“取消键入”-功能" class="headerlink" title="1、手机晃动时，如果页面上有输入框会触发系统默认的 “取消键入” 功能"></a>1、手机晃动时，如果页面上有输入框会触发系统默认的 “取消键入” 功能</h4><p><strong>问题描述</strong>：</p>
+<p>之前做了一个摇一摇抢红包的活动，前提是需要用户登录，但是用户登陆（表单输入）后再摇，就会触发 “取消键入”。</p>
+<p><strong>解决办法</strong>：</p>
+<p>我的登录是抽离的组件，登录成功后，dom也就不存在了。刷新一次页面就可以了。</p>
+<p>其他的办法，将有表单输入和晃一晃的页面分开，放在两个页面。</p>
+<h4 id="2、IOS的快速连续点击事件"><a href="#2、IOS的快速连续点击事件" class="headerlink" title="2、IOS的快速连续点击事件"></a>2、IOS的快速连续点击事件</h4><p><strong>问题描述</strong>：<br>之前做了一个戳红包的活动，需要用户快速连续的点击抢红包的按钮，才会触发抽奖的链接，但是IOS系统 click 事件会延迟300ms。</p>
+<p><strong>解决办法</strong>：</p>
+<p>有个库叫<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="noopener">fastclick</a>可以处理这个问题</p>
+<p>React可以用这个：<a href="https://www.npmjs.com/package/react-fastclick" target="_blank" rel="noopener">react-fastclick</a>库</p>
+<h4 id="3、滚动事件"><a href="#3、滚动事件" class="headerlink" title="3、滚动事件"></a>3、滚动事件</h4><p>IOS系统是<code>10.3</code> 这个问题在微信和 App的 webview 中发现了，safari 和 chrome 没有发现问题。</p>
+<p><strong>问题描述</strong>：</p>
+<p><code>window.addEventListener(&#39;scroll&#39;,function(){})</code></p>
+<p>对滚动事件的监听，页面滚动结束后才触发要执行的函数，并不是滚动开始时触发。</p>
+<p><strong>解决办法</strong>：</p>
+<p><code>window.addEventListener(&#39;touchmove&#39;,function(){})</code></p>
+<p>使用 <code>touchmove</code> 事件代替 <code>scroll</code> 事件</p>
+<h4 id="4、touch-事件和-click-事件共存时，click-事件失效"><a href="#4、touch-事件和-click-事件共存时，click-事件失效" class="headerlink" title="4、touch 事件和 click 事件共存时，click 事件失效"></a>4、touch 事件和 click 事件共存时，click 事件失效</h4><p><strong>问题描述</strong>：</p>
+<p>要实现类似IOS系统悬浮球（AssistiveTouch）的功能，可以移动和贴边吸附，还增加了点击跳转链接的功能。</p>
+<p>我用的 <code>react</code> 框架, <code>onClick</code> 和 <code>touch</code>类的事件共存的时候，发现click事件失效了，点击事件没有反应，不清楚是IOS的原因还是react的原因。</p>
+<p><strong>解决办法</strong>：</p>
+<p>使用 <code>touch</code> 事件模拟点击事件，<code>touchstart</code> 事件里记录目标元素的位置，与 <code>touchend</code> 事件目标元素的位置作比较，位置如果没有改变，则定义为点击事件，不然默认为触摸事件。</p>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><blockquote>
+<p>暂时还没遇到过 😁</p>
+</blockquote>
+<h2 id="都有"><a href="#都有" class="headerlink" title="都有"></a>都有</h2><p>1、一个在 App 里打开的H5页面，我想实现定时自动返回上一页，发现 <code>history.back()</code> 没有执行</p>
+<p><strong>解决办法</strong></p>
+<p>自动返回需要移动端给H5提供调用方法实现。</p>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

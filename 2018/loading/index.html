@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>loading 等待不再无聊</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    loading 等待不再无聊
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2018-03-27T06:20:01.000Z" itemprop="datePublished">2018-03-27</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2018-03-27T06:20:01.000Z" itemprop="dateUpdated">2018-03-27</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <p><img src="/media/Spinner-1s-200px.gif" alt="Spinner-1s-200px"></p>
+<blockquote>
+<p>很多应用在加载的时候，因为数据还没有返回，会给用户呈现一个加载的动效作为反馈，提示用户数据正在加载。但是如果页面加载的时间太长，可能就会导致用户流失。</p>
+<p>其实等待加载的这个小细节里，也有很多的创意，让等待不在无聊。</p>
+</blockquote>
+<p>为了让用户能稍等片刻，<code>loading</code> 的设计就可以充满趣味性，这里介绍一些比较有趣的 <code>loading</code>，让等待的过程变成了一种享受。</p>
+<h2 id="使用充满趣味性的加载动效"><a href="#使用充满趣味性的加载动效" class="headerlink" title="使用充满趣味性的加载动效"></a>使用充满趣味性的加载动效</h2><p><img src="http://image.woshipm.com/wp-files/2017/02/a4WTx4yop7z4oCVUMIUl.gif" alt=""></p>
+<p><img src="/media/pdECLTLpVFMr4Jc8xCWb.gif" alt="pdECLTLpVFMr4Jc8xCWb"></p>
+<p><img src="/media/161ZG138-44.gif" alt="161ZG138-44"></p>
+<p><img src="/media/161ZJ0S-14.gif" alt="161ZJ0S-14"></p>
+<p><img src="/media/815442-b0b53e2a86279228.gif" alt="815442-b0b53e2a86279228"></p>
+<p><img src="/media/815442-6f23db9af75006ff.gif" alt="815442-6f23db9af75006ff"></p>
+<p><img src="/media/giphy.gif" alt="giphy"></p>
+<h3 id="品牌的-loading"><a href="#品牌的-loading" class="headerlink" title="品牌的 loading"></a>品牌的 loading</h3><blockquote>
+<p>嵌入自家 logo，强化产品品牌</p>
+</blockquote>
+<h4 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h4><p><img src="/media/04-google-loading-motion-dots-logo.gif" alt="04-google-loading-motion-dots-logo"></p>
+<h4 id="slack"><a href="#slack" class="headerlink" title="slack"></a>slack</h4><p><img src="/media/slack_load.gif" alt="slack_load"></p>
+<h4 id="digg"><a href="#digg" class="headerlink" title="digg"></a>digg</h4><p><img src="/media/815442-668ae4eaf45aab9b.gif" alt="815442-668ae4eaf45aab9b"></p>
+<blockquote>
+<p>上面的 <code>loading</code> 用户初次见到时候可能会感到比较新颖，但是多次遇到 <code>loading</code> 后，趣味性就递减了。</p>
+</blockquote>
+<p>我常用的一款 app 的 <code>loading</code> 就很有意思，每次的文案不一样，而且充满趣味性。</p>
+<p>这样的 app 即使出现 <code>loading</code>，用户不会有等待感，反而想看清楚显示的是什么，对每次的文案充满期待。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let noticeString = [</span><br><span class="line">    &quot;正在拼命加载&quot;,</span><br><span class="line">    &quot;前方发现楼主&quot;,</span><br><span class="line">    &quot;年轻人,不要着急&quot;,</span><br><span class="line">    &quot;让我飞一会儿&quot;,</span><br><span class="line">    &quot;大爷,您又来了?&quot;,</span><br><span class="line">    &quot;楼主正在抓皮卡丘，等他一会儿吧&quot;,</span><br><span class="line">    &quot;爱我，就等我一万年&quot;,</span><br><span class="line">    &quot;未满18禁止入内&quot;,</span><br><span class="line">    &quot;正在前往 花村&quot;,</span><br><span class="line">    &quot;正在前往 阿努比斯神殿&quot;,</span><br><span class="line">    &quot;正在前往 沃斯卡娅工业区&quot;,</span><br><span class="line">    &quot;正在前往 观测站：直布罗陀&quot;,</span><br><span class="line">    &quot;正在前往 好莱坞&quot;,</span><br><span class="line">    &quot;正在前往 66号公路&quot;,</span><br><span class="line">    &quot;正在前往 国王大道&quot;,</span><br><span class="line">    &quot;正在前往 伊利奥斯&quot;,</span><br><span class="line">    &quot;正在前往 漓江塔&quot;,</span><br><span class="line">    &quot;正在前往 尼泊尔&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><blockquote>
+<p>最后，附上几个 <code>loading</code> 生成工具。</p>
+</blockquote>
+<h3 id="loading-io"><a href="#loading-io" class="headerlink" title="loading.io"></a>loading.io</h3><p><a href="https://loading.io/" target="_blank" rel="noopener">https://loading.io/</a></p>
+<p>登陆后，免费下载，支持 <code>loading</code> 动效的各种格式导出。</p>
+<p><img src="/media/15221417078807.jpg" alt=""></p>
+<h3 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h3><p><a href="https://connoratherton.com/loaders" target="_blank" rel="noopener">https://connoratherton.com/loaders</a></p>
+<p>纯 <code>css</code> 实现的 <code>loading</code></p>
+<p><img src="/media/15221417417648.jpg" alt=""></p>
+<h3 id="spin-js"><a href="#spin-js" class="headerlink" title="spin.js"></a>spin.js</h3><p><a href="http://spin.js.org/" target="_blank" rel="noopener">http://spin.js.org/</a></p>
+<p>在线编辑各种参数</p>
+<p><img src="/media/15221418378683.jpg" alt=""></p>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

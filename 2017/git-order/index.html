@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>git 常用命令清单</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    git 常用命令清单
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2017-02-22T06:46:53.000Z" itemprop="datePublished">2017-02-22</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2018-06-18T11:40:00.000Z" itemprop="dateUpdated">2018-06-18</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fh37ua0t32j30nc08caav.jpg" alt=""></p>
+<blockquote>
+<p>下面的 git </p>
+</blockquote>
+<p>注：简写指的是 <code>zsh</code> 自带的 <code>git</code> 扩展</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>克隆仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Youthink</span><br><span class="line"></span><br><span class="line">简写 gcl</span><br></pre></td></tr></table></figure>
+<p>添加修改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add --all</span><br><span class="line"></span><br><span class="line">简写 gaa</span><br></pre></td></tr></table></figure>
+<p>提交修改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m</span><br><span class="line"></span><br><span class="line">简写 gcmsg</span><br></pre></td></tr></table></figure>
+<p>代码推到远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin 当前分支</span><br><span class="line"></span><br><span class="line">简写 ggpush</span><br></pre></td></tr></table></figure>
+<p>查看已经commit的具体细节、文件更改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> -p</span><br></pre></td></tr></table></figure>
+<p>暂存代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash save</span><br><span class="line"></span><br><span class="line">简写 gsta</span><br><span class="line"></span><br><span class="line">git stash save some_msg   这样就好区分了</span><br></pre></td></tr></table></figure>
+<p>查看之前暂存的代码号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash list</span><br><span class="line"></span><br><span class="line">简写 gstl</span><br></pre></td></tr></table></figure>
+<p>查看之前暂存的代码内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash show --text</span><br><span class="line"></span><br><span class="line">简写 gsts</span><br></pre></td></tr></table></figure>
+<p>恢复暂存的代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash apply stash@&#123;1&#125;   1 是恢复第一个</span><br><span class="line"></span><br><span class="line">简写 gstaa</span><br></pre></td></tr></table></figure>
+<p>清除所有暂存的代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash clear</span><br><span class="line"></span><br><span class="line">简写 gstc</span><br></pre></td></tr></table></figure>
+<p>删除某一条暂存代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash drop stash@&#123;0&#125;</span><br></pre></td></tr></table></figure>
+<p>恢复第一条缓存代码并删除记录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+<h3 id="代码回滚"><a href="#代码回滚" class="headerlink" title="代码回滚"></a>代码回滚</h3><p>彻底取消最近的提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+<p>只取消提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --soft</span><br></pre></td></tr></table></figure>
+<p>想直接丢弃工作区的修改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- file</span><br></pre></td></tr></table></figure>
+<p>用一个新提交来消除一个历史提交所做的任何修改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git revert c011eb3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个命令只回滚某一次，不是某一次到现在的代码。</span></span><br></pre></td></tr></table></figure>
+<p>回滚到之前某一次提交</p>
+<p>比如我们有 1、2、3、4、5、6、7、8 次提交，现在因为某些不可描述的原因，我们想把代码恢复到 4 这次提交。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard 4这次提交的 <span class="built_in">hash</span> 串</span><br><span class="line">git reset --soft 8这次提交的 <span class="built_in">hash</span> 串</span><br><span class="line">git commit -m <span class="string">'Reverted 5 6 7 8'</span></span><br></pre></td></tr></table></figure>
+<p>放弃本地修改同远程同步</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure>
+<p>回退到某个版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard c011eb3</span><br></pre></td></tr></table></figure>
+<p>已经 add 了怎么取消</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset HEAD 文件</span><br></pre></td></tr></table></figure>
+<p>已经commit了怎么取消（最近一次）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>新建并切换到分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名</span><br><span class="line"></span><br><span class="line">简写 gcb 分支名</span><br></pre></td></tr></table></figure>
+<p>拉取远程所有分支的更改<br>(同时可以清除本地无效的远程分支)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch -p</span><br></pre></td></tr></table></figure>
+<p>删除本地分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d  分支名</span><br><span class="line"></span><br><span class="line">git branch -D  分支名</span><br><span class="line"></span><br><span class="line">简写 gbd</span><br></pre></td></tr></table></figure>
+<p>删除远程分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin :分支名</span><br></pre></td></tr></table></figure>
+<p>重命名本地分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m</span><br></pre></td></tr></table></figure>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>查看标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<p>删除本地标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag -d 标签名</span><br></pre></td></tr></table></figure>
+<p>删除远程标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin :refs/tags/标签名</span><br></pre></td></tr></table></figure>
+<p>推送标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin 标签名</span><br></pre></td></tr></table></figure>
+<p>打标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag -a 标签名 -m <span class="string">"提交信息"</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="合并某一次提交的内容"><a href="#合并某一次提交的内容" class="headerlink" title="合并某一次提交的内容"></a>合并某一次提交的内容</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git cherry-pick commit哈希值</span><br></pre></td></tr></table></figure>
+<h4 id="查看某个文件的任意一行是谁？在什么时间修改的？"><a href="#查看某个文件的任意一行是谁？在什么时间修改的？" class="headerlink" title="查看某个文件的任意一行是谁？在什么时间修改的？"></a>查看某个文件的任意一行是谁？在什么时间修改的？</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git blame 文件路径</span><br></pre></td></tr></table></figure>
+<h4 id="merge-的时候如何快速解决大量文件的冲突？"><a href="#merge-的时候如何快速解决大量文件的冲突？" class="headerlink" title="merge 的时候如何快速解决大量文件的冲突？"></a>merge 的时候如何快速解决大量文件的冲突？</h4><p>如果合并时有大量文件冲突，可以使用命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout --ours( --theirs)  文件</span><br></pre></td></tr></table></figure>
+<p>冲突文件中 <code>HEAD</code> 区块是 <code>ours</code> ，汇入的分支区块是 <code>theirs</code> 。</p>
+<p>举个🌰：一个功能分支是 <code>A</code> ，在 <code>test</code> 分支去合并分支 <code>A</code> 时，发现有大量文件冲突，且冲突的文件大部分都需要采取 <code>A</code> 分支的修改，我们可以先手动处理那小部分的需要采取 <code>test</code> 分支修改的冲突，再使用命令把 <code>test</code> 分支的 <code>HEAD</code> 修改 <code>checkout</code> 掉，即，使用 <code>git checkout --ours .</code> 命令解决冲突。</p>
+<p>这里要注意一个点，你现在所在的分支是 <code>ours</code> 也就是 冲突里的 <code>HEAD</code></p>
+<p>有时间再补充个图。。。。</p>
+<p> 🙏：欢迎补充更好的方案。</p>
+<p> 😂：此方法学自我夫人。。。（让我必须注明）</p>
+<h3 id="生成-ssh"><a href="#生成-ssh" class="headerlink" title="生成 ssh"></a>生成 ssh</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br><span class="line"></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

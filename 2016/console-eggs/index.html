@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>js console 彩蛋的原理与实现</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    js console 彩蛋的原理与实现
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2016-12-12T05:02:07.000Z" itemprop="datePublished">2016-12-12</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2017-01-14T17:08:00.000Z" itemprop="dateUpdated">2017-01-15</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <blockquote>
+<p>打开浏览器的开发者模式的控制台，比如F12（或者shift + command + j）打开Chrome的控制台，有些网站，会在这里面展示一些信息，比如招聘信息。话不多说，先上一波演示。</p>
+</blockquote>
+<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h3><h4 id="文字类型："><a href="#文字类型：" class="headerlink" title="文字类型："></a>文字类型：</h4><p>1、<a href="https://www.tmall.com" target="_blank" rel="noopener">天猫</a></p>
+<p><img src="https://ooo.0o0.ooo/2017/01/15/587a4df9ce5d4.png" alt="天猫"></p>
+<a id="more"></a>
+<p>2、<a href="https://www.baidu.com" target="_blank" rel="noopener">百度</a></p>
+<p><img src="https://ooo.0o0.ooo/2017/01/15/587a565731626.png" alt="百度"></p>
+<p>3、<a href="http://stackoverflow.com/questions/7505623/colors-in-javascript-console" target="_blank" rel="noopener">更炫酷的</a></p>
+<p><img src="https://ooo.0o0.ooo/2017/01/15/587a566f32813.png" alt=""></p>
+<h4 id="字符画类型："><a href="#字符画类型：" class="headerlink" title="字符画类型："></a>字符画类型：</h4><p>4、<a href="https://www.zhihu.com" target="_blank" rel="noopener">知乎</a></p>
+<p><img src="https://ooo.0o0.ooo/2017/01/15/587a52811c543.png" alt="知乎"></p>
+<p>5、<a href="https://www.hrwhisper.me/site-console-log/" target="_blank" rel="noopener">hrwhisper</a></p>
+<p><img src="https://ooo.0o0.ooo/2017/01/15/587a56e4a2dfc.png" alt=""></p>
+<h4 id="图片类型："><a href="#图片类型：" class="headerlink" title="图片类型："></a>图片类型：</h4><p>6、<a href="http://labs.qiang.it/qqpai/test/wcn/console/console.html" target="_blank" rel="noopener">凹凸实验室</a></p>
+<p><img src="https://ooo.0o0.ooo/2017/01/15/587a5743ac623.png" alt=""></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><blockquote>
+<p>看完，效果。我们一起学习一下，这些是怎么实现这些炫酷的效果</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'%c'</span>, <span class="string">'CSS代码'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="文字实现："><a href="#文字实现：" class="headerlink" title="文字实现："></a>文字实现：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(&apos;%c 你好！&apos;, &apos;background: #008000; color: #fff&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="图片实现："><a href="#图片实现：" class="headerlink" title="图片实现："></a>图片实现：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">console.log(&apos;%c            &apos;,&apos;background:url(http://7oxgmt.com1.z0.glb.clouddn.com/wp-content/themes/VicSugar-wordpress/public/img/face.jpg) no-repeat left center;font-size:200px&apos;);</span><br></pre></td></tr></table></figure>
+<p>注：<code>width</code>、<code>height</code> 这几个属性是不支持的，只能用<code>font-szie</code>来设置图片高宽。</p>
+<h3 id="字符画："><a href="#字符画：" class="headerlink" title="字符画："></a>字符画：</h3><blockquote>
+<p>上面的字符画效果是怎么实现的那？哈哈，肯定不是手打的啦。介绍两款很方便的软件，上传图片，可以自动生成对应的字符画。</p>
+</blockquote>
+<h4 id="字符画生成器"><a href="#字符画生成器" class="headerlink" title="字符画生成器"></a>字符画生成器</h4><p><a href="http://www.degraeve.com/img2txt.php" target="_blank" rel="noopener">http://www.degraeve.com/img2txt.php</a></p>
+<p><a href="http://picascii.com/" target="_blank" rel="noopener">http://picascii.com/</a></p>
+<h5 id="字符画直接复制到console-log中会报错，处理方式："><a href="#字符画直接复制到console-log中会报错，处理方式：" class="headerlink" title="字符画直接复制到console.log中会报错，处理方式："></a>字符画直接复制到<code>console.log</code>中会报错，处理方式：</h5><p>1、ES6里有  <code>`` </code> 这两个点，可以直接处理多行字符串</p>
+<p>2、把字符画复制到<code>Sublime Text</code>里，全选 然后 <code>shift + ctrl + l</code> 多行光标 在每行的开头添加<code>\n</code>,然后删除换行，使多行字符串变成单行字符串。</p>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

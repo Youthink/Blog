@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>本地 &lt;--&gt; 服务器间文件传输</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    本地 &lt;--&gt; 服务器间文件传输
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2015-05-03T02:21:06.000Z" itemprop="datePublished">2015-05-03</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2018-02-12T01:21:06.000Z" itemprop="dateUpdated">2018-02-12</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <h3 id="Linux-服务器之间文件传输"><a href="#Linux-服务器之间文件传输" class="headerlink" title="Linux 服务器之间文件传输"></a>Linux 服务器之间文件传输</h3><p>要把当前一个文件上传到远程另外一台主机上，可以如下命令<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scp -P 端口 文件 用户名@IP:远程主机目录  (注意主机号后的冒号于文件路径间没有空格！)</span><br><span class="line"></span><br><span class="line">scp -P 21345 /home/daisy/full.tar.gz root@172.19.2.75:/home/root</span><br></pre></td></tr></table></figure></p>
+<p>把文件从远程主机下载当前目录<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scp 用户名@IP:要存放的目录 远程主机文件</span><br><span class="line"></span><br><span class="line">scp -P 21345 root@172.19.2.75:/home/root/full.tar.gz ./</span><br></pre></td></tr></table></figure></p>
+<h3 id="Windows-与-Linux-之间传送文件"><a href="#Windows-与-Linux-之间传送文件" class="headerlink" title="Windows 与 Linux 之间传送文件"></a>Windows 与 Linux 之间传送文件</h3><p>Windows 下可以使用 <code>putty</code> 软件里的 <code>pscp.exe</code></p>
+<p>先在WIN的DOS下，PUTTY目录下及PSCP文件所在目录。</p>
+<p>上传文件到服务器<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pscp file username@hostIP:文件地址</span><br><span class="line"></span><br><span class="line">例:pscp d:abc.txt vic@IP:/home/endall/abc.txt</span><br></pre></td></tr></table></figure></p>
+<p>从服务器下载文件<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pscp vic@IP:/home/endall/abc.txt d:abc</span><br></pre></td></tr></table></figure></p>
+<p>具体操作</p>
+<p>1、把服务器上的 <code>/root/dir</code> 目录取回本地 <code>C:\My Documents\data\</code> 目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\&gt;pscp.exe -r root@192.168.32.50:/root/dir “C:\My Documents\data\”</span><br></pre></td></tr></table></figure>
+<p>2、把服务器上的 <code>/root/file</code> 文件取回来本地当前目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\&gt;pscp.exe root@192.168.32.50:/root/file .</span><br></pre></td></tr></table></figure>
+<p>3、把本地目录 dir、文件 file 传输到 Linux 服务器的 <code>/root/</code>，并指定服务器端口2009</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\&gt;pscp.exe -P 2009 -r dir file root@192.168.32.50:/root/</span><br></pre></td></tr></table></figure>
+<p>4、把本地文件 file 传输到 Linux 服务器的 <code>/root/</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\&gt;pscp.exe file 192.168.32.50:/root/</span><br></pre></td></tr></table></figure>
+<p>它会提示你输入密码，就像 Linux 下使用 scp 那样。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如果上传的路径需要权限，可以先<code>scp</code> 上传到不需要 <code>sudo</code> 权限的目录下，再在服务器上使用 <code>sudo</code> mv 过去。</p>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

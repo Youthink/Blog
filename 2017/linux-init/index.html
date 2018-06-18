@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>linux 服务器初始化配置流程</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    linux 服务器初始化配置流程
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2017-12-08T16:00:00.000Z" itemprop="datePublished">2017-12-09</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2017-12-08T16:00:00.000Z" itemprop="dateUpdated">2017-12-09</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <p><img src="/media/819542712-5a291b0bb9615_articlex.jpeg" alt="819542712-5a291b0bb9615_articlex"></p>
+<blockquote>
+<p>开发 <code>web</code> 应用的时候，经常需要配置服务器。我在阮一峰老师的 <a href="http://www.ruanyifeng.com/blog/2014/03/server_setup.html" target="_blank" rel="noopener">Linux服务器的初步配置流程</a> 的基础上，整理了这篇笔记。节约以后配置服务器的时间。 </p>
+</blockquote>
+<h2 id="修改-root-密码"><a href="#修改-root-密码" class="headerlink" title="修改 root 密码"></a>修改 root 密码</h2><p><code>root</code> 账户默认没有密码 安全起见 先初始化一个</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<h2 id="创建-Linux-管理员账户"><a href="#创建-Linux-管理员账户" class="headerlink" title="创建 Linux 管理员账户"></a>创建 Linux 管理员账户</h2><blockquote>
+<p>🐧 使用 <code>Linux</code> 服务器的时候，尽量不要使用 <code>root</code> 账号，处理日常操作，我们新建一个管理员账号。</p>
+</blockquote>
+<p>首先，添加一个用户组（这里我自定义的 admin）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">addgroup admin</span><br></pre></td></tr></table></figure>
+<p>然后，添加一个新用户（假定为 www）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">useradd -d /home/www -s /bin/bash -m www</span><br></pre></td></tr></table></figure>
+<p>上面命令中，参数 <code>d</code> 指定用户的主目录，参数 <code>s</code> 指定用户的 <code>shell</code>，参数 <code>m</code> 表示如果该目录不存在，则创建该目录。</p>
+<p>接着，设置新用户的密码。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">passwd www</span><br></pre></td></tr></table></figure>
+<p>将新用户（www）添加到用户组（admin）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">usermod -a -G admin www</span><br></pre></td></tr></table></figure>
+<p>接着，为新用户设定sudo权限。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/sudoers</span><br></pre></td></tr></table></figure>
+<p>找到下面这一行。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root    ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
+<p>在这一行的下面，再添加一行。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line">www    ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+<p>上面的 <code>NOPASSWD</code> 表示，切换 sudo 的时候，不需要输入密码。如果出于安全考虑，也可以强制要求输入密码。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line">www    ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
+<p>最后，先退出 <code>root</code> 用户登录，再用新用户的身份登录。</p>
+<h2 id="配置-SSH-服务"><a href="#配置-SSH-服务" class="headerlink" title="配置 SSH 服务"></a>配置 SSH 服务</h2><p>把自己电脑的 <code>ssh</code> 公钥，保存到服务器的 <code>~/.ssh/authorized_keys</code> 文件中</p>
+<p>直接使用下面的命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@123.456.78</span><br></pre></td></tr></table></figure>
+<p>然后，进入服务器，编辑SSH配置文件/etc/ssh/sshd_config。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/ssh/sshd_config ~     (备份，复原时使用)</span><br><span class="line">sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>在配置文件中，将 SSH 的默认端口 22 改掉。假设使用 25000</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Port 25000</span><br></pre></td></tr></table></figure>
+<p>然后，检查几个设置是否设成下面这样，确保去除前面的#号。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protocol 2</td>
+<td>ssh 协议使用新版的</td>
+</tr>
+<tr>
+<td>PermitRootLogin no</td>
+<td>不允许 root 登录</td>
+</tr>
+<tr>
+<td>PermitEmptyPasswords no</td>
+<td>不允许空密码登录</td>
+</tr>
+<tr>
+<td>PasswordAuthentication no</td>
+<td>使用密码授权登录</td>
+</tr>
+<tr>
+<td>RSAAuthentication yes</td>
+<td>使用RSA算法进行安全验证</td>
+</tr>
+<tr>
+<td>PubkeyAuthentication yes</td>
+<td>允许公钥认证</td>
+</tr>
+<tr>
+<td>UseDNS no</td>
+<td>禁用DNS反向解析 会加快速度</td>
+</tr>
+<tr>
+<td>SyslogFacility AUTHPRIV</td>
+<td>记录用户登录信息</td>
+</tr>
+</tbody>
+</table>
+<p>上面主要是禁止 <code>root</code> 用户登录，以及禁止用密码方式登录。</p>
+<p>保存后，退出文件编辑。</p>
+<p>接着，改变authorized_keys文件的权限。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo chmod 600 ~/.ssh/authorized_keys &amp;&amp; chmod 700 ~/.ssh/</span><br></pre></td></tr></table></figure>
+<p>重启 SSHD</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo /etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
+<h2 id="运行环境配置"><a href="#运行环境配置" class="headerlink" title="运行环境配置"></a>运行环境配置</h2><p>检查服务器的区域设置。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">locale</span><br></pre></td></tr></table></figure>
+<p>如果结果不是 <code>en_US.UTF-8</code>，建议都设成它。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo locale-gen en_US en_US.UTF-8 en_CA.UTF-8</span><br><span class="line">sudo dpkg-reconfigure locales</span><br></pre></td></tr></table></figure>
+<p>然后，更新软件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<p>最后，再根据需要，做一些安全设置，比如搭建防火墙，关闭 <code>HTTP</code>、<code>HTTPs</code>、<code>SSH</code> 以外的端口，详细可参考这篇 <a href="http://spenserj.com/blog/2013/07/15/securing-a-linux-server/" target="_blank" rel="noopener">《Securing a Linux Server》</a>。</p>
+<h2 id="特别番"><a href="#特别番" class="headerlink" title="特别番"></a>特别番</h2><h3 id="阿里云服务器"><a href="#阿里云服务器" class="headerlink" title="阿里云服务器"></a>阿里云服务器</h3><p>阿里云服务器可以在控制台设置安全组规则。</p>
+<h4 id="什么是安全组"><a href="#什么是安全组" class="headerlink" title="什么是安全组"></a>什么是安全组</h4><p>简单点，给大家举个栗子🌰，我部署了一个 <code>MongoDB</code> 的数据库，我怕别人黑我数据库，我就可以在安全组的规则里设置 <code>公网入方向</code> 拒绝访问 <code>MongoDB</code> 使用的端口 <code>27017</code>。只允许本地 <code>locahost</code> 访问，禁止公网访问。</p>
+<p>下面是教科书版具体解释</p>
+<p>阿里云产品介绍 请看这里 <a href="https://www.alibabacloud.com/help/zh/doc-detail/25387.htm" target="_blank" rel="noopener">安全组</a></p>
+<blockquote>
+<p>安全组是一种虚拟防火墙，具备状态检测包过滤功能。安全组用于设置单台或多台云服务器的网络访问控制，它是重要的网络安全隔离手段，用于在云端划分安全域。</p>
+<p>安全组是一个逻辑上的分组，这个分组是由同一个地域（Region）内具有相同安全保护需求并相互信任的实例组成。每个实例至少属于一个安全组，在创建的时候就需要指定。同一安全组内的实例之间网络互通，不同安全组的实例之间默认内网不通。可以授权两个安全组之间互访。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.ruanyifeng.com/blog/2014/03/server_setup.html" target="_blank" rel="noopener">Linux服务器的初步配置流程</a></p>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>定时任务 crontab 命令的使用</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    定时任务 crontab 命令的使用
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2017-08-05T11:47:32.000Z" itemprop="datePublished">2017-08-05</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2017-08-04T16:00:00.000Z" itemprop="dateUpdated">2017-08-05</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <p>每个系统用户都可以有自己的 <code>crontab</code>（在 <code>/var/spool/cron/</code> 下</p>
+<p>要查看当前用户的 <code>crontab</code>，输入 <code>crontab -l</code></p>
+<p>要编辑 <code>crontab</code>，输入 <code>crontab -e</code></p>
+<p>要删除 <code>crontab</code>，输入 <code>crontab -r</code></p>
+<h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式 :"></a>基本格式 :</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*　　*　　*　　*　　*　　command</span><br><span class="line">分　 时　 日　 月　 周　 命令</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第 1 列表示分钟 1～59 每分钟用 * 或者 */1 表示</span><br><span class="line">第 2 列表示小时 1～23（0 表示 0 点）</span><br><span class="line">第 3 列表示日期 1～31</span><br><span class="line">第 4 列表示月份 1～12</span><br><span class="line">第 5 列标识号星期 0～6（0 表示星期天）</span><br><span class="line">第 6 列要运行的命令</span><br><span class="line">* 逗号( , ) 指定列表值。如:  1, 3, 4, 7, 8</span><br><span class="line">* 中横线( - ) 指定范围值 如  1-6, 代表 1, 2, 3, 4, 5, 6</span><br><span class="line">* 星号 ( * ) 代表所有可能的值</span><br></pre></td></tr></table></figure>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">30 21 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>上面的例子表示每晚的21:30重启 <code>apache</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">45 4 1,10,22 * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>上面的例子表示每月1、10、22日的4 : 45重启 <code>apache</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">10 1 * * 6,0 /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>上面的例子表示每周六、周日的1 : 10重启 <code>apache</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0,30 18-23 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>上面的例子表示在每天 18 : 00 至 23 : 00 之间每隔30分钟重启 <code>apache</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 23 * * 6 /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>上面的例子表示每星期六的11 : 00 pm重启 <code>apache</code>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* */1 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>每一小时重启 <code>apache</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* 23-7/1 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>晚上11点到早上7点之间，每隔一小时重启 <code>apache</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 11 4 * mon-wed /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>每月的4号与每周一到周三的11点重启 <code>apache</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 4 1 jan * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+<p>一月一号的4点重启 <code>apache</code></p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><a href="http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html" target="_blank" rel="noopener">crontab命令</a></p>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

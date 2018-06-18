@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>npm 技巧汇总(含国内填坑指南)</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    npm 技巧汇总(含国内填坑指南)
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2017-08-05T12:32:05.000Z" itemprop="datePublished">2017-08-05</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2018-04-26T12:32:05.000Z" itemprop="dateUpdated">2018-04-26</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <h2 id="针对国内的-npm-配置"><a href="#针对国内的-npm-配置" class="headerlink" title="针对国内的 npm 配置"></a>针对国内的 <code>npm</code> 配置</h2><blockquote>
+<p>因为中国社会主义特色，部分代码库在下载的时候，有些坎坷。可以做以下的配置优化</p>
+</blockquote>
+<h3 id="npm-使用国内源"><a href="#npm-使用国内源" class="headerlink" title="npm 使用国内源"></a><code>npm</code> 使用国内源</h3><p>使用 <code>cnpm</code> 的源</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set registry http://registry.cnpmjs.org</span><br></pre></td></tr></table></figure>
+<p>或者使用淘宝的源</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p>除了上面使用命令的方式，也可以直接在 <code>~/.npmrc</code> 文件添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<h3 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h3><blockquote>
+<p>以下几个地址，也替换成淘宝的源，加快下载速度。</p>
+</blockquote>
+<p>在 <code>~/.npmrc</code> 文件添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sass_binary_site=https://npm.taobao.org/mirrors/node-sass/</span><br><span class="line">phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs/</span><br><span class="line">electron_mirror=https://npm.taobao.org/mirrors/electron/</span><br></pre></td></tr></table></figure>
+<h2 id="npm-其他技巧"><a href="#npm-其他技巧" class="headerlink" title="npm 其他技巧"></a><code>npm</code> 其他技巧</h2><h3 id="npm-检查-package-json-中未声明的-package"><a href="#npm-检查-package-json-中未声明的-package" class="headerlink" title="npm 检查 package.json 中未声明的 package"></a><code>npm</code> 检查 <code>package.json</code> 中未声明的 <code>package</code></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm prune</span><br></pre></td></tr></table></figure>
+<p>运行 <code>prune</code> 命令，<code>npm CLI</code> 会读取 <code>package.json</code>，并将结果与项目的 <code>/node_modules</code> 目录进行对比，并打印出不在 <code>package.json</code> 之列的模块列表。</p>
+<h3 id="npm-改变所有项目的默认前缀"><a href="#npm-改变所有项目的默认前缀" class="headerlink" title="npm 改变所有项目的默认前缀"></a><code>npm</code> 改变所有项目的默认前缀</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set save-prefix ~</span><br></pre></td></tr></table></figure>
+<p>使用 <code>~</code> 比默认的 <code>^</code> 行为更加保守。</p>
+<p><code>~</code> 将依赖锁定在小版本，允许使用 <code>npm update</code> 安装补丁版本。</p>
+<p><code>^</code> 将依赖锁定在主版本，允许使用 <code>npm update</code> 更新小版本。</p>
+<h3 id="设置-pyhton-版本"><a href="#设置-pyhton-版本" class="headerlink" title="设置 pyhton 版本"></a>设置 pyhton 版本</h3><blockquote>
+<p>有些库可能需要 <code>python</code> 辅助编译, 比如 <code>node-sass</code> 相关的 <code>node-gyp</code></p>
+</blockquote>
+<p>大部分库默认使用的 <code>python2</code>,因为 <code>Mac</code> 本身就内置了。如果你的电脑上安装了 <code>python</code> 的默认版本是 <code>3.x</code>,打包的时候就会报错。可以这样设置：</p>
+<p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm config set python python2.7</span><br></pre></td></tr></table></figure>
+<p>或者在 <code>~/.npmrc</code> 文件添加下面这一行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python=python2.7</span><br></pre></td></tr></table></figure>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>

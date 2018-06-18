@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+	<title>微信开发之判断用户是否关注了你的公众平台</title>
+</head>
+<body>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<div class="container">
+    <div class="article">
+            
+  
+  <h1 class="title">
+    微信开发之判断用户是否关注了你的公众平台
+  </h1>
+  
+
+
+        <ul class="article-info">
+            <li>
+                发布
+                <time datetime="2015-11-22T16:00:00.000Z" itemprop="datePublished">2015-11-23</time>
+            </li>
+            <li>
+                
+    更新 <time datetime="2015-11-22T16:00:00.000Z" itemprop="dateUpdated">2015-11-23</time>
+
+            </li>
+            <li id="busuanzi_container_page_pv">
+              阅读 <span id="busuanzi_value_page_pv"></span>
+            </li>
+            <li>
+              评论 <a href="#SOHUCS" id="changyan_count_unit"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="content">
+            <h3 id="判断这个有什么用呢？"><a href="#判断这个有什么用呢？" class="headerlink" title="判断这个有什么用呢？"></a>判断这个有什么用呢？</h3><blockquote>
+<p>引导用户关注你的微信公众号</p>
+</blockquote>
+<p>这一节不是从基础开始，如果这几个知识点，你不清楚，请先看上一章。</p>
+<pre><code>1、如何获取openid
+
+2、怎样请求接口
+</code></pre><p>依旧参考<a href="http://mp.weixin.qq.com/wiki/" target="_blank" rel="noopener">wiki</a></p>
+<p>侧边栏，用户管理—&gt;<a href="http://mp.weixin.qq.com/wiki/17/c807ee0f10ce36226637cebf428a0f6d.html" target="_blank" rel="noopener">获取用户基本信息(UnionID机制)</a></p>
+<p>往下翻，第二个表格有这样一个参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">subscribe</span><br><span class="line"></span><br><span class="line">用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息。</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>这就是我们今天要找的那个小伙伴。就是靠他，来判断用户是否关注了你的微信平台。</p>
+<p>怎么获取这个值呢？</p>
+<p><strong>1、请求这个接口</strong><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&amp;openid=OPENID&amp;lang=zh_CN</span><br></pre></td></tr></table></figure></p>
+<p>请求这个接口前我们要先准备两个参数</p>
+<p><code>OPENID</code> 的获取请看上一章。</p>
+<p><code>access_taken</code> 的获取和上一章就不同了，wiki里一直强调一点，就是网页授权里获取的 <code>access_taken</code> 和平常的用的 <code>access_taken</code> 是不同的。</p>
+<blockquote>
+<p>也就是说，在网页开发时获取的access_taken，不能再继续用在这里，获取subscribe</p>
+</blockquote>
+<p>我们接着看wiki，在左侧的导航栏里找到：<br>获取接口调用凭据–&gt;<a href="http://mp.weixin.qq.com/wiki/2/88b2bf1265a707c031e51f26ca5e6512.html" target="_blank" rel="noopener">获取access token</a></p>
+<p>请求以下地址获取access_token：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=APPID&amp;secret=APPSECRET</span><br></pre></td></tr></table></figure></p>
+<p><strong>记得替换APPID，APPSECRET。获取方式：看上一章</strong></p>
+<p>正常情况下，微信会返回下述JSON数据包给公众号：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"access_token"</span>:<span class="string">"ACCESS_TOKEN"</span>,<span class="attr">"expires_in"</span>:<span class="number">7200</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>如果出现以下形式的错误，可以根据返回的错误码，分析错误。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"errcode"</span>:<span class="number">40013</span>,<span class="attr">"errmsg"</span>:<span class="string">"invalid appid"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://mp.weixin.qq.com/wiki/17/fa4e1434e57290788bde25603fa2fcbd.html" target="_blank" rel="noopener">全局返回码说明</a></p>
+<p>好了，现在我们有 <code>opebid</code> 和 <code>access_token</code> 了，就可以请求以下的地址获取 <code>subscribe</code> 了。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&amp;openid=OPENID&amp;lang=zh_CN</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<p>整理一下我们的思路，我们想获得subscribe的值，用来判断用户是否关注了我们的微信公众平台。首先我们要准备openid和access_taken（这是第一个，我们叫他帅哥）两个值。得到openid 要先获取access_taken（这是第二个，我们叫她美女）虽然都叫access_taken，但是他们的获取方式是不同的，这两个access_taken，是不一样的（一男一女嘛）。重点就在这里。我们先通过网页授权获得taken_access,然后获取openid。</p>
+</blockquote>
+
+        </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--<div class="like ">
+             <div class="like-button">
+              <a id="like-note" href="">
+                  <i class="icon-heart"></i>  喜欢</a>
+           </div>
+           <span id="likes-count">256</span>
+      </div>-->
+      <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+      </div>
+      <div class="comment">
+          <!--搜狐 畅言 PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+  (function(){
+    var appid = 'cysVQ7NO7';
+    var conf = 'prod_f24ac5e42b5d773453cf6183f614b8ee';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" async  src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script>
+
+</body>
+</html>
