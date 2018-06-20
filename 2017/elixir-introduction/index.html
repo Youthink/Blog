@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
@@ -12,10 +12,10 @@
 	<link rel="dns-prefetch" href="http://hm.baidu.com/">
   <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
 	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
-	<title>elixir介绍:未来的编程语言</title>
+	<title>elixir介绍:未来的编程语言</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body>
-<div class="navbar-header">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="navbar-header">
   <a class="blog-title" href="/">胡方运的博客</a>
   <a class="face-img" href="/">
     <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
@@ -79,7 +79,7 @@
 <h2 id="Actor并发"><a href="#Actor并发" class="headerlink" title="Actor并发"></a>Actor并发</h2><p><code>Elixir</code> 使用 <code>actor</code> 并发模型，<code>actor</code> 是一个无依赖的进程，它不与其他进程共享任何东西。你可以<code>spawn</code> 新进程，向它发消息，并且用 <code>receive</code> 接收消息，仅此而已。这里谈论的 <code>Elixir</code> 进程并不是操作系统的原生进程。它们既慢又笨重。相反，<code>Elixir</code> 使用 <code>Erlang</code> 的进程。这些进程将在所有的处理器中运行（像原生进程一样），但是它们的开销非常小，在普通的机器里创建数十万个 <code>Elixir</code> 进程轻而易举。</p>
 <h2 id="OTP"><a href="#OTP" class="headerlink" title="OTP"></a>OTP</h2><p><code>OTP</code> 是 <code>Open Telecom Platform</code> 的缩写，是爱立信公司开发的开放电信应用平台，这是一个很强大并且很通用的框架，它能帮我们编写大型的、容错的，分布式的系统。</p>
 <p><code>OTP</code> 经常被渲染成解决所有高可用分布式应用困境的法宝。其实未必，但是用它的确可以解决许多原本你需要自己解决的问题，比如服务发现、故障检测与管理、热代码交换和服务器结构安排等。<code>OTP</code> 这个名字主要由于历史原因沿用下来，最初它被用来建立电话交换机，这些设备具有的特性也正是我们希望所有大型在线应用所具备的特性，所以 <code>OTP</code> 现在是一个通用工具，用于开发和管理大型系统。</p>
-<p>我们每学一样东西都要把握它的中心思想，<code>OTP</code> 的中心思想就是把程序的通用部分和业务部分切开，我帮你把通用部分做好，你做你的业务逻辑就行了。如果你看过一些分布式系统，最火的应该是分布式存储系统了，像<code>`Amazon</code>的 <code>Dynamo</code>、<code>Google</code> 的 <code>Bigtable</code>、<code>LiveJournal</code> 的 <code>memcache</code> 等，就知道保证分布式系统的容错能力、数据一致性、请求高并发性是非常困难的。但是他们所用的算法都非常固定，当你去实现另一个分布式系统时，很可能就是参考他们的算法。然后一些技术功底不够的程序员就想，要是能把这些基础的设施都做好，并且提供插件扩展，那多好啊，这样当我想写个分布式数据库的时候就能跟写普通数据库一样简单了。没错，<code>OTP</code> 就是帮你干那些又脏又累的活。</p>
+<p>我们每学一样东西都要把握它的中心思想，<code>OTP</code> 的中心思想就是把程序的通用部分和业务部分切开，我帮你把通用部分做好，你做你的业务逻辑就行了。如果你看过一些分布式系统，最火的应该是分布式存储系统了，像<code></code>Amazon<code>的</code>Dynamo<code>、</code>Google<code>的</code>Bigtable<code>、</code>LiveJournal<code>的</code>memcache<code>等，就知道保证分布式系统的容错能力、数据一致性、请求高并发性是非常困难的。但是他们所用的算法都非常固定，当你去实现另一个分布式系统时，很可能就是参考他们的算法。然后一些技术功底不够的程序员就想，要是能把这些基础的设施都做好，并且提供插件扩展，那多好啊，这样当我想写个分布式数据库的时候就能跟写普通数据库一样简单了。没错，</code>OTP` 就是帮你干那些又脏又累的活。</p>
 <p><code>OTP</code> 实际上是一个包，其中包括了 <code>Erlang</code>、分布式数据库Mnesia和不计其数的库文件，主要如下：</p>
 <ul>
 <li>一个Erlang直译器</li>
@@ -144,7 +144,7 @@
 </div>
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
-<script type="text/javascript" src="/./main.5e4174.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

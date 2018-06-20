@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
@@ -12,10 +12,10 @@
 	<link rel="dns-prefetch" href="http://hm.baidu.com/">
   <link rel="stylesheet" type="text/css" href="/./main.5e4174.css">
 	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
-	<title>由 ECMA 规范解读 Javascript 可执行上下文概念</title>
+	<title>由 ECMA 规范解读 Javascript 可执行上下文概念</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body>
-<div class="navbar-header">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="navbar-header">
   <a class="blog-title" href="/">胡方运的博客</a>
   <a class="face-img" href="/">
     <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
@@ -77,7 +77,11 @@
 <p><code>官方解释：</code>词法环境是用来定义特定变量和函数标识符的。一个词法环境由一个<strong>环境记录项</strong>和可能为空的<strong>外部词法环境</strong>引用构成。</p>
 <blockquote>
 <p>通常词法环境会与 <code>ECMAScript</code> 代码诸如 <code>函数声明（FunctionDeclaration）</code>、<code>WithStatement</code> 或者 <code>TryStatement</code> 的 <code>Catch</code> 块这样的特定句法结构相联系，且类似代码每次执行都会<strong>有一个新的词法环境</strong>被创建出来。</p>
+</blockquote>
+<blockquote>
 <p><strong>外部词法环境引用</strong> 用于表示词法环境的逻辑嵌套关系模型。（内部）词法环境的外部引用是逻辑上包含内部词法环境的词法环境。外部词法环境自然也可能有多个内部词法环境。</p>
+</blockquote>
+<blockquote>
 <p>例如，如果一个 FunctionDeclaration 包含两个嵌套的 FunctionDeclaration，那么每个内嵌函数的词法环境都是外部函数本次执行所产生的词法环境。</p>
 </blockquote>
 <p><strong>环境记录项</strong> 又可以分为两种<strong>声明式环境记录项</strong>和<strong>对象式环境记录项</strong>。</p>
@@ -141,7 +145,11 @@ return 或者抛出异常退出一个执行环境。
 <p><img src="/media/2624009007-59e545c159240_articlex-1.jpeg" alt="2624009007-59e545c159240_articlex"></p>
 <h2 id="建立执行环境"><a href="#建立执行环境" class="headerlink" title="建立执行环境"></a>建立执行环境</h2><blockquote>
 <p>解释执行全局代码或使用 <code>eval</code> 函数输入的代码会创建并进入一个新的执行环境。每次调用 <code>ECMA</code> 脚本代码定义的函数也会建立并进入一个新的执行环境，即便函数是自身递归调用的。</p>
+</blockquote>
+<blockquote>
 <p>每一次 <code>return</code> 都会退出一个执行环境。抛出异常也可退出一个或多个执行环境。</p>
+</blockquote>
+<blockquote>
 <p><strong>当控制流进入一个执行环境时，会设置该执行环境的 <code>this</code> 绑定组件，定义变量环境和初始词法环境，并执行声明式绑定初始化过程。</strong>以上这些步骤的严格执行方式由进入的代码的类型决定。</p>
 </blockquote>
 <h3 id="进入全局代码"><a href="#进入全局代码" class="headerlink" title="进入全局代码"></a>进入全局代码</h3><p>执行以下步骤：</p>
@@ -230,7 +238,7 @@ return 或者抛出异常退出一个执行环境。
 </div>
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
-<script type="text/javascript" src="/./main.5e4174.js"></script>
+<script type="text/javascript" src="/./main.5e4174.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
