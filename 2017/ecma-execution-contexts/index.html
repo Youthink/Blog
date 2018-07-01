@@ -10,9 +10,10 @@
 	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
 	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
 	<link rel="dns-prefetch" href="http://hm.baidu.com/">
-  <link rel="stylesheet" type="text/css" href="/./main.8ae7f4.css">
+  <link rel="stylesheet" type="text/css" href="/./main.0363ae.css">
 	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
-	<title>由 ECMA 规范解读 Javascript 可执行上下文概念</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+	<title>由 ECMA 规范解读 Javascript 可执行上下文概念</title>
+  <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/1ff30348.js","daovoice")</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body>
 <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="navbar-header">
@@ -72,7 +73,7 @@
 <blockquote>
 <p>当 <code>JavaScript</code> 引擎开始执行（进入）一段可执行代码之后，会生成一个执行环境（Execution Context)，或执行上下文。引擎用执行环境来维护执行当前代码所需要的变量声明、this指向等。</p>
 </blockquote>
-<p><img src="/media/2624009007-59e545c159240_articlex.jpeg" alt="2624009007-59e545c159240_articlex"></p>
+<p><img src="/media/2624009007-59e545c159240_articlex.jpeg" alt="2624009007-59e545c159240_articlex"><span class="img-alt">2624009007-59e545c159240_articlex</span></p>
 <h2 id="词法环境-Lexical-Environments"><a href="#词法环境-Lexical-Environments" class="headerlink" title="词法环境 (Lexical Environments)"></a>词法环境 (Lexical Environments)</h2><p><code>词法环境</code> 是执行环境的三个组成的状态之一。</p>
 <p><code>官方解释：</code>词法环境是用来定义特定变量和函数标识符的。一个词法环境由一个<strong>环境记录项</strong>和可能为空的<strong>外部词法环境</strong>引用构成。</p>
 <blockquote>
@@ -89,7 +90,7 @@
 <p>咬文嚼字，不好理解？</p>
 <p><code>通俗点讲：</code> 词法环境就是 JavaScript 引擎在执行代码过程中用来标识函数声明、变量声明这一类的。我们每次声明一个函数，或者使用 <code>with</code> 、<code>catch</code>语句的时候，就会有新的词法环境被创建出来。全局词法环境的外部词法环境就是空的，因为他已经是最外层的词法环境了。</p>
 <p>我们用个例子来说明词法环境：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">q</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x+y+z+q;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo(<span class="number">20</span>);</span><br><span class="line">bar(<span class="number">40</span>);</span><br></pre></td></tr></table></figure></p>
-<p><img src="/media/2735347362-59e54b066ff9b_articlex.jpeg" alt="2735347362-59e54b066ff9b_articlex"></p>
+<p><img src="/media/2735347362-59e54b066ff9b_articlex.jpeg" alt="2735347362-59e54b066ff9b_articlex"><span class="img-alt">2735347362-59e54b066ff9b_articlex</span></p>
 <h3 id="词法环境的运算"><a href="#词法环境的运算" class="headerlink" title="词法环境的运算"></a>词法环境的运算</h3><p>给出一个标识符字符串，首先在当前的词法环境内寻找，如果存在，返回引用的标识符字符串，如果不存在，再在当前词法环境的外部词法环境寻找。</p>
 <p>咦，怎么感觉和作用域链的概念很相似？他们有什么关系吗？</p>
 <ul>
@@ -101,7 +102,7 @@
 <h2 id="执行环境（Execution-Contexts）"><a href="#执行环境（Execution-Contexts）" class="headerlink" title="执行环境（Execution Contexts）"></a>执行环境（Execution Contexts）</h2><p>如果我们的 <code>JavaScript</code> 程序有各种函数，函数之间还有嵌套的情况，那 <code>JavaScript</code> 引擎怎么解释各种声明和执行上下文哪？</p>
 <p>当控制器转入 <code>ECMA</code> 脚本的可执行代码时，上文已经说了有三种可执行代码，不管进入哪一种控制器都会进入一个执行环境。多个执行环境在逻辑上形成一个<strong>栈结构</strong>。栈结构最顶层的执行环境称为当前运行的执行环境，最底层是全局执行环境。</p>
 <p>用一张图解释</p>
-<p><img src="/media/1243889088-59c8b7e123cd6_articlex.png" alt="1243889088-59c8b7e123cd6_articlex"></p>
+<p><img src="/media/1243889088-59c8b7e123cd6_articlex.png" alt="1243889088-59c8b7e123cd6_articlex"><span class="img-alt">1243889088-59c8b7e123cd6_articlex</span></p>
 <p>因为 JS 引擎被实现为单线程，也就是同一时间只能发生一件事情，其他的行为就会依次排队。</p>
 <p>你可以有任意多个函数执行环境，每次调用函数创建一个新的执行环境，会创建一个私有作用域，函数内部声明的任何变量都不能在当前函数作用域外部直接访问。函数能访问当前执行环境外面的变量声明，但在外部执行环境不能访问内部的变量/函数声明。</p>
 <h3 id="小总结-1"><a href="#小总结-1" class="headerlink" title="小总结"></a>小总结</h3><p>关于执行栈（调用栈）</p>
@@ -113,7 +114,7 @@
 return 或者抛出异常退出一个执行环境。
 </code></pre><p>我们用一个具体的函数理解：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function foo(i) &#123;</span><br><span class="line">  if (i &lt; 0) return;</span><br><span class="line">  console.log(&apos;begin:&apos; + i);</span><br><span class="line">  foo(i - 1);</span><br><span class="line">  console.log(&apos;end:&apos; + i);</span><br><span class="line">&#125;</span><br><span class="line">foo(2);</span><br><span class="line"></span><br><span class="line">// 输出:</span><br><span class="line"></span><br><span class="line">// begin:2</span><br><span class="line">// begin:1</span><br><span class="line">// begin:0</span><br><span class="line">// end:0</span><br><span class="line">// end:1</span><br><span class="line">// end:2</span><br></pre></td></tr></table></figure>
-<p><img src="/media/1606300353-59b5b7f1caff1_articlex%20-1-.png" alt="1606300353-59b5b7f1caff1_articlex -1-"></p>
+<p><img src="/media/1606300353-59b5b7f1caff1_articlex%20-1-.png" alt="1606300353-59b5b7f1caff1_articlex -1-"><span class="img-alt">1606300353-59b5b7f1caff1_articlex -1-</span></p>
 <p>代码的执行流程进入内部函数，创建一个新的执行上下文并把它压入执行栈的顶部。<strong>浏览器总会执行位于栈顶的执行上下文，一旦当前上下文函数执行结束，它将被从栈顶弹出，并将上下文控制权交给当前的栈。</strong> 这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到回到全局的上下文。</p>
 <blockquote>
 <p>执行环境包含所有用于追踪与其相关的代码的执行进度的状态。精确地说，每个执行环境包含如下表列出的组件。</p>
@@ -142,7 +143,7 @@ return 或者抛出异常退出一个执行环境。
 </tbody>
 </table>
 <p>当创建一个执行环境时，其词法环境组件和变量环境组件最初是同一个值。在该执行环境相关联的代码的执行过程中，变量环境组件永远不变，而词法环境组件有可能改变。变量环境的不变和词法环境的可能改变都是指引用的改变。</p>
-<p><img src="/media/2624009007-59e545c159240_articlex-1.jpeg" alt="2624009007-59e545c159240_articlex"></p>
+<p><img src="/media/2624009007-59e545c159240_articlex-1.jpeg" alt="2624009007-59e545c159240_articlex"><span class="img-alt">2624009007-59e545c159240_articlex</span></p>
 <h2 id="建立执行环境"><a href="#建立执行环境" class="headerlink" title="建立执行环境"></a>建立执行环境</h2><blockquote>
 <p>解释执行全局代码或使用 <code>eval</code> 函数输入的代码会创建并进入一个新的执行环境。每次调用 <code>ECMA</code> 脚本代码定义的函数也会建立并进入一个新的执行环境，即便函数是自身递归调用的。</p>
 </blockquote>
@@ -239,7 +240,7 @@ return 或者抛出异常退出一个执行环境。
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
 
-<script type="text/javascript" src="/./main.8ae7f4.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script type="text/javascript" src="/./main.0363ae.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
