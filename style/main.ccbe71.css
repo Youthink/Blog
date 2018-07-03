@@ -304,13 +304,13 @@ h2, h3, h4 {
     color: #4d4d4d;
     font-size: 40px; }
   .article-title .article-info {
-    width: 350px;
+    width: 300px;
     margin: 10px auto; }
     .article-title .article-info li {
       float: left;
       list-style: none;
       margin: 8px;
-      color: #888888;
+      color: #666666;
       font-size: 13px; }
     .article-title .article-info:after {
       content: '';
