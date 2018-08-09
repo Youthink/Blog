@@ -40,7 +40,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-06-18T11:40:00.000Z" itemprop="dateUpdated">2018-06-18</time>
+    更新 <time datetime="2018-07-09T11:40:00.000Z" itemprop="dateUpdated">2018-07-09</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -99,7 +99,9 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset HEAD 文件</span><br></pre></td></tr></table></figure>
 <p>已经commit了怎么取消（最近一次）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
-<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>新建并切换到分支</p>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>切换到上一个分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gco -</span><br></pre></td></tr></table></figure>
+<p>新建并切换到分支</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名</span><br><span class="line"></span><br><span class="line">简写 gcb 分支名</span><br></pre></td></tr></table></figure>
 <p>拉取远程所有分支的更改<br>(同时可以清除本地无效的远程分支)</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch -p</span><br></pre></td></tr></table></figure>
@@ -129,6 +131,12 @@
 <p>有时间再补充个图。。。。</p>
 <p> 🙏：欢迎补充更好的方案。</p>
 <p> 😂：此方法学自我夫人。。。（让我必须注明）</p>
+<h3 id="其他-git-工具"><a href="#其他-git-工具" class="headerlink" title="其他 git 工具"></a>其他 git 工具</h3><h4 id="tig"><a href="#tig" class="headerlink" title="tig"></a>tig</h4><p><a href="https://github.com/jonas/tig" target="_blank" rel="noopener">官方地址</a></p>
+<blockquote>
+<p>Git repository browser<br>方便的查找每次的更改记录</p>
+</blockquote>
+<p>上张图片感受一下</p>
+<p><img src="media/15311167451329.jpg" alt="tig"><span class="img-alt">tig</span></p>
 <h3 id="生成-ssh"><a href="#生成-ssh" class="headerlink" title="生成 ssh"></a>生成 ssh</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br><span class="line"></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 
       </div>

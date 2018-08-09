@@ -40,7 +40,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-05-14T15:31:31.000Z" itemprop="dateUpdated">2018-05-14</time>
+    更新 <time datetime="2018-07-16T15:31:31.000Z" itemprop="dateUpdated">2018-07-16</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -69,7 +69,11 @@
 <p><code>cd</code> 命令进入 <code>~/user/github/Youthink</code> 文件夹，下一次再想进入 <code>Yourhink</code> 文件夹的时候,直接 <code>j youthink</code> 即可<br>或者只输入 <code>youthink</code> 的一部分 <code>youth</code> 都行</p>
 <p>删除无效路径</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">j --purge 无效路径</span><br></pre></td></tr></table></figure>
-<p>需要额外下载 <code>autojump</code> 并配置</p>
+<p>打开 muisc 文件夹</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jo music</span><br></pre></td></tr></table></figure>
+<p>多个参数一起使用 打开 <code>/home/user/work/inbox</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">j w in</span><br></pre></td></tr></table></figure>
+<p>和 <code>Z</code> 不同 <code>autojump</code> 不是 <code>zsh</code> 内置的插件，需要额外安装。</p>
 <p>首先安装 <code>autojump</code>，如果你用 <code>Mac</code>，可以使用 <code>brew</code> 安装：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install autojump</span><br></pre></td></tr></table></figure>
 <p>如果是 <code>Linux</code>，可以使用 <code>git</code> 安装，比如：</p>
@@ -80,7 +84,9 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] &amp;&amp; . ~/.autojump/etc/profile.d/autojump.sh</span><br></pre></td></tr></table></figure>
 <h3 id="Z"><a href="#Z" class="headerlink" title="Z"></a>Z</h3><p>如果你不想额外安装 <code>autojump</code></p>
 <p>可以使用 <code>oh-my-zsh</code> 内置的类似组件 <a href="https://github.com/rupa/z" target="_blank" rel="noopener">Z</a> </p>
-<p>和 <code>autojump</code> 除了名字不一样，基本雷同。但是我选了 <code>Z</code> ，因为删除无效路径它的命令更短 😏</p>
+<p>和 <code>autojump</code> 除了名字不一样，基本雷同。</p>
+<p>⚠️ 2018.07.16更新<br><code>Z</code> 会在用户目录下生成很多的缓存文件，如下图</p>
+<p><img src="media/WX20180716-150719@2x.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">z -x 无效路径</span><br></pre></td></tr></table></figure>
 <p>效果图</p>
 <p><img src="https://ww2.sinaimg.cn/large/006tNc79ly1ffqsum0zibj30ey01hjsg.jpg" alt=""></p>
@@ -169,7 +175,7 @@
 </blockquote>
 <h3 id="history-命令时间格式"><a href="#history-命令时间格式" class="headerlink" title="history 命令时间格式"></a>history 命令时间格式</h3><p><code>history</code> 命令查看历史输入命令的时间展示格式</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">HIST_STAMPS=<span class="string">"yyyy-mm-dd"</span></span><br></pre></td></tr></table></figure>
-<p><img src="/media/15241577143324.jpg" alt=""></p>
+<p><img src="media/15241577143324.jpg" alt=""></p>
 <p>时间会按照指定的格式展示，方便搜索查看</p>
 <h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>在 <code>~/.zshrc</code> 文件中设置主题为 <code>random</code> 即可开启随机主题</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ZSH_THEME=&quot;random&quot;</span><br></pre></td></tr></table></figure>
@@ -184,7 +190,7 @@
 <p>防止 <code>copy</code> 的时候覆盖已存在的文件, 带上 <code>i</code> 选项，文件已存在的时候，会提示，需要确认才能 <code>copy</code></p>
 <h4 id="bat-代替-cat"><a href="#bat-代替-cat" class="headerlink" title="bat 代替 cat"></a><code>bat</code> 代替 <code>cat</code></h4><p><code>cat</code> 某个文件，可以在终端直接输出文件内容，<code>bat</code> 相比 <code>cat</code> 增加了行号和颜色高亮 👍</p>
 <p>直接上个效果</p>
-<p><img src="/media/15262637829800.jpg" alt=""></p>
+<p><img src="media/15262637829800.jpg" alt=""></p>
 <p><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">官网</a></p>
 <p>安装方式</p>
 <p>macOS 上</p>

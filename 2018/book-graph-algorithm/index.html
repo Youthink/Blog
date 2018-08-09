@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./style/main.432ae0.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>《算法图解》读书笔记</title>
+  <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/1ff30348.js","daovoice")</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    《算法图解》读书笔记
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2018-07-17T04:33:59.000Z" itemprop="datePublished">2018-07-17</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2018-07-17T04:33:59.000Z" itemprop="dateUpdated">2018-07-17</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        <blockquote>
+<p><a href="https://book.douban.com/subject/26979890/" target="_blank" rel="noopener">《算法图解》</a>是大牛推荐的一本看算法专业书籍前的缓冲书籍，如果感觉<a href="https://book.douban.com/subject/10432347/" target="_blank" rel="noopener">《算法》</a>、<a href="https://book.douban.com/subject/20432061/" target="_blank" rel="noopener">《算法导论》</a> 过于枯燥，可以先看这本通俗易懂的 <a href="https://book.douban.com/subject/26979890/" target="_blank" rel="noopener">《算法图解》</a></p>
+</blockquote>
+<blockquote>
+<p>以下是我的读书笔记。</p>
+</blockquote>
+<h4 id="第一章-算法简介-收获"><a href="#第一章-算法简介-收获" class="headerlink" title="第一章 算法简介 收获"></a>第一章 算法简介 收获</h4><p>1、使用两种方法尝试写了一个二分查找<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// while</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">binary_search_1</span>(<span class="params">arr, target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> low = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> high = arr.length - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">const</span> midFunc = <span class="function">(<span class="params">high, low</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor([high + low] / <span class="number">2</span>);  <span class="comment">//不是偶数的时候往下取整</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">    <span class="keyword">const</span> mid = midFunc(high, low);</span><br><span class="line">    <span class="keyword">if</span> (arr[mid] == target) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;arr[mid]&#125;</span>是目标值<span class="subst">$&#123;target&#125;</span>`</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">      </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[mid] &lt; target) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;arr[mid]&#125;</span>小于<span class="subst">$&#123;target&#125;</span>`</span>);</span><br><span class="line">      low = mid + <span class="number">1</span>;</span><br><span class="line">     </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[mid] &gt; target) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;arr[mid]&#125;</span>大于<span class="subst">$&#123;target&#125;</span>`</span>);</span><br><span class="line">      high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'不存在需要查找的值'</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//递归</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">binary_search_2</span>(<span class="params">arr, target</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">recursive_binary_search</span>(<span class="params">low, high</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> low = low || <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> high = high || arr.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> mid = <span class="built_in">Math</span>.floor([high + low] / <span class="number">2</span>);  <span class="comment">//不是偶数的时候往下取整</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (arr[mid] == target) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;arr[mid]&#125;</span>是目标值<span class="subst">$&#123;target&#125;</span>`</span>);</span><br><span class="line">      </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[mid] &lt; target) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;arr[mid]&#125;</span>小于<span class="subst">$&#123;target&#125;</span>`</span>);</span><br><span class="line">      low = mid + <span class="number">1</span>;</span><br><span class="line">      recursive_binary_search(low, high);</span><br><span class="line">      </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[mid] &gt; target) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;arr[mid]&#125;</span>大于<span class="subst">$&#123;target&#125;</span>`</span>);</span><br><span class="line">      high = mid - <span class="number">1</span>;</span><br><span class="line">      recursive_binary_search(low, high);</span><br><span class="line">      </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'不存在需要查找的值'</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> list = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">19</span>];</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'方法一所需时间：'</span>);</span><br><span class="line">binary_search_1(list, <span class="number">12</span>);</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'方法一所需时间：'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'方法二所需时间：'</span>);</span><br><span class="line">binary_search_1(list, <span class="number">15</span>);</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'方法二所需时间：'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>2、理解二分查找的需要的步数是 ${log_2 n}$<br>3、<code>大O表示法</code>：具体可以看这篇文章 <a href="./2018/algorithm-big-o.html">【算法】一次搞懂大O表示法</a></p>
+<h3 id="《图解算法》-第二章-选择排序-收获"><a href="#《图解算法》-第二章-选择排序-收获" class="headerlink" title="《图解算法》 第二章 选择排序 收获"></a>《图解算法》 第二章 选择排序 收获</h3><p><strong>数组和链表的对比</strong></p>
+<p>数组支持随机访问，读取速度快， 而插入速度慢；</p>
+<p>链表只支持顺序访问，读取速度慢，而插入速度快。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>数组</th>
+<th>链表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读取</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p>O(n) = 线性时间<br>O(1) = 常量时间</p>
+<p>数组插入元素为什么是 O(n), 比如考虑在数组的首位插入元素</p>
+<p><strong>我们可以分别运用双方的长处</strong></p>
+<p>使用数组存储 26 字母对应的链表，链表里存储以该字母开头的用户名。插入和删除的速度，使用了链表的长处，查询上使用了数组的长处，优化了时间。</p>
+<p>⚠️ 只是个例子，实际运用中，有更好的方法。</p>
+<p><strong>选择排序</strong></p>
+<p>遍历数组，寻找最大的（或者最小的）把获取到的值存到另一个数组中，重复执行上面的操作  $O(n^2)$</p>
+<h3 id="《图解算法》-第三章-递归-收获"><a href="#《图解算法》-第三章-递归-收获" class="headerlink" title="《图解算法》 第三章 递归 收获"></a>《图解算法》 第三章 递归 收获</h3><p><strong>递归</strong></p>
+<p>编写递归函数时，必须告诉它何时停止递归。每个递归函数都有两部分: <code>基线条件</code>(base case)和<code>递归条件</code>(recursive case)。</p>
+<p>递归条件指的是函数调用自己，而基线条件则指的是函数不再调用自己，从而避免形成无限循环。</p>
+<p>使用栈虽然很方便，但是也要付出代价: 存储详尽的信息可能占用大量的内存。</p>
+<p>每个函数调用都要占用一定的内存，如果栈很高，就意味着计算机存储了大量函数调用的信息。在这种情况下，两种选择。</p>
+<ul>
+<li>重新编写代码，转而使用循环。递归不一定，更快。只是更优雅。</li>
+<li>使用尾递归。不是所有语言都支持</li>
+</ul>
+<h4 id="《算法图解》第四章收获"><a href="#《算法图解》第四章收获" class="headerlink" title="《算法图解》第四章收获"></a>《算法图解》第四章收获</h4><blockquote>
+<p>学习分而治之。有时候，你可能会遇到使用任何已知的算法都无法解决的问题。分而治之是一种通用的问题解决方法。</p>
+</blockquote>
+<blockquote>
+<p>快速排序使用分而治之的策略。</p>
+</blockquote>
+<p>分而治之 (divide and conquer，D&amp;C) —— 一种著名的递归式问题解决方法。</p>
+<p>使用D&amp;C解决问题的过程包括两个步骤。<br>(1) 找出基线条件，这种条件必须尽可能简单。<br>(2) 不断将问题分解(或者说缩小规模)，直到符合基线条件。（和递归的两个条件是一样的）</p>
+<p><img src="/media/15306818577933.jpg" alt=""></p>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+        <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+        </div>
+        <div class="comments" id="comments">
+          <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const gitalk = new Gitalk({
+    clientID: '3b064dc018768ed172b8',
+    clientSecret: '403c6f397465f7fa14cfb02668011929102421d1',
+    repo: 'Youthink.github.io',
+    owner: 'Youthink',
+    admin: ['Youthink'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('comments');
+</script>
+
+        </div>
+      </div>
+    </div>
+   </div>
+</main>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true, 
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<script type="text/javascript" src="/./js/main.432ae0.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
