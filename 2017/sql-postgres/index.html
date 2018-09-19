@@ -41,7 +41,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-03-13T16:00:00.000Z" itemprop="dateUpdated">2018-03-14</time>
+    更新 <time datetime="2018-09-02T16:00:00.000Z" itemprop="dateUpdated">2018-09-03</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -60,6 +60,8 @@
 <p><a href="http://www.w3school.com.cn/sql/sql_func_format.asp" target="_blank" rel="noopener">w3schoolSQL教程</a></p>
 <p><a href="https://www.postgresql.org/docs/9.6/static/reference.html" target="_blank" rel="noopener">PostgreSQL 英文文档</a></p>
 <p><a href="http://wiki.jikexueyuan.com/project/sql/" target="_blank" rel="noopener">极客学院SQL教程</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>macOS</code> 上可以使用 <code>brew</code> 安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">brew install postgres</span><br></pre></td></tr></table></figure>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><a href="http://blog.everlose.com/mac-homebrew-postgresql.html" target="_blank" rel="noopener">Mac 下使用 homebrew 安装 postgresql 及配置</a> </p>
 <h5 id="mac-启动-postgreSQL-服务"><a href="#mac-启动-postgreSQL-服务" class="headerlink" title="mac 启动 postgreSQL 服务"></a>mac 启动 postgreSQL 服务</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pg_ctl -D /usr/local/var/postgres start</span><br></pre></td></tr></table></figure>
 <h5 id="连接远程数据库"><a href="#连接远程数据库" class="headerlink" title="连接远程数据库"></a>连接远程数据库</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">psql -h IP或者主机地址 -p 端口 -U 用户 -d 数据库</span><br><span class="line"></span><br><span class="line">psql -h 117.12.116.18 -p 5432 -U web -d test</span><br></pre></td></tr></table></figure>
@@ -74,6 +76,10 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">psql -d 数据库名字 -f 文件名 用户名</span><br><span class="line"></span><br><span class="line">例子:</span><br><span class="line"></span><br><span class="line">psql -d dataname -f file.sql admin</span><br></pre></td></tr></table></figure>
 <h4 id="联表查询"><a href="#联表查询" class="headerlink" title="联表查询"></a>联表查询</h4><p>将来补充</p>
 <h4 id="用户、角色、权限管理"><a href="#用户、角色、权限管理" class="headerlink" title="用户、角色、权限管理"></a>用户、角色、权限管理</h4><p><a href="http://www.jianshu.com/p/b09d0b29faa9" target="_blank" rel="noopener">PostgreSQL学习笔记(九) 用户、角色、权限管理</a></p>
+<h4 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h4><p>1、macOS postgres 角色不存在</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">** (Postgrex.Error) FATAL 28000 (invalid_authorization_specification): role "postgres" does not exist</span><br></pre></td></tr></table></figure>
+<p><strong>解决</strong></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">psql -d postgres</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> postgres <span class="keyword">WITH</span> OWNER postgres;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> postgres SUPERUSER;</span><br></pre></td></tr></table></figure>
 <h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p><a href="http://www.infoq.com/cn/news/2013/12/mysql-vs-postgresql" target="_blank" rel="noopener">MySQL与PostgreSQL：该选择哪个开源数据库？哪一个更好？</a></p>
 <p><a href="http://www.infoq.com/cn/news/2015/03/why-postgresql-not-mysql" target="_blank" rel="noopener">为什么选择PostgreSQL而不是MySQL</a></p>
 

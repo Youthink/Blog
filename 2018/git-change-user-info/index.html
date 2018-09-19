@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="keywords" content="胡方运,小猿大圣,前端,个人博客,Youthink,Web" />
+	<meta name="description" content="小猿大圣的个人博客，胡方运的博客" />
+	<meta http-equiv="x-dns-prefetch-control" content="on">
+	<link rel="dns-prefetch" href="http://7oxgmt.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://7xrdfc.com1.z0.glb.clouddn.com">
+	<link rel="dns-prefetch" href="http://hm.baidu.com/">
+  <link rel="stylesheet" type="text/css" href="/./style/main.c5b49c.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>如果修改 git 已提交的用户邮箱和用户名</title>
+  <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/1ff30348.js","daovoice")</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://tva3.sinaimg.cn/crop.0.0.200.200.180/005Kc3C1jw8f2uep0hhkvj305k05k3yk.jpg">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    如果修改 git 已提交的用户邮箱和用户名
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2018-09-19T11:44:04.000Z" itemprop="datePublished">2018-09-19</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2018-09-19T11:44:04.000Z" itemprop="dateUpdated">2018-09-19</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        <p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fh37ua0t32j30nc08caav.jpg" alt=""></p>
+<h3 id="1、修改上一次提交的邮箱和用户名"><a href="#1、修改上一次提交的邮箱和用户名" class="headerlink" title="1、修改上一次提交的邮箱和用户名"></a>1、修改上一次提交的邮箱和用户名</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit --amend --reset-author</span><br></pre></td></tr></table></figure>
+<h3 id="2、批量修改多次提交的邮箱和用户名"><a href="#2、批量修改多次提交的邮箱和用户名" class="headerlink" title="2、批量修改多次提交的邮箱和用户名"></a>2、批量修改多次提交的邮箱和用户名</h3><p>新建一个 <code>shell</code> 脚本 <code>changeGitInfo.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter <span class="string">'</span></span><br><span class="line"><span class="string">an="$GIT_AUTHOR_NAME"</span></span><br><span class="line"><span class="string">am="$GIT_AUTHOR_EMAIL"</span></span><br><span class="line"><span class="string">cn="$GIT_COMMITTER_NAME"</span></span><br><span class="line"><span class="string">cm="$GIT_COMMITTER_EMAIL"</span></span><br><span class="line"><span class="string">if [ "$GIT_COMMITTER_EMAIL" = "这里写你原来的邮箱" ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">	cn="你想替换成的用户名"</span></span><br><span class="line"><span class="string">	cm="你想替换成的邮箱"</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ "$GIT_AUTHOR_EMAIL" = "这里写你原来的邮箱" ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">	an="你想替换成的用户名"</span></span><br><span class="line"><span class="string">	am="你想替换成的邮箱"</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">	export GIT_AUTHOR_NAME="$an"</span></span><br><span class="line"><span class="string">	export GIT_AUTHOR_EMAIL="$am"</span></span><br><span class="line"><span class="string">	export GIT_COMMITTER_NAME="$cn"</span></span><br><span class="line"><span class="string">	export GIT_COMMITTER_EMAIL="$cm"</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>在 <code>git</code> 仓库(项目)下运行一下，该脚本即可。</p>
+<h2 id="如果避免上面的问题？"><a href="#如果避免上面的问题？" class="headerlink" title="如果避免上面的问题？"></a>如果避免上面的问题？</h2><h3 id="分目录配置-git-用户信息"><a href="#分目录配置-git-用户信息" class="headerlink" title="分目录配置 git 用户信息"></a>分目录配置 git 用户信息</h3><p><code>git</code> 可以设置全局的用户信息，然后可以再单独为每个仓库设置用户信息。如果忘记了给项目重置用户信息，可能就会发生上面的问题 — 提交时的邮箱和用户名错了。😓</p>
+<p>如果你喜欢用不同的目录区分个人和公司的项目，可以使用下面的方法配置自己的 <code>git</code> 用户信息。😀</p>
+<p>比如，你把公司的项目都放在了 <code>Company</code> 目录下，个人的项目都放在了 <code>Personal</code> 目录下下面。</p>
+<p>那你可以这么做：</p>
+<p>在 <code>Company</code> 下新建一个 <code>.gitconfig_include</code> 文件，配置你想在该目录下给所有 <code>git</code> 仓库设置的用户信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[user]</span><br><span class="line">  name = 用户名</span><br><span class="line">  email = 邮箱</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>~/.gitconfig</code> 内添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[includeIf &quot;gitdir:~/Company/&quot;]</span><br><span class="line">  path = ~/Company/.gitconfig_include</span><br></pre></td></tr></table></figure>
+<p>⚠️ 复制提醒。<code>Company</code> 要替换成你自己的目录</p>
+<p>这样，之后 <code>Company</code> 目录下的 <code>git</code> 仓库都会使用对应的 <code>git</code> 用户信息。💪</p>
+<p>这是 git 的一个用法，感兴趣的同学可以看这里 <a href="https://git-scm.com/docs/git-config#_conditional_includes" target="_blank" rel="noopener">conditional includes </a> </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://stackoverflow.com/questions/21307793/set-git-config-values-for-all-child-folders" target="_blank" rel="noopener">Set git config values for all child folders</a></p>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+        <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+        </div>
+        <div class="comments" id="comments">
+          <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const gitalk = new Gitalk({
+    clientID: '3b064dc018768ed172b8',
+    clientSecret: '403c6f397465f7fa14cfb02668011929102421d1',
+    repo: 'Youthink.github.io',
+    owner: 'Youthink',
+    admin: ['Youthink'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('comments');
+</script>
+
+        </div>
+      </div>
+    </div>
+   </div>
+</main>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/VicSugar"> VicSugar </a>
+      主题
+    </p>
+      <p>&copy;2013-2017 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script type="text/javascript" src="/./js/main.c5b49c.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

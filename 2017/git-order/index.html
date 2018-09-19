@@ -41,7 +41,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-07-09T11:40:00.000Z" itemprop="dateUpdated">2018-07-09</time>
+    更新 <time datetime="2018-09-19T10:43:00.000Z" itemprop="dateUpdated">2018-09-19</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -52,7 +52,14 @@
   <div class="container">
     <div class="article">
       <div class="content">
-        <p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fh37ua0t32j30nc08caav.jpg" alt=""></p>
+        <p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png" alt="图片来自阮一峰的网络日志"><span class="img-alt">图片来自阮一峰的网络日志</span></p>
+<p><code>git</code> 的几个概念：</p>
+<ul>
+<li>Workspace：工作区</li>
+<li>Index / Stage：暂存区</li>
+<li>Repository：仓库区（或本地仓库）</li>
+<li>Remote：远程仓库</li>
+</ul>
 <blockquote>
 <p>下面的 git </p>
 </blockquote>
@@ -100,6 +107,8 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset HEAD 文件</span><br></pre></td></tr></table></figure>
 <p>已经commit了怎么取消（最近一次）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+<p>修改上次的提交者信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit --amend --reset-author</span><br></pre></td></tr></table></figure>
 <h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>切换到上一个分支</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gco -</span><br></pre></td></tr></table></figure>
 <p>新建并切换到分支</p>
@@ -122,7 +131,9 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin 标签名</span><br></pre></td></tr></table></figure>
 <p>打标签</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag -a 标签名 -m <span class="string">"提交信息"</span></span><br></pre></td></tr></table></figure>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="合并某一次提交的内容"><a href="#合并某一次提交的内容" class="headerlink" title="合并某一次提交的内容"></a>合并某一次提交的内容</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git cherry-pick commit哈希值</span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="如果修改-git-已提交的用户邮箱和用户名"><a href="#如果修改-git-已提交的用户邮箱和用户名" class="headerlink" title="如果修改 git 已提交的用户邮箱和用户名"></a>如果修改 git 已提交的用户邮箱和用户名</h4><p><a href="https://hufangyun.com/2018/git-change-user-info">请看这篇文章</a></p>
+<h4 id="如果分目录配置用户信息"><a href="#如果分目录配置用户信息" class="headerlink" title="如果分目录配置用户信息"></a>如果分目录配置用户信息</h4><p><a href="https://hufangyun.com/2018/git-change-user-info">请看这篇文章</a></p>
+<h4 id="合并某一次提交的内容"><a href="#合并某一次提交的内容" class="headerlink" title="合并某一次提交的内容"></a>合并某一次提交的内容</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git cherry-pick commit哈希值</span><br></pre></td></tr></table></figure>
 <h4 id="查看某个文件的任意一行是谁？在什么时间修改的？"><a href="#查看某个文件的任意一行是谁？在什么时间修改的？" class="headerlink" title="查看某个文件的任意一行是谁？在什么时间修改的？"></a>查看某个文件的任意一行是谁？在什么时间修改的？</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git blame 文件路径</span><br></pre></td></tr></table></figure>
 <h4 id="merge-的时候如何快速解决大量文件的冲突？"><a href="#merge-的时候如何快速解决大量文件的冲突？" class="headerlink" title="merge 的时候如何快速解决大量文件的冲突？"></a>merge 的时候如何快速解决大量文件的冲突？</h4><p>如果合并时有大量文件冲突，可以使用命令</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout --ours( --theirs)  文件</span><br></pre></td></tr></table></figure>
@@ -132,6 +143,13 @@
 <p>有时间再补充个图。。。。</p>
 <p> 🙏：欢迎补充更好的方案。</p>
 <p> 😂：此方法学自我夫人。。。（让我必须注明）</p>
+<h3 id="同时部署到多个-git-源"><a href="#同时部署到多个-git-源" class="headerlink" title="同时部署到多个 git 源"></a>同时部署到多个 git 源</h3><p>比如同时更新到 <code>Github</code> 和 <code>Coding</code></p>
+<ul>
+<li>在已有的本地仓库内找到隐藏的 <code>.git</code> 文件夹</li>
+<li>打开里面的 <code>config</code> 文件</li>
+<li>添加如下设置：两个远端仓库的 <code>url</code>，并命名为 <code>origin</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[remote <span class="string">"origin"</span>]</span><br><span class="line">    url = git@git.coding.net:user_name/user_name.coding.me.git</span><br><span class="line">    url = git@github.com:user_name/user_name.github.io.git</span><br></pre></td></tr></table></figure>
 <h3 id="其他-git-工具"><a href="#其他-git-工具" class="headerlink" title="其他 git 工具"></a>其他 git 工具</h3><h4 id="tig"><a href="#tig" class="headerlink" title="tig"></a>tig</h4><p><a href="https://github.com/jonas/tig" target="_blank" rel="noopener">官方地址</a></p>
 <blockquote>
 <p>Git repository browser<br>方便的查找每次的更改记录</p>
