@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-09-19T10:43:00.000Z" itemprop="dateUpdated">2018-09-19</time>
+    更新 <time datetime="2018-11-05T10:43:00.000Z" itemprop="dateUpdated">2018-11-05</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -70,7 +70,7 @@
   <div class="container">
     <div class="article">
       <div class="content">
-        <p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png" alt="图片来自阮一峰的网络日志"><span class="img-alt">图片来自阮一峰的网络日志</span></p>
+        <img alt="图片来自阮一峰的网络日志" src="https://static.hufangyun.com/hexo/img/git-order.png?imageView2/2/w/750"><span class="img-alt">图片来自阮一峰的网络日志</span>
 <p><code>git</code> 的几个概念：</p>
 <ul>
 <li>Workspace：工作区</li>
@@ -86,6 +86,8 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Youthink</span><br><span class="line"></span><br><span class="line">简写 gcl</span><br></pre></td></tr></table></figure>
 <p>添加修改</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add --all</span><br><span class="line"></span><br><span class="line">简写 gaa</span><br></pre></td></tr></table></figure>
+<p>指定某个文件的修改添加到下次提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add -p &lt;file&gt;</span><br></pre></td></tr></table></figure>
 <p>提交修改</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m</span><br><span class="line"></span><br><span class="line">简写 gcmsg</span><br></pre></td></tr></table></figure>
 <p>代码推到远程仓库</p>
@@ -106,8 +108,8 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git stash drop stash@&#123;0&#125;</span><br></pre></td></tr></table></figure>
 <p>恢复第一条缓存代码并删除记录</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
-<h3 id="代码回滚"><a href="#代码回滚" class="headerlink" title="代码回滚"></a>代码回滚</h3><p>彻底取消最近的提交</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+<h3 id="代码回滚"><a href="#代码回滚" class="headerlink" title="代码回滚"></a>代码回滚</h3><p>放弃工作目录下的所有更改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard HEAD</span><br></pre></td></tr></table></figure>
 <p>只取消提交</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --soft</span><br></pre></td></tr></table></figure>
 <p>想直接丢弃工作区的修改</p>
@@ -120,7 +122,7 @@
 <p>放弃本地修改同远程同步</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure>
 <p>回退到某个版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard c011eb3</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset --hard c011eb3</span><br><span class="line"></span><br><span class="line">简写 grhh</span><br></pre></td></tr></table></figure>
 <p>已经 add 了怎么取消</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git reset HEAD 文件</span><br></pre></td></tr></table></figure>
 <p>已经commit了怎么取消（最近一次）</p>
@@ -133,6 +135,8 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名</span><br><span class="line"></span><br><span class="line">简写 gcb 分支名</span><br></pre></td></tr></table></figure>
 <p>拉取远程所有分支的更改<br>(同时可以清除本地无效的远程分支)</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch -p</span><br></pre></td></tr></table></figure>
+<p>下载远程端的所有改动到本地，不会自动合并到当前</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch</span><br><span class="line"></span><br><span class="line">简写 gf</span><br></pre></td></tr></table></figure>
 <p>删除本地分支</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d  分支名</span><br><span class="line"></span><br><span class="line">git branch -D  分支名</span><br><span class="line"></span><br><span class="line">简写 gbd</span><br></pre></td></tr></table></figure>
 <p>删除远程分支</p>
