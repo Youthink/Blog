@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-07-16T15:31:31.000Z" itemprop="dateUpdated">2018-07-16</time>
+    更新 <time datetime="2018-11-12T15:31:31.000Z" itemprop="dateUpdated">2018-11-12</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -75,7 +75,7 @@
 <p>可以使用各种 <code>git</code> 命令缩写。😋</p>
 <p>比如</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add --all ===&gt; gaa</span><br><span class="line"></span><br><span class="line">git commit -m ===&gt; gcmsg</span><br></pre></td></tr></table></figure>
-<p><img src="https://ooo.0o0.ooo/2017/05/21/5921b3e1283cf.png" alt=""></p>
+<img src="https://static.hufangyun.com/hexo/img/zsh-git.png?imageView2/2/w/200">
 <p>查看所有 <code>git</code> 命令缩写</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh</span><br></pre></td></tr></table></figure>
 <p>或者筛选对应的命令</p>
@@ -104,14 +104,12 @@
 <h3 id="Z"><a href="#Z" class="headerlink" title="Z"></a>Z</h3><p>如果你不想额外安装 <code>autojump</code></p>
 <p>可以使用 <code>oh-my-zsh</code> 内置的类似组件 <a href="https://github.com/rupa/z" target="_blank" rel="noopener">Z</a> </p>
 <p>和 <code>autojump</code> 除了名字不一样，基本雷同。</p>
-<p>⚠️ 2018.07.16更新<br><code>Z</code> 会在用户目录下生成很多的缓存文件，如下图</p>
-<p><img src="media/WX20180716-150719@2x.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">z -x 无效路径</span><br></pre></td></tr></table></figure>
 <p>效果图</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tNc79ly1ffqsum0zibj30ey01hjsg.jpg" alt=""></p>
+<img src="https://static.hufangyun.com/hexo/img/zsh-z.jpg?imageView2/2/w/500">
 <h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p><a href="https://github.com/zsh-users/zsh-syntax-highlighting" target="_blank" rel="noopener">官网</a></p>
 <p><strong>作用</strong> 平常用的<code>ls</code>、<code>cd</code> 等命令输入正确会绿色高亮显示，输入错误会显示其他的颜色。</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/21/5921b54d899d9.png" alt=""></p>
+<img src="https://static.hufangyun.com/hexo/img/zsh-syntax-highlighting.png?imageView2/2/w/300">
 <p> <strong>安装</strong></p>
 <p>克隆项目</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
@@ -123,7 +121,7 @@
 <p><strong>作用</strong></p>
 <p>效率神器 👍</p>
 <p>如图输入命令时，会给出建议的命令（灰色部分）按键盘 &#8594; 补全</p>
-<p><img src="https://ww1.sinaimg.cn/large/006tNbRwly1ffanc9rb8pj30ay016q39.jpg" alt=""></p>
+<img src="https://static.hufangyun.com/hexo/img/zsh-autosuggestions.jpg?imageView2/2/w/300">
 <p>如果感觉 &#8594; 补全不方便，还可以自定义补全的快捷键，比如我设置的逗号补全</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bindkey &apos;,&apos; autosuggest-accept</span><br></pre></td></tr></table></figure>
 <p>在 <code>.zshrc</code> 文件添加这句话即可。</p>
@@ -194,7 +192,7 @@
 </blockquote>
 <h3 id="history-命令时间格式"><a href="#history-命令时间格式" class="headerlink" title="history 命令时间格式"></a>history 命令时间格式</h3><p><code>history</code> 命令查看历史输入命令的时间展示格式</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">HIST_STAMPS=<span class="string">"yyyy-mm-dd"</span></span><br></pre></td></tr></table></figure>
-<p><img src="media/15241577143324.jpg" alt=""></p>
+<img src="https://static.hufangyun.com/hexo/img/zsh-history.jpg?imageView2/2/w/300">
 <p>时间会按照指定的格式展示，方便搜索查看</p>
 <h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>在 <code>~/.zshrc</code> 文件中设置主题为 <code>random</code> 即可开启随机主题</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ZSH_THEME=&quot;random&quot;</span><br></pre></td></tr></table></figure>
@@ -209,7 +207,7 @@
 <p>防止 <code>copy</code> 的时候覆盖已存在的文件, 带上 <code>i</code> 选项，文件已存在的时候，会提示，需要确认才能 <code>copy</code></p>
 <h4 id="bat-代替-cat"><a href="#bat-代替-cat" class="headerlink" title="bat 代替 cat"></a><code>bat</code> 代替 <code>cat</code></h4><p><code>cat</code> 某个文件，可以在终端直接输出文件内容，<code>bat</code> 相比 <code>cat</code> 增加了行号和颜色高亮 👍</p>
 <p>直接上个效果</p>
-<p><img src="media/15262637829800.jpg" alt=""></p>
+<img src="https://static.hufangyun.com/hexo/img/zsh-bat.jpg?imageView2/2/w/500">
 <p><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">官网</a></p>
 <p>安装方式</p>
 <p>macOS 上</p>
