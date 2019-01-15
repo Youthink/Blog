@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="keywords" content="胡方运,小猿大圣,编程,程序员,个人博客,Youthink,Web" />
-  <meta name="description" content="小猿大圣的个人博客,胡方运的博客,编程随想" />
+  <meta name="keywords" content="胡方运,小猿大圣,编程,程序员,个人博客,Youthink,Web">
+  <meta name="description" content="小猿大圣的个人博客,胡方运的博客,编程随想">
   <meta http-equiv="x-dns-prefetch-control" content="on">
   <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
   
@@ -24,7 +24,7 @@
   <link rel="stylesheet" type="text/css" href="/./style/main.651055.css">
   <link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <title>正则表达式实践学习</title>
+  <title>正则表达式学习笔记</title>
   
   <script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?ae46047b557574a12bba544bea130043";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();
   </script>
@@ -47,7 +47,7 @@
     
   
   <h1 class="title">
-    正则表达式实践学习
+    正则表达式学习笔记
   </h1>
   
 
@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2017-03-22T16:00:00.000Z" itemprop="dateUpdated">2017-03-23</time>
+    更新 <time datetime="2018-11-23T16:00:00.000Z" itemprop="dateUpdated">2018-11-24</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -70,21 +70,172 @@
   <div class="container">
     <div class="article">
       <div class="content">
-        <blockquote>
-<p>整理一下项目中使用到的正则表达式,实践出真知。</p>
+        <img src="https://static.hufangyun.com/hexo/img/learn-regex.jpg">
+<blockquote>
+<p>之前看过<a href="https://book.douban.com/subject/2154713/" target="_blank" rel="noopener">《精通正则表达式》</a>，也翻阅过很多次的文档，但是缺乏实践，理解的也不深刻，很快就忘记了，和没看一样 😂 。</p>
 </blockquote>
-<p>之前看过《精通正则表达式》，但是缺乏实践，使用的不熟练，很容易忘记。</p>
-<p>文档：<a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">http://deerchao.net/tutorials/regex/regex.htm</a></p>
-<p>工具：<a href="http://tool.chinaz.com/regex" target="_blank" rel="noopener">http://tool.chinaz.com/regex</a></p>
-<a id="more"></a>
-<p>写这种工具性的小函数挺有意思的。</p>
-<p>1、手机号码分隔</p>
-<p>187 3377 1994</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">formatPhoneNumber(rawNumber) &#123;</span><br><span class="line">  <span class="keyword">return</span> rawNumber.toString().split(<span class="string">''</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">char, idx</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (idx === <span class="number">2</span> || idx === <span class="number">6</span>) ? char + <span class="string">' '</span> : char;</span><br><span class="line">  &#125;).join(<span class="string">''</span>).trim();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、匹配手机号</p>
+<p>所以，看再多次文档，没用！！！😂 要动手写，实践出真知。💪</p>
+<h2 id="学习方法"><a href="#学习方法" class="headerlink" title="学习方法"></a>学习方法</h2><p>我觉得正则的学习方法是这样的:</p>
+<p>1、大体翻阅一遍文档，20 ~ 30 分钟左右。当然聪明的你，可能花的时间更少。😄</p>
+<p>2、做题练习，在实践中加深理解。</p>
+<p>  ① 做题的时候先自己思考，尝试着去解决。✌️<br>  ② 如果没有思路，再翻阅文档，思考一下那些组合可能解决问题。😄<br>  ③ 如果还是不行，就搜索相关的思路。再尝试解决。⚠️ 注意，不是搜索答案。<br>  ④ 还是解决不了，就去看答案吧。</p>
+<p>  经过这么长时间的思考、折腾。当你看到答案的时候，印象会更加的深刻。对很多用法理解的也更加的透彻。💯</p>
+<p>3、平常的使用过程中，再查漏补缺。</p>
+<h2 id="文档选择"><a href="#文档选择" class="headerlink" title="文档选择"></a>文档选择</h2><p>文档的话，可以从下面根据喜好任选一款。</p>
+<p><a href="http://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">正则表达式教程</a></p>
+<p><a href="https://github.com/ziishaned/learn-regex/blob/master/README-cn.md" target="_blank" rel="noopener">学习正则表达式的简单方法</a></p>
+<p><a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">正则表达式30分钟入门教程</a></p>
+<h2 id="正则题库"><a href="#正则题库" class="headerlink" title="正则题库"></a>正则题库</h2><p><a href="https://alf.nu/RegexGolf" target="_blank" rel="noopener">RegexGolf</a></p>
+<p><a href="https://gist.github.com/jonathanmorley/8058871" target="_blank" rel="noopener">RegexGolf 答案</a></p>
+<p><a href="https://blog.csdn.net/NJYR21/article/details/79600217" target="_blank" rel="noopener">答案二</a></p>
+<p>如果有更好的题库，希望能分享给我。😄</p>
+<h2 id="正则工具"><a href="#正则工具" class="headerlink" title="正则工具"></a>正则工具</h2><p>正则网站</p>
+<p><a href="https://regex101.com/" target="_blank" rel="noopener">https://regex101.com/</a></p>
+<p><a href="http://tool.chinaz.com/regex" target="_blank" rel="noopener">http://tool.chinaz.com/regex</a></p>
+<p><a href="https://regexr.com/" target="_blank" rel="noopener">https://regexr.com/</a></p>
+<p><a href="https://regexper.com/" target="_blank" rel="noopener">正则语法可视化分析工具</a></p>
+<p><a href="http://zhoushengfe.com/rline.html" target="_blank" rel="noopener">正则语法可视化分析工具2</a></p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>含义 </th>
+<th>语法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[abc]</td>
+<td>单个字符 a或b或c</td>
+<td>[^abc]</td>
+<td>a,b,c以外的单个字符</td>
+</tr>
+<tr>
+<td>[a-zA-Z0-9]</td>
+<td>字符范围</td>
+<td>.</td>
+<td>任意字符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>空字符</td>
+<td>\S</td>
+<td>非空字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>数字字符</td>
+<td>\D</td>
+<td>非数字字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>单词(字母，数字，下划线)</td>
+<td>\W</td>
+<td>非单词</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>单词边界</td>
+<td>\b</td>
+<td>非单词边界</td>
+</tr>
+<tr>
+<td>^</td>
+<td>开头</td>
+<td>$</td>
+<td>结尾</td>
+</tr>
+<tr>
+<td>(…)</td>
+<td>分组</td>
+<td>(a\</td>
+<td>b)</td>
+<td>a或b</td>
+</tr>
+<tr>
+<td>a*</td>
+<td>重复0次或多次</td>
+<td>a?</td>
+<td>重复0次或1次</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>重复1次或多次</td>
+<td>a{3}</td>
+<td>重复3次</td>
+</tr>
+<tr>
+<td>a{3,}</td>
+<td>重复3次或多次</td>
+<td>a{3,5}</td>
+<td>重复3到5次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>非贪婪匹配</td>
+<td>(?:abc)</td>
+<td>非捕获分组</td>
+</tr>
+<tr>
+<td>(?=abc)</td>
+<td>正向匹配abc</td>
+<td>(?!abc)</td>
+<td>正向不匹配abc</td>
+</tr>
+<tr>
+<td>\xhh</td>
+<td>十六进制hh字符</td>
+<td>\uhhhh</td>
+<td>十六进制hhhh字符</td>
+</tr>
+<tr>
+<td>\u{hhhh}</td>
+<td>(仅当设置了u标志时)十六进制hhhh字符</td>
+<td>\cX</td>
+<td>控制字符</td>
+</tr>
+<tr>
+<td>\0</td>
+<td>空字符</td>
+<td>\数字（n）</td>
+<td> 匹配第 n 个（）内的值</td>
+</tr>
+<tr>
+<td>\a</td>
+<td>alert字符</td>
+<td>\t</td>
+<td>制表符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行符</td>
+<td>\v</td>
+<td>垂直制表符</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>换页符</td>
+<td>\r</td>
+<td>回车符</td>
+</tr>
+<tr>
+<td>\e</td>
+<td>escape字符</td>
+<td>[\b]</td>
+<td>退格符</td>
+</tr>
+</tbody>
+</table>
+<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><h3 id="num"><a href="#num" class="headerlink" title="\num"></a><code>\num</code></h3><p>如下，顺序执行，<code>\1</code> 代表重复第一个 <code>()</code> 内的元素，<code>\2</code> 代表重复第二个 <code>()</code> 内的元素</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">(.)(.)\<span class="number">2</span>\<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// abba</span></span><br><span class="line"></span><br><span class="line">(.)(.)\<span class="number">1</span>\<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// abaa</span></span><br><span class="line"></span><br><span class="line">(.)(.)\<span class="number">1</span>\<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//abab</span></span><br></pre></td></tr></table></figure>
+<h3 id="匹配回文？"><a href="#匹配回文？" class="headerlink" title="匹配回文？"></a>匹配回文？</h3><p>严格意义上的正则表达式不能匹配<strong>未知长度</strong>的回文字符串</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">aba</span><br><span class="line">aabaa</span><br><span class="line">aaaaaabaaaaaa</span><br></pre></td></tr></table></figure>
+<p>因为在看到’b’之后我们必须倒数 x 次以确保它是回文。但是正则表达式，无法计算 x。</p>
+<p>详情<a href="https://stackoverflow.com/questions/233243/how-to-check-that-a-string-is-a-palindrome-using-regular-expressions" target="_blank" rel="noopener">看这里</a></p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>匹配手机号</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">isMobileValid(number) &#123;</span><br><span class="line">  <span class="keyword">return</span> number &amp;&amp; (<span class="regexp">/^1[345678]\d&#123;9&#125;$/</span>).test(number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>3、匹配第一个”bat”或者”cat”,不区分大小写<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">/[bc]at/i</span><br></pre></td></tr></table></figure></p>
-
       </div>
         <div class="support-author">
           <p>感谢您的阅读。 🙏
@@ -129,7 +280,7 @@
         </div>
       </div>
     </div>
-   </div>
+   
 </main>
 <div class="footer">
   <div class="info">
