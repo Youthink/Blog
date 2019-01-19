@@ -21,7 +21,7 @@
   <link rel="dns-prefetch" href="https://api.github.com">
   <link rel="dns-prefetch" href="https://avatars3.githubusercontent.com">
   
-  <link rel="stylesheet" type="text/css" href="/./style/main.7d41b7.css">
+  <link rel="stylesheet" type="text/css" href="/./style/main.9200c6.css">
   <link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
   <title>Nodejs怎么按行读写文件</title>
@@ -70,6 +70,11 @@
   <div class="container">
     <div class="article">
       <div class="content">
+        
+        <div class="overdue-remind">
+          本文最后更新于$day天前，文中所描述的信息可能已发生改变。
+        </div>
+        
         <h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>); <span class="comment">//导入 文件系统 模块</span></span><br><span class="line"><span class="keyword">var</span> ws = fs.createWriteStream(<span class="string">'./example.txt'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>;i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">	   <span class="keyword">var</span> re = ws.write(i + <span class="string">'\n'</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>); <span class="comment">//Node.js本身就有按行读取的模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rl = readline.createInterface(&#123;</span><br><span class="line">  input: fs.createReadStream(<span class="string">'./example.txt'</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">rl.on(<span class="string">'line'</span>, (data) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>命令行里跑脚本的感觉酷酷的。🏃</p>
@@ -164,7 +169,7 @@
     }
     console.log('%c' + o, textStyle);
   });
-}(consoleConfig));</script><script type="text/javascript" src="/./js/main.7d41b7.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+}(consoleConfig));</script><script type="text/javascript" src="/./js/main.9200c6.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

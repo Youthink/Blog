@@ -21,7 +21,7 @@
   <link rel="dns-prefetch" href="https://api.github.com">
   <link rel="dns-prefetch" href="https://avatars3.githubusercontent.com">
   
-  <link rel="stylesheet" type="text/css" href="/./style/main.7d41b7.css">
+  <link rel="stylesheet" type="text/css" href="/./style/main.9200c6.css">
   <link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
   <title>本地 &lt;--&gt; 服务器间文件传输</title>
@@ -70,6 +70,7 @@
   <div class="container">
     <div class="article">
       <div class="content">
+        
         <h3 id="Linux-服务器之间文件传输"><a href="#Linux-服务器之间文件传输" class="headerlink" title="Linux 服务器之间文件传输"></a>Linux 服务器之间文件传输</h3><p>要把当前一个文件上传到远程另外一台主机上，可以如下命令<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scp -P 端口 文件 用户名@IP:远程主机目录  (注意主机号后的冒号于文件路径间没有空格！)</span><br><span class="line"></span><br><span class="line">scp -P 21345 /home/daisy/full.tar.gz root@172.19.2.75:/home/root</span><br></pre></td></tr></table></figure></p>
 <p>把文件从远程主机下载当前目录<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scp 用户名@IP:要存放的目录 远程主机文件</span><br><span class="line"></span><br><span class="line">scp -P 21345 root@172.19.2.75:/home/root/full.tar.gz ./</span><br></pre></td></tr></table></figure></p>
 <h3 id="Windows-与-Linux-之间传送文件"><a href="#Windows-与-Linux-之间传送文件" class="headerlink" title="Windows 与 Linux 之间传送文件"></a>Windows 与 Linux 之间传送文件</h3><p>Windows 下可以使用 <code>putty</code> 软件里的 <code>pscp.exe</code></p>
@@ -178,7 +179,7 @@
     }
     console.log('%c' + o, textStyle);
   });
-}(consoleConfig));</script><script type="text/javascript" src="/./js/main.7d41b7.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+}(consoleConfig));</script><script type="text/javascript" src="/./js/main.9200c6.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
