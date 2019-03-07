@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-08-08T06:57:05.000Z" itemprop="dateUpdated">2018-08-08</time>
+    更新 <time datetime="2019-01-28T06:57:05.000Z" itemprop="dateUpdated">2019-01-28</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -76,8 +76,15 @@
 </blockquote>
 <p><a href="https://eslint.org/docs/user-guide/configuring.html#configuring-rules" target="_blank" rel="noopener">官方文档</a></p>
 <h2 id="禁用方法"><a href="#禁用方法" class="headerlink" title="禁用方法"></a>禁用方法</h2><p>代码块禁用</p>
-<p>1、禁用所有规则<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/*eslint-disable */</span><br><span class="line"></span><br><span class="line">code...</span><br><span class="line"></span><br><span class="line">/*eslint-enable */</span><br></pre></td></tr></table></figure></p>
-<p>2、禁用指定的规则</p>
+<p>1、</p>
+<ul>
+<li><code>&quot;off&quot;</code> 或者 <code>0</code> - 关掉规则</li>
+<li><code>&quot;warn&quot;</code> 或者 <code>1</code> - 打开规则作为一个警告(不影响退出代码)</li>
+<li><code>&quot;error&quot;</code> 或者 <code>2</code> - 打开规则作为一个错误(退出代码为1时触发)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/* eslint react/display-name: 0, curly: 2 */</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">/* eslint eqeqeq: &quot;off&quot;, curly: &quot;error&quot; */</span><br></pre></td></tr></table></figure>
+<p>2、禁用所有规则<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/*eslint-disable */</span><br><span class="line"></span><br><span class="line">code...</span><br><span class="line"></span><br><span class="line">/*eslint-enable */</span><br></pre></td></tr></table></figure></p>
+<p>3、禁用指定的规则</p>
 <blockquote>
 <p>多个规则间用逗号分隔</p>
 </blockquote>
