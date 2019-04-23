@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2019-02-15T07:59:32.000Z" itemprop="dateUpdated">2019-02-15</time>
+    更新 <time datetime="2019-04-15T07:59:32.000Z" itemprop="dateUpdated">2019-04-15</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -153,6 +153,10 @@
 <td>gt</td>
 <td>后一个 tab</td>
 </tr>
+<tr>
+<td>ma</td>
+<td>选中目录后，在当前目录创建文件。</td>
+</tr>
 </tbody>
 </table>
 <h3 id="vim-multiple-mouse"><a href="#vim-multiple-mouse" class="headerlink" title="vim-multiple-mouse"></a>vim-multiple-mouse</h3><p>1、v 模式选中</p>
@@ -180,6 +184,8 @@
 <p>guu       将当前行的字母全改成小写</p>
 <p>gUw       将光标下的单词改成大写。</p>
 <p>guw       将光标下的单词改成小写。</p>
+<p>w         单词末尾</p>
+<p>b         单词开头</p>
 <p>3、vim 屏幕滚动</p>
 <p>向下滚动一屏(ctrl+f)<br>助记: Forwards。</p>
 <p>向下滚动半屏(ctrl+d)<br>助记: Downwards。</p>
@@ -206,6 +212,17 @@
 </ul>
 <p>8、buffer</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:b num      前往指定buffer</span><br><span class="line">:bn 下一个   buffer</span><br><span class="line">:bp 上一个   buffer</span><br><span class="line">:bw 保存当前 buffer</span><br><span class="line">:bd 删除当前 buffer</span><br></pre></td></tr></table></figure>
+<p><leader> b  搜索当前打开的 buffers</leader></p>
+<p>9、分栏</p>
+<p>:vsp 文件  左右两栏</p>
+<p>10、删除单词</p>
+<p>daw 删除光标所在的单词</p>
+<p>bdw 删除光标所在的单词，并将光标重置到单词开头处</p>
+<p>10、删除引号内的内容</p>
+<p>ci’、ci”、ci(、ci[、ci{、ci&lt; - 分别更改这些配对标点符号中的文本内容</p>
+<p>di’、di”、di(或dib、di[、di{或diB、di&lt; - 分别删除这些配对标点符号中的文本内容</p>
+<p>yi’、yi”、yi(、yi[、yi{、yi&lt; - 分别复制这些配对标点符号中的文本内容</p>
+<p>vi’、vi”、vi(、vi[、vi{、vi&lt; - 分别选中这些配对标点符号中的文本内容</p>
 <h2 id="alfred-workflow"><a href="#alfred-workflow" class="headerlink" title="alfred workflow"></a>alfred workflow</h2><h3 id="youdao"><a href="#youdao" class="headerlink" title="youdao"></a>youdao</h3><p>shift + enter 发音</p>
 <p>control ^ + enter 打开有道翻译的页面</p>
 
