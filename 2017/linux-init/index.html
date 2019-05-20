@@ -7,7 +7,6 @@
   <meta name="keywords" content="胡方运,小猿大圣,编程,程序员,个人博客,Youthink,Web">
   <meta name="description" content="小猿大圣的个人博客,胡方运的博客,编程随想">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <meta name="referrer" content="no-referrer">
   <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
   
   <link rel="dns-prefetch" href="https://widget.daovoice.io">
@@ -164,6 +163,15 @@
 <p>然后，更新软件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
 <p>最后，再根据需要，做一些安全设置，比如搭建防火墙，关闭 <code>HTTP</code>、<code>HTTPs</code>、<code>SSH</code> 以外的端口，详细可参考这篇 <a href="http://spenserj.com/blog/2013/07/15/securing-a-linux-server/" target="_blank" rel="noopener">《Securing a Linux Server》</a>。</p>
+<h2 id="设置时区"><a href="#设置时区" class="headerlink" title="设置时区"></a>设置时区</h2><p>使用 tzselect 命令选择需要的时区。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tzselect</span><br></pre></td></tr></table></figure>
+<p>设置完后，命令行会提示我们将时区的配置文件添加到 <code>.profile</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">TZ='Asia/Hong_Kong'; export TZ</span><br></pre></td></tr></table></figure>
+<p>执行完后，重新登录系统或者刷新 <code>~/.bashrc</code> 文件使其生效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>更改 Linux 整个系统范围的时区可以使用如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+<p>现在使用 <code>date</code> 命令查看一下时间。</p>
 <h2 id="特别番"><a href="#特别番" class="headerlink" title="特别番"></a>特别番</h2><h3 id="阿里云服务器"><a href="#阿里云服务器" class="headerlink" title="阿里云服务器"></a>阿里云服务器</h3><p>阿里云服务器可以在控制台设置安全组规则。</p>
 <h4 id="什么是安全组"><a href="#什么是安全组" class="headerlink" title="什么是安全组"></a>什么是安全组</h4><p>简单点，给大家举个栗子🌰，我部署了一个 <code>MongoDB</code> 的数据库，我怕别人黑我数据库，我就可以在安全组的规则里设置 <code>公网入方向</code> 拒绝访问 <code>MongoDB</code> 使用的端口 <code>27017</code>。只允许本地 <code>locahost</code> 访问，禁止公网访问。</p>
 <p>下面是教科书版具体解释</p>

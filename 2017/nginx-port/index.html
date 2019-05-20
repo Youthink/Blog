@@ -7,7 +7,6 @@
   <meta name="keywords" content="胡方运,小猿大圣,编程,程序员,个人博客,Youthink,Web">
   <meta name="description" content="小猿大圣的个人博客,胡方运的博客,编程随想">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <meta name="referrer" content="no-referrer">
   <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
   
   <link rel="dns-prefetch" href="https://widget.daovoice.io">
@@ -60,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2017-07-15T13:42:15.000Z" itemprop="dateUpdated">2017-07-15</time>
+    更新 <time datetime="2019-05-20T13:42:15.000Z" itemprop="dateUpdated">2019-05-20</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -78,7 +77,7 @@
         
         <p>开发的项目使用的 3000 端口，现在部署到服务器上，想使用主域名直接访问。我们就需要做一个转发，当用户访问域名（默认 80端口）的时候，转发到3000端口,就可以直接访问我们的项目了。</p>
 <p>端口转发的方式有很多种，我这里选择使用的 <code>nginx</code></p>
-<p>服务器使用的 <code>ubuntu 16.04</code> 首先安装 <code>nginx</code></p>
+<p>服务器使用的 <code>ubuntu</code> 首先安装 <code>nginx</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
 <p>进入 <code>/etc/nginx</code> 目录，<code>conf.d</code> 文件夹下添加 <code>server.conf</code> 文件，内容如下：</p>
 <figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#root /var/www/html;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#index index.html index.htm index.nginx-debian.html;</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">                <span class="attribute">proxy_pass</span> http://localhost:3000;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -86,6 +85,17 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
 <p>如果 <code>nginx</code> 启动失败，可以查看错误日志，检查原因</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
+<p>或者使用以下命令查看 nginx 状态，会输出报错信息</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl status -l nginx.service</span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>按照上面配置完后，<code>nginx</code> 启动失败 🙈，报错如下：</p>
+<p>重复的定义了 default server 80 端口</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-enabled/default:22</span><br></pre></td></tr></table></figure>
+<p>使用以下命令搜索哪些地方用到了 <code>default_server</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">grep -R default_server /etc/nginx</span><br></pre></td></tr></table></figure>
+<p>原因是 nginx 的默认配置文件也定义了 80 端口</p>
+<p>备份一下 <code>/etc/nginx/sites-enabled/default</code></p>
+<p>然后删除该文件。</p>
+<p>再次重启 nginx 服务，成功 🦊。</p>
 
       </div>
         <div class="support-author">

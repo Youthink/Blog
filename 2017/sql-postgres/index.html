@@ -7,7 +7,6 @@
   <meta name="keywords" content="胡方运,小猿大圣,编程,程序员,个人博客,Youthink,Web">
   <meta name="description" content="小猿大圣的个人博客,胡方运的博客,编程随想">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <meta name="referrer" content="no-referrer">
   <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
   
   <link rel="dns-prefetch" href="https://widget.daovoice.io">
@@ -60,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2019-05-12T16:00:00.000Z" itemprop="dateUpdated">2019-05-13</time>
+    更新 <time datetime="2019-05-19T16:00:00.000Z" itemprop="dateUpdated">2019-05-20</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -80,8 +79,14 @@
 <p><a href="http://www.w3school.com.cn/sql/sql_func_format.asp" target="_blank" rel="noopener">w3schoolSQL教程</a></p>
 <p><a href="https://www.postgresql.org/docs/9.6/static/reference.html" target="_blank" rel="noopener">PostgreSQL 英文文档</a></p>
 <p><a href="http://wiki.jikexueyuan.com/project/sql/" target="_blank" rel="noopener">极客学院SQL教程</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>macOS</code> 上可以使用 <code>brew</code> 安装</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h3><p><code>macOS</code> 上可以使用 <code>brew</code> 安装</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">brew install postgres</span><br></pre></td></tr></table></figure>
+<h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><p>安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install postgresql-11</span><br></pre></td></tr></table></figure>
+<p>查看状态</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl status postgresql</span><br></pre></td></tr></table></figure>
+<p>切换用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo -i -u postgres</span><br><span class="line">psql</span><br></pre></td></tr></table></figure>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><a href="http://blog.everlose.com/mac-homebrew-postgresql.html" target="_blank" rel="noopener">Mac 下使用 homebrew 安装 postgresql 及配置</a> </p>
 <h5 id="mac-启动-postgreSQL-服务"><a href="#mac-启动-postgreSQL-服务" class="headerlink" title="mac 启动 postgreSQL 服务"></a>mac 启动 postgreSQL 服务</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pg_ctl -D /usr/local/var/postgres start</span><br></pre></td></tr></table></figure>
 <h5 id="连接远程数据库"><a href="#连接远程数据库" class="headerlink" title="连接远程数据库"></a>连接远程数据库</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">psql -h IP或者主机地址 -p 端口 -U 用户 -d 数据库</span><br><span class="line"></span><br><span class="line">psql -h 117.12.116.18 -p 5432 -U web -d test</span><br></pre></td></tr></table></figure>
@@ -96,6 +101,8 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">psql -d 数据库名字 -f 文件名 用户名</span><br><span class="line"></span><br><span class="line">例子:</span><br><span class="line"></span><br><span class="line">psql -d dataname -f file.sql admin</span><br></pre></td></tr></table></figure>
 <h4 id="联表查询"><a href="#联表查询" class="headerlink" title="联表查询"></a>联表查询</h4><p>将来补充</p>
 <h4 id="用户、角色、权限管理"><a href="#用户、角色、权限管理" class="headerlink" title="用户、角色、权限管理"></a>用户、角色、权限管理</h4><p><a href="http://www.jianshu.com/p/b09d0b29faa9" target="_blank" rel="noopener">PostgreSQL学习笔记(九) 用户、角色、权限管理</a></p>
+<p>创建用户并赋予权限</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">CREATE USER www WITH PASSWORD 'u867#eDgg6#2@elo098OIUh';</span><br><span class="line"></span><br><span class="line">CREATE DATABASE my_app_prod OWNER www;</span><br><span class="line"></span><br><span class="line">alter role www login createdb;</span><br></pre></td></tr></table></figure>
 <h4 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h4><p>1、macOS postgres 角色不存在</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">** (Postgrex.Error) FATAL 28000 (invalid_authorization_specification): role "postgres" does not exist</span><br></pre></td></tr></table></figure>
 <p><strong>解决</strong></p>
