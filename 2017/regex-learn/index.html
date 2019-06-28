@@ -237,6 +237,9 @@
 <p>详情<a href="https://stackoverflow.com/questions/233243/how-to-check-that-a-string-is-a-palindrome-using-regular-expressions" target="_blank" rel="noopener">看这里</a></p>
 <h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>匹配手机号</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">isMobileValid(number) &#123;</span><br><span class="line">  <span class="keyword">return</span> number &amp;&amp; (<span class="regexp">/^1[345678]\d&#123;9&#125;$/</span>).test(number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Js-字符处理"><a href="#Js-字符处理" class="headerlink" title="Js 字符处理"></a>Js 字符处理</h2><p>截取字符串的第一位和最后一位</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'abc'</span>;</span><br><span class="line">str.substring(<span class="number">1</span>, str.length<span class="number">-1</span>); <span class="comment">// b</span></span><br></pre></td></tr></table></figure>
+
       </div>
         <div class="support-author">
           <p>感谢您的阅读。 🙏

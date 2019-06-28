@@ -93,7 +93,14 @@
 <p><code>Ctrl+h</code> 删除光标所在处前一个字符</p>
 <p><code>Ctrl+y</code> 粘贴刚才所删除的字符</p>
 <p><code>Ctrl+w</code> 剪切光标所在处之前的一个词（以空格、标点等为分隔符）</p>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="NerdTree"><a href="#NerdTree" class="headerlink" title="NerdTree"></a>NerdTree</h3><table>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="删除匹配的行"><a href="#删除匹配的行" class="headerlink" title="删除匹配的行"></a>删除匹配的行</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:g/text/d</span><br></pre></td></tr></table></figure>
+<h3 id="删除空行"><a href="#删除空行" class="headerlink" title="删除空行"></a>删除空行</h3><p>方法一：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:%s/^\n$//g</span><br></pre></td></tr></table></figure>
+<p>这种方式对于那种空行中含有tab键和空格的情况删除不了</p>
+<p>方法二：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:g/^\s*$\n\s*$/d</span><br></pre></td></tr></table></figure>
+<p>这种情况既能删除只有回车的空行，还能删除包含tab键和空格的空行</p>
+<h3 id="NerdTree"><a href="#NerdTree" class="headerlink" title="NerdTree"></a>NerdTree</h3><table>
 <thead>
 <tr>
 <th>快键键</th>
