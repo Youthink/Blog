@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -76,24 +76,35 @@
 <p>要编辑 <code>crontab</code>，输入 <code>crontab -e</code></p>
 <p>要删除 <code>crontab</code>，输入 <code>crontab -r</code></p>
 <h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式 :"></a>基本格式 :</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*　　*　　*　　*　　*　　command</span><br><span class="line">分　 时　 日　 月　 周　 命令</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第 1 列表示分钟 1～59 每分钟用 * 或者 */1 表示</span><br><span class="line">第 2 列表示小时 1～23（0 表示 0 点）</span><br><span class="line">第 3 列表示日期 1～31</span><br><span class="line">第 4 列表示月份 1～12</span><br><span class="line">第 5 列标识号星期 0～6（0 表示星期天）</span><br><span class="line">第 6 列要运行的命令</span><br><span class="line">* 逗号( , ) 指定列表值。如:  1, 3, 4, 7, 8</span><br><span class="line">* 中横线( - ) 指定范围值 如  1-6, 代表 1, 2, 3, 4, 5, 6</span><br><span class="line">* 星号 ( * ) 代表所有可能的值</span><br></pre></td></tr></table></figure>
+
 <h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">30 21 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>上面的例子表示每晚的21:30重启 <code>apache</code>。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">45 4 1,10,22 * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>上面的例子表示每月1、10、22日的4 : 45重启 <code>apache</code>。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">10 1 * * 6,0 /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>上面的例子表示每周六、周日的1 : 10重启 <code>apache</code>。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0,30 18-23 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>上面的例子表示在每天 18 : 00 至 23 : 00 之间每隔30分钟重启 <code>apache</code>。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 23 * * 6 /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>上面的例子表示每星期六的11 : 00 pm重启 <code>apache</code>。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* */1 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>每一小时重启 <code>apache</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* 23-7/1 * * * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>晚上11点到早上7点之间，每隔一小时重启 <code>apache</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 11 4 * mon-wed /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>每月的4号与每周一到周三的11点重启 <code>apache</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 4 1 jan * /usr/local/etc/rc.d/lighttpd restart</span><br></pre></td></tr></table></figure>
+
 <p>一月一号的4点重启 <code>apache</code></p>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><a href="http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html" target="_blank" rel="noopener">crontab命令</a></p>
 

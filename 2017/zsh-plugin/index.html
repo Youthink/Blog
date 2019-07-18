@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -76,12 +76,16 @@
 <p>可以使用各种 <code>git</code> 命令缩写。😋</p>
 <p>比如</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add --all ===&gt; gaa</span><br><span class="line"></span><br><span class="line">git commit -m ===&gt; gcmsg</span><br></pre></td></tr></table></figure>
+
 <img src="https://static.hufangyun.com/hexo/img/zsh-git.png?imageView2/2/w/350">
+
 <p>查看所有 <code>git</code> 命令缩写</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh</span><br></pre></td></tr></table></figure>
+
 <p>或者筛选对应的命令</p>
 <p>如和 <code>config</code> 有关的命令</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> | grep config</span><br></pre></td></tr></table></figure>
+
 <h3 id="autojump"><a href="#autojump" class="headerlink" title="autojump"></a>autojump</h3><p><a href="https://github.com/wting/autojump" target="_blank" rel="noopener">autojump 官网</a></p>
 <p><strong>作用</strong> 目录间快速跳转,不用再一直 <code>cd</code> 了 😁</p>
 <p><strong>使用</strong></p>
@@ -89,50 +93,68 @@
 <p><code>cd</code> 命令进入 <code>~/user/github/Youthink</code> 文件夹，下一次再想进入 <code>Yourhink</code> 文件夹的时候,直接 <code>j youthink</code> 即可<br>或者只输入 <code>youthink</code> 的一部分 <code>youth</code> 都行</p>
 <p>删除无效路径</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">j --purge 无效路径</span><br></pre></td></tr></table></figure>
+
 <p>打开 muisc 文件夹</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jo music</span><br></pre></td></tr></table></figure>
+
 <p>多个参数一起使用 打开 <code>/home/user/work/inbox</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">j w in</span><br></pre></td></tr></table></figure>
+
 <p>和 <code>Z</code> 不同 <code>autojump</code> 不是 <code>zsh</code> 内置的插件，需要额外安装。</p>
 <p>首先安装 <code>autojump</code>，如果你用 <code>Mac</code>，可以使用 <code>brew</code> 安装：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install autojump</span><br></pre></td></tr></table></figure>
+
 <p>如果是 <code>Linux</code>，可以使用 <code>git</code> 安装，比如：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone git://github.com/joelthelion/autojump.git</span><br></pre></td></tr></table></figure>
+
 <p>进入目录，执行</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./install.py</span><br></pre></td></tr></table></figure>
+
 <p>最后把以下代码加入 <code>.zshrc</code>：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] &amp;&amp; . ~/.autojump/etc/profile.d/autojump.sh</span><br></pre></td></tr></table></figure>
+
 <h3 id="Z"><a href="#Z" class="headerlink" title="Z"></a>Z</h3><p>如果你不想额外安装 <code>autojump</code></p>
 <p>可以使用 <code>oh-my-zsh</code> 内置的类似组件 <a href="https://github.com/rupa/z" target="_blank" rel="noopener">Z</a> </p>
 <p>和 <code>autojump</code> 除了名字不一样，基本雷同。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">z -x 无效路径</span><br></pre></td></tr></table></figure>
+
 <p>效果图</p>
 <img src="https://static.hufangyun.com/hexo/img/zsh-z.jpg?imageView2/2/w/500">
+
 <h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p><a href="https://github.com/zsh-users/zsh-syntax-highlighting" target="_blank" rel="noopener">官网</a></p>
 <p><strong>作用</strong> 平常用的<code>ls</code>、<code>cd</code> 等命令输入正确会绿色高亮显示，输入错误会显示其他的颜色。</p>
 <img src="https://static.hufangyun.com/hexo/img/zsh-syntax-highlighting.png?imageView2/2/w/450">
+
 <p> <strong>安装</strong></p>
 <p>克隆项目</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+
 <p>在 <code>~/.zshrc</code> 中配置</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">plugins=(其他的插件 zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure>
+
 <p>使配置生效</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
 <h3 id="zsh-autosuggestions"><a href="#zsh-autosuggestions" class="headerlink" title="zsh-autosuggestions"></a>zsh-autosuggestions</h3><p><a href="https://github.com/zsh-users/zsh-autosuggestions" target="_blank" rel="noopener">官网</a></p>
 <p><strong>作用</strong></p>
 <p>效率神器 👍</p>
 <p>如图输入命令时，会给出建议的命令（灰色部分）按键盘 &#8594; 补全</p>
 <img src="https://static.hufangyun.com/hexo/img/zsh-autosuggestions.jpg?imageView2/2/w/350">
+
 <p>如果感觉 &#8594; 补全不方便，还可以自定义补全的快捷键，比如我设置的逗号补全</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bindkey &apos;,&apos; autosuggest-accept</span><br></pre></td></tr></table></figure>
+
 <p>在 <code>.zshrc</code> 文件添加这句话即可。</p>
 <p><strong>安装</strong></p>
 <p>克隆项目</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://github.com/zsh-users/zsh-autosuggestions <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
 <p>在 <code>~/.zshrc</code> 中配置</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">plugins=(其他的插件 zsh-autosuggestions)</span><br></pre></td></tr></table></figure>
+
 <p>使配置生效</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
 <h3 id="sublime"><a href="#sublime" class="headerlink" title="sublime"></a>sublime</h3><p><a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/sublime" target="_blank" rel="noopener">官网</a></p>
 <p>已经内置直接启用即可</p>
 <p><strong>作用</strong></p>
@@ -144,8 +166,7 @@
 <th>作用</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>st</td>
 <td>打开 sublime</td>
 </tr>
@@ -165,8 +186,7 @@
 <td>sst</td>
 <td>管理员权限 相当于 sudo st</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h3 id="git-open"><a href="#git-open" class="headerlink" title="git-open"></a>git-open</h3><p><a href="https://github.com/paulirish/git-open" target="_blank" rel="noopener">官网</a></p>
 <p>在终端里打开当前项目的远程仓库地址</p>
 <p>不要小看这个插件欧，每次改完本地代码，当你想用浏览器访问远程仓库的时候，就知道这个插件多方便了 😘</p>
@@ -184,35 +204,47 @@
 <p><strong>安装</strong></p>
 <p>克隆项目</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/paulirish/git-open.git <span class="variable">$ZSH_CUSTOM</span>/plugins/git-open</span><br></pre></td></tr></table></figure>
+
 <p>在 <code>~/.zshrc</code> 中配置</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">plugins=(其他的插件 git-open)</span><br></pre></td></tr></table></figure>
+
 <p>使配置生效</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><blockquote>
 <p>我在 <code>.zshrc</code> 中的其他配置</p>
 </blockquote>
 <h3 id="history-命令时间格式"><a href="#history-命令时间格式" class="headerlink" title="history 命令时间格式"></a>history 命令时间格式</h3><p><code>history</code> 命令查看历史输入命令的时间展示格式</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">HIST_STAMPS=<span class="string">"yyyy-mm-dd"</span></span><br></pre></td></tr></table></figure>
+
 <img src="https://static.hufangyun.com/hexo/img/zsh-history.jpg?imageView2/2/w/350">
+
 <p>时间会按照指定的格式展示，方便搜索查看</p>
 <h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>在 <code>~/.zshrc</code> 文件中设置主题为 <code>random</code> 即可开启随机主题</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ZSH_THEME=&quot;random&quot;</span><br></pre></td></tr></table></figure>
+
 <p>每次打开新的终端的时候，zsh 都会随机使用一个主题</p>
 <h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> go=<span class="string">"git-open"</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> rm=<span class="string">"trash"</span></span><br></pre></td></tr></table></figure>
+
 <p>安装了一个 <code>trash</code> 命令，替代 <code>rm</code> 命令，被删除的文件会放到垃圾桶</p>
 <p><a href="https://github.com/sindresorhus/trash" target="_blank" rel="noopener">trash 官网</a></p>
 <p>安装方式 </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install --global trash-cli</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> cp=<span class="string">"cp -i</span></span><br></pre></td></tr></table></figure>
+
 <p>防止 <code>copy</code> 的时候覆盖已存在的文件, 带上 <code>i</code> 选项，文件已存在的时候，会提示，需要确认才能 <code>copy</code></p>
 <h4 id="bat-代替-cat"><a href="#bat-代替-cat" class="headerlink" title="bat 代替 cat"></a><code>bat</code> 代替 <code>cat</code></h4><p><code>cat</code> 某个文件，可以在终端直接输出文件内容，<code>bat</code> 相比 <code>cat</code> 增加了行号和颜色高亮 👍</p>
 <p>直接上个效果</p>
 <img src="https://static.hufangyun.com/hexo/img/zsh-bat.jpg?imageView2/2/w/500">
+
 <p><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">官网</a></p>
 <p>安装方式</p>
 <p>macOS 上</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install bat</span><br></pre></td></tr></table></figure>
+
 
       </div>
         <div class="support-author">

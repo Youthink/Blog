@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -77,34 +77,46 @@
 </blockquote>
 <h2 id="修改-root-密码"><a href="#修改-root-密码" class="headerlink" title="修改 root 密码"></a>修改 root 密码</h2><p><code>root</code> 账户默认没有密码 安全起见 先初始化一个</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+
 <h2 id="创建-Linux-管理员账户"><a href="#创建-Linux-管理员账户" class="headerlink" title="创建 Linux 管理员账户"></a>创建 Linux 管理员账户</h2><blockquote>
 <p>🐧 使用 <code>Linux</code> 服务器的时候，尽量不要使用 <code>root</code> 账号，处理日常操作，我们新建一个管理员账号。</p>
 </blockquote>
 <p>首先，添加一个用户组（这里我自定义的 admin）。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">addgroup admin</span><br></pre></td></tr></table></figure>
+
 <p>然后，添加一个新用户（假定为 www）。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">useradd -d /home/www -s /bin/bash -m www</span><br></pre></td></tr></table></figure>
+
 <p>上面命令中，参数 <code>d</code> 指定用户的主目录，参数 <code>s</code> 指定用户的 <code>shell</code>，参数 <code>m</code> 表示如果该目录不存在，则创建该目录。</p>
 <p>接着，设置新用户的密码。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">passwd www</span><br></pre></td></tr></table></figure>
+
 <p>将新用户（www）添加到用户组（admin）。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">usermod -a -G admin www</span><br></pre></td></tr></table></figure>
+
 <p>接着，为新用户设定sudo权限。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/sudoers</span><br></pre></td></tr></table></figure>
+
 <p>找到下面这一行。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root    ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
+
 <p>在这一行的下面，再添加一行。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line">www    ALL=(ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+
 <p>上面的 <code>NOPASSWD</code> 表示，切换 sudo 的时候，不需要输入密码。如果出于安全考虑，也可以强制要求输入密码。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line">www    ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
+
 <p>最后，先退出 <code>root</code> 用户登录，再用新用户的身份登录。</p>
 <h2 id="配置-SSH-服务"><a href="#配置-SSH-服务" class="headerlink" title="配置 SSH 服务"></a>配置 SSH 服务</h2><p>把自己电脑的 <code>ssh</code> 公钥，保存到服务器的 <code>~/.ssh/authorized_keys</code> 文件中</p>
 <p>直接使用下面的命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@123.456.78</span><br></pre></td></tr></table></figure>
+
 <p>然后，进入服务器，编辑SSH配置文件/etc/ssh/sshd_config。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/ssh/sshd_config ~     (备份，复原时使用)</span><br><span class="line">sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
 <p>在配置文件中，将 SSH 的默认端口 22 改掉。假设使用 25000</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Port 25000</span><br></pre></td></tr></table></figure>
+
 <p>然后，检查几个设置是否设成下面这样，确保去除前面的#号。</p>
 <table>
 <thead>
@@ -113,8 +125,7 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Protocol 2</td>
 <td>ssh 协议使用新版的</td>
 </tr>
@@ -146,31 +157,40 @@
 <td>SyslogFacility AUTHPRIV</td>
 <td>记录用户登录信息</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>上面主要是禁止 <code>root</code> 用户登录，以及禁止用密码方式登录。</p>
 <p>保存后，退出文件编辑。</p>
 <p>接着，改变authorized_keys文件的权限。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo chmod 600 ~/.ssh/authorized_keys &amp;&amp; chmod 700 ~/.ssh/</span><br></pre></td></tr></table></figure>
+
 <p>重启 SSHD</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
+
 <p>或者</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo /etc/init.d/ssh restart</span><br></pre></td></tr></table></figure>
+
 <h2 id="运行环境配置"><a href="#运行环境配置" class="headerlink" title="运行环境配置"></a>运行环境配置</h2><p>检查服务器的区域设置。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">locale</span><br></pre></td></tr></table></figure>
+
 <p>如果结果不是 <code>en_US.UTF-8</code>，建议都设成它。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo locale-gen en_US en_US.UTF-8 en_CA.UTF-8</span><br><span class="line">sudo dpkg-reconfigure locales</span><br></pre></td></tr></table></figure>
+
 <p>然后，更新软件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
 <p>最后，再根据需要，做一些安全设置，比如搭建防火墙，关闭 <code>HTTP</code>、<code>HTTPs</code>、<code>SSH</code> 以外的端口，详细可参考这篇 <a href="http://spenserj.com/blog/2013/07/15/securing-a-linux-server/" target="_blank" rel="noopener">《Securing a Linux Server》</a>。</p>
 <h2 id="设置时区"><a href="#设置时区" class="headerlink" title="设置时区"></a>设置时区</h2><p>使用 tzselect 命令选择需要的时区。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tzselect</span><br></pre></td></tr></table></figure>
+
 <p>设置完后，命令行会提示我们将时区的配置文件添加到 <code>.profile</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">TZ='Asia/Hong_Kong'; export TZ</span><br></pre></td></tr></table></figure>
+
 <p>执行完后，重新登录系统或者刷新 <code>~/.bashrc</code> 文件使其生效</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
 <p>更改 Linux 整个系统范围的时区可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
 <p>现在使用 <code>date</code> 命令查看一下时间。</p>
 <h2 id="特别番"><a href="#特别番" class="headerlink" title="特别番"></a>特别番</h2><h3 id="阿里云服务器"><a href="#阿里云服务器" class="headerlink" title="阿里云服务器"></a>阿里云服务器</h3><p>阿里云服务器可以在控制台设置安全组规则。</p>
 <h4 id="什么是安全组"><a href="#什么是安全组" class="headerlink" title="什么是安全组"></a>什么是安全组</h4><p>简单点，给大家举个栗子🌰，我部署了一个 <code>MongoDB</code> 的数据库，我怕别人黑我数据库，我就可以在安全组的规则里设置 <code>公网入方向</code> 拒绝访问 <code>MongoDB</code> 使用的端口 <code>27017</code>。只允许本地 <code>locahost</code> 访问，禁止公网访问。</p>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -75,13 +75,20 @@
 <p><strong>任务</strong></p>
 <p>今天造轮子的目标不是实现功能，而是专注在 API 和架构。你需要完成的东西支持以下功能：</p>
 <p>1、<code>$(selector)</code> 根据选择器构造一个<code>jQuery</code> 对象</p>
-<p>2、<code>jQuery</code> 对象是一个类数组，需要支持以下方法：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var a = $(selector);</span><br><span class="line">a[0]                                   访问元素</span><br><span class="line">a.length                               元素个数</span><br><span class="line">a.each(function()&#123; console.log(this)&#125;) 迭代操作</span><br><span class="line">a.click(function()&#123;...&#125;)               绑定事件</span><br></pre></td></tr></table></figure></p>
+<p>2、<code>jQuery</code> 对象是一个类数组，需要支持以下方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var a = $(selector);</span><br><span class="line">a[0]                                   访问元素</span><br><span class="line">a.length                               元素个数</span><br><span class="line">a.each(function()&#123; console.log(this)&#125;) 迭代操作</span><br><span class="line">a.click(function()&#123;...&#125;)               绑定事件</span><br></pre></td></tr></table></figure>
+
 <p>3、链式调用</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var a = $(selector);</span><br><span class="line">a.addClass(&apos;hello&apos;).click(function()&#123;...&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>4、扩展实例方法</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$.fn.tabs = function()&#123;</span><br><span class="line">  console.log(this);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>之后就可以这样使用<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(selector).tabs();</span><br></pre></td></tr></table></figure></p>
+
+<p>之后就可以这样使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(selector).tabs();</span><br></pre></td></tr></table></figure>
+
 <h2 id="jQuery-的整体架构"><a href="#jQuery-的整体架构" class="headerlink" title="jQuery 的整体架构"></a>jQuery 的整体架构</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">( function( global, factory ) &#123;</span><br><span class="line">  //省略...</span><br><span class="line">&#125; )( typeof window !== &quot;undefined&quot; ? window : this,</span><br><span class="line">  function( window, noGlobal ) &#123;</span><br><span class="line">    jQuery = function( selector, context ) &#123;</span><br><span class="line">      return new jQuery.fn.init( selector, context );</span><br><span class="line">      //这里用new，省去了构造函数 jQuery() 前面的运算符new，因此我们可以直接写 jQuery()</span><br><span class="line">    &#125;;</span><br><span class="line">    jQuery.fn = jQuery.prototype = &#123;</span><br><span class="line">      jquery: version,</span><br><span class="line">      constructor: jQuery,</span><br><span class="line">      init: function( selector, context, rootjQuery ) &#123;</span><br><span class="line">        // ...</span><br><span class="line">      &#125;,</span><br><span class="line">      ...</span><br><span class="line">    &#125;;</span><br><span class="line">    // 通过覆盖原型的方式，把 jQuery.prototype 覆盖到 jQuery.fn.init.prototype 上</span><br><span class="line">    jQuery.fn.init.prototype = jQuery.fn;</span><br><span class="line">      // 核心方法</span><br><span class="line">      // 回调系统</span><br><span class="line">      // 异步队列</span><br><span class="line">      // 数据缓存</span><br><span class="line">      // 队列操作</span><br><span class="line">      // 选择器</span><br><span class="line">      // 属性操作</span><br><span class="line">      // 节点遍历</span><br><span class="line">      // 文档处理</span><br><span class="line">      // 样式操作</span><br><span class="line">      // 属性操作</span><br><span class="line">      // 事件体系</span><br><span class="line">      // AJAX交互</span><br><span class="line">      // 动画引擎</span><br><span class="line">    jQuery.extend = jQuery.fn.extend = function()&#123;</span><br><span class="line">    ....//</span><br><span class="line">    &#125;;</span><br><span class="line">    //jQuery.extend()和jQuery.fn.extend()</span><br><span class="line">    //用于合并多个对象的属性到第一个对象，类似于 es6 的 Object.assign()，不过还是有区别的</span><br><span class="line">      if ( !noGlobal ) &#123;</span><br><span class="line">        window.jQuery = window.$ = jQuery;</span><br><span class="line">      &#125;</span><br><span class="line">      return jQuery;</span><br><span class="line">  &#125;));</span><br></pre></td></tr></table></figure>
+
 <p><code>$()</code> 和 <code>jQuery()</code> 是等价的，当我们使用 <code>$()</code> 的时候初始化了一个 <code>jQuery.fn.init</code> 实例。</p>
 <p><code>jQuery.fn.init.prototype = jQuery.fn;</code> 将真正的构造函数 <code>jQuery.fn.init</code> 的原型设为了 <code>jQuery.fn</code> 也就是 <code>jQuery.prototype</code>，所以 <code>jQuery.fn.init</code> 创建的对象能够访问到 <code>jQuery.prototype</code> 上的属性和方法。</p>
 <p>jQuery 对象的构建，为什么使用原型式的结构？<br>详细解说请点击 <a href="http://www.imooc.com/code/3391" target="_blank" rel="noopener">对象的构建</a></p>
@@ -90,7 +97,9 @@
 </blockquote>
 <h2 id="jQuery对象的构建"><a href="#jQuery对象的构建" class="headerlink" title="jQuery对象的构建"></a>jQuery对象的构建</h2><p>使用原型结构，性能上是得到了优化</p>
 <h2 id="类数组对象结构"><a href="#类数组对象结构" class="headerlink" title="类数组对象结构"></a>类数组对象结构</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var jQuery = function(selector) &#123;</span><br><span class="line">  if (!(this instanceof jQuery)) &#123;</span><br><span class="line">    return new jQuery(selector);</span><br><span class="line">  &#125;</span><br><span class="line">var elem = document.querySelectorAll(selector);</span><br><span class="line">  this.length = elem.length;</span><br><span class="line">  this[0] = elem;</span><br><span class="line">  this.context = document;</span><br><span class="line">  this.selector = selector;</span><br><span class="line">  this.get = function(num) &#123;</span><br><span class="line">    return this[num];</span><br><span class="line">  &#125;</span><br><span class="line">  return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jQuery.each( ( &quot;blur focus focusin focusout resize scroll click dblclick &quot; +</span><br><span class="line">	&quot;mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave &quot; +</span><br><span class="line">	&quot;change select submit keydown keypress keyup contextmenu&quot; ).split( &quot; &quot; ),</span><br><span class="line">	function( i, name ) &#123;</span><br><span class="line"></span><br><span class="line">	// Handle event binding</span><br><span class="line">	jQuery.fn[ name ] = function( data, fn ) &#123;</span><br><span class="line">		return arguments.length &gt; 0 ?</span><br><span class="line">			this.on( name, null, data, fn ) :</span><br><span class="line">			this.trigger( name );</span><br><span class="line">	&#125;;</span><br><span class="line">&#125; );</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1、<a href="http://www.imooc.com/learn/172" target="_blank" rel="noopener">jQuery源码解析</a></p>
 <p>2、<a href="http://www.jianshu.com/p/cff2f32cd0d4" target="_blank" rel="noopener">jQuery对象的构建</a></p>
 

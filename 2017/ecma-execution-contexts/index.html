@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -109,7 +109,9 @@
 <p>声明式环境记录项 用于标识标识符和<code>函数声明</code>、<code>变量声明</code>、<code>catch 语句</code>等语法元素的绑定。对象式环境记录项 主要用于定义那些将标识符与具体对象的属性绑定的语法元素。</p>
 <p>咬文嚼字，不好理解？</p>
 <p><code>通俗点讲：</code> 词法环境就是 JavaScript 引擎在执行代码过程中用来标识函数声明、变量声明这一类的。我们每次声明一个函数，或者使用 <code>with</code> 、<code>catch</code>语句的时候，就会有新的词法环境被创建出来。全局词法环境的外部词法环境就是空的，因为他已经是最外层的词法环境了。</p>
-<p>我们用个例子来说明词法环境：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">q</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x+y+z+q;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo(<span class="number">20</span>);</span><br><span class="line">bar(<span class="number">40</span>);</span><br></pre></td></tr></table></figure></p>
+<p>我们用个例子来说明词法环境：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">q</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x+y+z+q;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo(<span class="number">20</span>);</span><br><span class="line">bar(<span class="number">40</span>);</span><br></pre></td></tr></table></figure>
+
 <p><img src="/media/2735347362-59e54b066ff9b_articlex.jpeg" alt="2735347362-59e54b066ff9b_articlex"><span class="img-alt">2735347362-59e54b066ff9b_articlex</span></p>
 <h3 id="词法环境的运算"><a href="#词法环境的运算" class="headerlink" title="词法环境的运算"></a>词法环境的运算</h3><p>给出一个标识符字符串，首先在当前的词法环境内寻找，如果存在，返回引用的标识符字符串，如果不存在，再在当前词法环境的外部词法环境寻找。</p>
 <p>咦，怎么感觉和作用域链的概念很相似？他们有什么关系吗？</p>
@@ -131,9 +133,9 @@
 一个全局上下文。
 无限制函数上下文。
 每次函数被调用创建新的执行上下文，包括调用自己。
-return 或者抛出异常退出一个执行环境。
-</code></pre><p>我们用一个具体的函数理解：</p>
+return 或者抛出异常退出一个执行环境。</code></pre><p>我们用一个具体的函数理解：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function foo(i) &#123;</span><br><span class="line">  if (i &lt; 0) return;</span><br><span class="line">  console.log(&apos;begin:&apos; + i);</span><br><span class="line">  foo(i - 1);</span><br><span class="line">  console.log(&apos;end:&apos; + i);</span><br><span class="line">&#125;</span><br><span class="line">foo(2);</span><br><span class="line"></span><br><span class="line">// 输出:</span><br><span class="line"></span><br><span class="line">// begin:2</span><br><span class="line">// begin:1</span><br><span class="line">// begin:0</span><br><span class="line">// end:0</span><br><span class="line">// end:1</span><br><span class="line">// end:2</span><br></pre></td></tr></table></figure>
+
 <p><img src="/media/1606300353-59b5b7f1caff1_articlex%20-1-.png" alt="1606300353-59b5b7f1caff1_articlex -1-"><span class="img-alt">1606300353-59b5b7f1caff1_articlex -1-</span></p>
 <p>代码的执行流程进入内部函数，创建一个新的执行上下文并把它压入执行栈的顶部。<strong>浏览器总会执行位于栈顶的执行上下文，一旦当前上下文函数执行结束，它将被从栈顶弹出，并将上下文控制权交给当前的栈。</strong> 这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到回到全局的上下文。</p>
 <blockquote>
@@ -147,8 +149,7 @@ return 或者抛出异常退出一个执行环境。
 <th>作用目的</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>词法环境</td>
 <td>指定一个词法环境对象，用于解析该执行环境内的代码创建的标识符引用。</td>
 </tr>
@@ -160,8 +161,7 @@ return 或者抛出异常退出一个执行环境。
 <td>this 绑定</td>
 <td>指定该执行环境内的 <code>ECMA</code> 脚本代码中 <code>this</code> 关键字所关联的值。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>当创建一个执行环境时，其词法环境组件和变量环境组件最初是同一个值。在该执行环境相关联的代码的执行过程中，变量环境组件永远不变，而词法环境组件有可能改变。变量环境的不变和词法环境的可能改变都是指引用的改变。</p>
 <p><img src="/media/2624009007-59e545c159240_articlex-1.jpeg" alt="2624009007-59e545c159240_articlex"><span class="img-alt">2624009007-59e545c159240_articlex</span></p>
 <h2 id="建立执行环境"><a href="#建立执行环境" class="headerlink" title="建立执行环境"></a>建立执行环境</h2><blockquote>
@@ -177,8 +177,7 @@ return 或者抛出异常退出一个执行环境。
 <pre><code>1、将变量环境设置为 全局环境 。 
 2、将词法环境设置为 全局环境 。
 3、将 this 绑定设置为 全局对象 。
-4、使用全局代码执行声明式绑定初始化化步骤。
-</code></pre><h3 id="进入函数代码"><a href="#进入函数代码" class="headerlink" title="进入函数代码"></a>进入函数代码</h3><blockquote>
+4、使用全局代码执行声明式绑定初始化化步骤。</code></pre><h3 id="进入函数代码"><a href="#进入函数代码" class="headerlink" title="进入函数代码"></a>进入函数代码</h3><blockquote>
 <p>当控制流根据一个函数对象 F、调用者提供的 <code>thisArg</code> 以及调用者提供的 <code>argumentList</code>，进入函数代码的执行环境时，执行以下步骤</p>
 </blockquote>
 <pre><code>如果函数代码是严格模式下的代码，设 this 绑定 为 thisArg。
@@ -189,18 +188,21 @@ return 或者抛出异常退出一个执行环境。
 设 词法环境组件 为 localEnv。
 设 变量环境组件 为 localEnv。
 令 code 为 F 的 [[Code]] 内部属性的值。
-使用函数代码 code 和 argumentList 执行声明式绑定初始化化步骤。
-</code></pre><p>我们用伪代码表示一下：</p>
+使用函数代码 code 和 argumentList 执行声明式绑定初始化化步骤。</code></pre><p>我们用伪代码表示一下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if(是 严格模式) &#123;</span><br><span class="line">    this = thisArg</span><br><span class="line">&#125; else if(thisArg === null || thisArg === undefined) &#123;</span><br><span class="line">    this = window</span><br><span class="line">&#125; else if(typeof thisArg != &apos;object&apos;) &#123;</span><br><span class="line">    this = Object(thisArg)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    this = thisArg</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>哎，这里的 <code>thisArg</code> 指的是什么？上文说了 <code>thisArg</code> 来自于函数的调用者。</p>
 <p>这里代表函数的 <code>apply</code>，<code>call</code>，<code>bind</code> 等设置 <code>this</code> 绑定的参数：</p>
-<p>通过 <code>call</code> 或者 <code>apply</code> 调用函数时，<code>thisArg</code> 的值比较明显，为传入的第一个参数。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Function.prototype.apply (thisArg, argArray)</span><br><span class="line"></span><br><span class="line">Function.prototype.call (thisArg [ , arg1 [ , arg2, … ] ] )</span><br></pre></td></tr></table></figure></p>
+<p>通过 <code>call</code> 或者 <code>apply</code> 调用函数时，<code>thisArg</code> 的值比较明显，为传入的第一个参数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Function.prototype.apply (thisArg, argArray)</span><br><span class="line"></span><br><span class="line">Function.prototype.call (thisArg [ , arg1 [ , arg2, … ] ] )</span><br></pre></td></tr></table></figure>
+
 <p>当然 <code>thisArg</code> 还有其他的可能，具体的可以参考这篇文章 <a href="http://www.cnblogs.com/Kingle/p/3281816.html" target="_blank" rel="noopener">Javascript this 解析</a></p>
 <p>对上面的伪代码做一下解释：</p>
 <p><strong>严格模式:</strong> 也就是说，在严格模式下，<code>this</code> 只能为 <code>thisArg</code>，而当 <code>thisArg</code> 为 <code>undefined</code> 时，<code>this</code> 就是 <code>undefined</code> ，而不是 <code>window</code>。</p>
 <p><strong>非严格模式:</strong> 如果 <code>thisArg</code> 是 <code>null</code> (如 <code>fun.call(null)</code>) 或 <code>undefined</code> （直接调用函数），则 <code>this</code> 为全局对象，浏览器里就是 <code>window</code>。</p>
 <p>否则，如果 传入了 <code>thisArg</code>, 但不是个对象，则把它转为对象，并赋给 <code>this</code>，比如，当 <code>fun.call(&#39;hhh&#39;)</code> 时，打印 fun 内的 <code>this</code> 为</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">String &#123;0: &quot;h&quot;, 1: &quot;h&quot;, 2: &quot;h&quot;, length: 3, [[PrimitiveValue]]: &quot;hhh&quot;&#125;</span><br></pre></td></tr></table></figure>
+
 <p>否则 ，也就是仅剩的一种情况，显式的传入了一个对象作为 <code>thisArg</code> 参数的情况下，设 <code>this</code> 绑定为 <code>thisArg</code>。</p>
 <h2 id="声明式绑定初始化"><a href="#声明式绑定初始化" class="headerlink" title="声明式绑定初始化"></a>声明式绑定初始化</h2><p>每个执行环境都有一个关联的 <code>变量环境</code>。当在一个执行环境下评估一段 <code>ECMA</code> 脚本时，变量和函数定义会以绑定的形式添加到这个 <code>变量环境</code> 的环境记录中。对于函数代码，参数也同样会以绑定的形式添加到这个 <code>变量环境</code> 的环境记录中。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>ECMAScript</code> 代码的执行由运行环境来完成。不同的运行环境可能采取不同的执行方式，但基本的流程是相同的。如浏览器在解析 <code>HTML</code> 页面中遇到 <code>&lt;script&gt;</code> 元素时，会下载对应的代码来运行，或直接执行内嵌的代码。代码的基本执行方式是从上到下，顺序执行。在调用函数之后，代码的执行会进入一个执行上下文之中。由于在一个函数的执行过程中会调用其他的函数，执行过程中的活动执行上下文会形成一个堆栈结构。在栈顶的是当前正在执行的代码。当函数返回时，会退出当前的执行上下文，而回到之前的执行上下文中。如果代码执行中出现异常，则可能从多个执行上下文中退出。</p>

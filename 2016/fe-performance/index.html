@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -96,6 +96,7 @@
 <h3 id="DNS-预解析-DNS-Prefetch"><a href="#DNS-预解析-DNS-Prefetch" class="headerlink" title="DNS 预解析 DNS Prefetch"></a>DNS 预解析 DNS Prefetch</h3><p>通过 DNS 预解析来告诉浏览器未来我们可能从某个特定的 URL 获取资源，当浏览器真正使用到该域中的某个资源时就可以尽快地完成 DNS 解析。例如，我们将来可能从 example.com 获取图片或音频资源，那么可以在文档顶部的 标签中加入以下内容：<a href="https://www.amazon.cn" target="_blank" rel="noopener">amazon</a> 就使用了该技术，具体审查源码。</p>
 <p>我们的图片基本都放在upyun上，可以在文档顶部加上这个</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;meta http-equiv="x-dns-prefetch-control" content="on"&gt;</span><br><span class="line"></span><br><span class="line">&lt;link rel="dns-prefetch" href="//hlj-img.b0.upaiyun.com"&gt;</span><br></pre></td></tr></table></figure>
+
 <h3 id="HTML5-prefetch-（目前移动端仅支持这个）"><a href="#HTML5-prefetch-（目前移动端仅支持这个）" class="headerlink" title="HTML5 prefetch （目前移动端仅支持这个）"></a>HTML5 prefetch （目前移动端仅支持这个）</h3><blockquote>
 <p>原理: 利用浏览器的空闲时间去先下载用户指定需要的内容,然后缓存起来,这样用户下次加载时,就直接从缓存中取出来,效率就快了。可以加载一个页面或者脚本文件、图片、css等。</p>
 </blockquote>
@@ -104,10 +105,13 @@
 <p>2、只有可缓存的资源才进行预加载，否则浪费资源！</p>
 <p>比如要预先加载某个页面:</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;link rel="prefetch" href="http://www.example.com/"&gt; &lt;!-- Firefox --&gt;</span><br></pre></td></tr></table></figure>
+
 <p>但如果是google的话,要用另外的一个名称:</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;link rel="prerender" href="http://www.example.com/"&gt; &lt;!-- Chrome --&gt;</span><br></pre></td></tr></table></figure>
+
 <p>也可以合并在一起写</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;link rel="prefetch prerender" href="http://www.example.com/style.css"&gt;&lt;!--加载静态的资源--&gt;</span><br></pre></td></tr></table></figure>
+
 <h4 id="什么情况下应该预加载页面资源"><a href="#什么情况下应该预加载页面资源" class="headerlink" title="什么情况下应该预加载页面资源"></a>什么情况下应该预加载页面资源</h4><p>建议:</p>
 <p>1、当页面有幻灯片类似的服务时，预加载/预读取接下来的1-3页和之前的1-3页。</p>
 <p>2、预加载那些整个网站通用的图片。</p>
@@ -115,18 +119,22 @@
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>1、预加载(Link prefetch)会污染你的网站访问量统计，因为有些预加载到浏览器的页面用户可能并未真正访问</p>
 <h3 id="预连接-Preconnect"><a href="#预连接-Preconnect" class="headerlink" title="预连接 Preconnect"></a>预连接 Preconnect</h3><p>与 DNS 预解析类似，preconnect 不仅完成 DNS 预解析，同时还将进行 TCP 握手和建立传输层协议。可以这样使用：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;link rel="preconnect" href="http://example.com"&gt;</span><br></pre></td></tr></table></figure>
+
 <p>现代浏览器都试着预测网站将来需要哪些连接，然后预先建立 socket 连接，从而消除昂贵的 DNS 查找、TCP 握手和 TLS 往返开销。然而，浏览器还不够聪明，并不能准确预测每个网站的所有预链接目标。好在，在 Firefox 39 和 Chrome 46 中我们可以使用 preconnect 告诉浏览器我们需要进行哪些预连接。</p>
 <h3 id="预获取-Prefetching"><a href="#预获取-Prefetching" class="headerlink" title="预获取 Prefetching"></a>预获取 Prefetching</h3><p>如果我们确定某个资源将来一定会被使用到，我们可以让浏览器预先请求该资源并放入浏览器缓存中。例如，一个图片和脚本或任何可以被浏览器缓存的资源：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;link rel="prefetch" href="image.png"&gt;</span><br></pre></td></tr></table></figure>
+
 <p>与 DNS 预解析不同，预获取真正请求并下载了资源，并储存在缓存中。但预获取还依赖于一些条件，某些预获取可能会被浏览器忽略，例如从一个非常缓慢的网络中获取一个庞大的字体文件。并且，Firefox 只会在浏览器闲置时进行资源预获取。</p>
 <p>在 Bram Stein 的帖子中说到，这对 webfonts 性能提升非常明显。目前，字体文件必须等到 DOM 和 CSS 构建完成之后才开始下载，使用预获取就可以轻松绕过该瓶颈。</p>
 <h3 id="Subresources"><a href="#Subresources" class="headerlink" title="Subresources"></a>Subresources</h3><p>这是另一个预获取方式，这种方式指定的预获取资源具有最高的优先级，在所有 prefetch 项之前进行：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;link rel="subresource" href="styles.css"&gt;</span><br></pre></td></tr></table></figure>
+
 <p>根据 Chrome 文档：</p>
 <p><code>rel=prefetch</code> 为将来的页面提供了一种低优先级的资源预加载方式，而 <code>rel=subresource</code>为当前页面提供了一种高优先级的资源预加载。</p>
 <p>所以，如果资源是当前页面必须的，或者资源需要尽快可用，那么最好使用 <code>subresource</code> 而不是 <code>prefetch</code></p>
 <h3 id="预渲染-Prerender"><a href="#预渲染-Prerender" class="headerlink" title="预渲染 Prerender"></a>预渲染 Prerender</h3><p>这是一个核武器，因为 prerender 可以预先加载文档的所有资源：</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;link rel="prerender" href="http://example.com"&gt;</span><br></pre></td></tr></table></figure>
+
 <p>这类似于在一个隐藏的 tab 页中打开了某个链接 – 将下载所有资源、创建 DOM 结构、完成页面布局、应用 CSS 样式和执行 JavaScript 脚本等。当用户真正访问该链接时，隐藏的页面就切换为可见，使页面看起来就是瞬间加载完成一样。Google 搜索在其即时搜索页面中已经应用该技术多年了</p>
 <blockquote>
 <p>所有预加载技术都存在一个潜在的风险：对资源预测错误，而预加载的开销（抢占 CPU 资源，消耗电池，浪费带宽等）是高昂的，所以必须谨慎行事。预加载所有的资源是不可取的，我们应该在用户体验和服务器负载间保持平衡。</p>
@@ -143,6 +151,7 @@
 <p>6、占用资源很多的页面</p>
 <p>7、打开了 chrome developer tools 开发工具</p>
 <h3 id="手动触发预渲染操作"><a href="#手动触发预渲染操作" class="headerlink" title="手动触发预渲染操作"></a>手动触发预渲染操作</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> hint =<span class="built_in">document</span>.createElement(<span class="string">"link"</span>);</span><br><span class="line"></span><br><span class="line">hint.setAttribute(“rel”,”prerender”);</span><br><span class="line"></span><br><span class="line">hint.setAttribute(“href”,”next-page.html”);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(“head”)[<span class="number">0</span>].appendChild(hint);</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>在 Chrome 中打开了 chrome developer tools 开发工具会阻止页面的预渲染，所以我们看不到这个过程，但可以在 chrome://cache/ 或 chrome://net-internals/#prerender 中查看 chrome://dns</p>
 </blockquote>

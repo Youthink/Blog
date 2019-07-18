@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -84,10 +84,10 @@
 <p>中文版：<a href="http://link.zhihu.com/?target=http%3A//www.ituring.com.cn/article/66566" target="_blank" rel="noopener">【翻译】Promises/A+规范</a></p>
 <p>上面的规范中主要定义的 <code>then</code> 的实现方式，也就是只规定了 <code>Promise</code> 的核心， <code>Promise.race</code>，<code>Promise.all</code> 等 <code>api</code> 没有规定。</p>
 <p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-promise-constructor" target="_blank" rel="noopener">ECMAScript 6.0 Promise.all 规范</a></p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p><strong> <code>Promise</code> 不需要编译器/解释器的支持</strong></p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>** <code>Promise</code> 不需要编译器/解释器的支持**</p>
 <p>将来可能成为主流的 <code>async-await</code>，以及曾经火过一把的 <code>generator</code> + <code>co</code>，这些都是需要编译器或者解释器级别的支持才能使用。</p>
 <p>而 <code>Promise</code>，是完全可以利用语言已有特性，作为一个库来实现！即使在非常原始的JS运行环境，你也可以自己实现一个 <code>Promise</code>，而不需要等待其他人的帮助。</p>
-<p><strong> <code>Promise</code> 是语言无关的</strong></p>
+<p>** <code>Promise</code> 是语言无关的**</p>
 <p><code>Promise</code> 还是独立于语言的，如果你要给另外一种编程语言实现 <code>Promise</code>，只要照葫芦画瓢就行了。</p>
 <h2 id="promise-怎么用呐"><a href="#promise-怎么用呐" class="headerlink" title="promise 怎么用呐"></a><code>promise</code> 怎么用呐</h2><p>请看这里：</p>
 <p><a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">ECMAScript 6 Promise入门</a></p>
@@ -95,9 +95,12 @@
 <h3 id="Promise-all-简介"><a href="#Promise-all-简介" class="headerlink" title="Promise.all() 简介"></a>Promise.all() 简介</h3><p><code>Promise.all(promiseArray)</code> 方法是 <code>Promise</code> 对象上的静态方法，该方法的作用是将多个 <code>Promise</code> 对象实例包装，生成并返回一个新的 <code>Promise</code> 实例。</p>
 <p>参数：<code>promiseArray</code>，是一个 <code>Promise</code> 实例数组</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var p1 = Promise.resolve(1),</span><br><span class="line">    p2 = Promise.resolve(2),</span><br><span class="line">    p3 = Promise.resolve(3);</span><br><span class="line">Promise.all([p1, p2, p3]).then(function (results) &#123;</span><br><span class="line">    console.log(results);  // [1, 2, 3]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>在上面的方法中，<code>promise</code> 数组中所有的 <code>promise</code> 实例都变为<code>resolve</code> 的时候，该方法才会返回，并将所有结果传递 <code>results</code> 数组中。<code>promise</code> 数组中任何一个 <code>promise</code> 为 <code>reject</code> 的话，则整个 <code>Promise.all</code> 调用会立即终止，并返回一个 <code>reject</code> 的新的 <code>promise</code> 对象。<code>reject</code> 使用示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var p1 = Promise.resolve(1),</span><br><span class="line">    p2 = Promise.reject(2),</span><br><span class="line">    p3 = Promise.resolve(3);</span><br><span class="line">Promise.all([p1, p2, p3]).then(function (results) &#123;</span><br><span class="line">    //then方法不会被执行</span><br><span class="line">    console.log(results);</span><br><span class="line">&#125;).catch(function (e)&#123;</span><br><span class="line">    //catch方法将会被执行，输出结果为：2</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <h3 id="实现-Promise-all-方法"><a href="#实现-Promise-all-方法" class="headerlink" title="实现 Promise.all 方法"></a>实现 Promise.all 方法</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function promiseAll(promises) &#123;</span><br><span class="line">  return new Promise(function(resolve, reject) &#123;</span><br><span class="line">    if (!isArray(promises)) &#123;</span><br><span class="line">      return reject(new TypeError(&apos;arguments must be an array&apos;));</span><br><span class="line">    &#125;</span><br><span class="line">    var resolvedCounter = 0;</span><br><span class="line">    var promiseNum = promises.length;</span><br><span class="line">    var resolvedValues = new Array(promiseNum);</span><br><span class="line">    for (var i = 0; i &lt; promiseNum; i++) &#123;</span><br><span class="line">      (function(i) &#123;</span><br><span class="line">        Promise.resolve(promises[i]).then(function(value) &#123;</span><br><span class="line">          resolvedCounter++</span><br><span class="line">          resolvedValues[i] = value</span><br><span class="line">          if (resolvedCounter == promiseNum) &#123;</span><br><span class="line">            return resolve(resolvedValues)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;, function(reason) &#123;</span><br><span class="line">          return reject(reason)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.jianshu.com/p/48e193c4662e" target="_blank" rel="noopener">自己动手实现ES6 Promise</a></p>
 <p><a href="http://liubin.org/promises-book/#ch2-promise-all" target="_blank" rel="noopener">JavaScript Promise迷你书</a></p>
 <p><a href="https://itbilu.com/javascript/js/41KMSZ9a.html" target="_blank" rel="noopener">Promise对象Promise.all()方法的使用</a></p>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -75,19 +75,26 @@
 <p>端口转发的方式有很多种，我这里选择使用的 <code>nginx</code></p>
 <p>服务器使用的 <code>ubuntu</code> 首先安装 <code>nginx</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+
 <p>进入 <code>/etc/nginx</code> 目录，<code>conf.d</code> 文件夹下添加 <code>server.conf</code> 文件，内容如下：</p>
 <figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#root /var/www/html;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#index index.html index.htm index.nginx-debian.html;</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">                <span class="attribute">proxy_pass</span> http://localhost:3000;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>重启 <code>nginx</code> 服务,不加 <code>sudo</code> 可能会报莫名的错误</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
+
 <p>如果 <code>nginx</code> 启动失败，可以查看错误日志，检查原因</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
+
 <p>或者使用以下命令查看 nginx 状态，会输出报错信息</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl status -l nginx.service</span><br></pre></td></tr></table></figure>
+
 <h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>按照上面配置完后，<code>nginx</code> 启动失败 🙈，报错如下：</p>
 <p>重复的定义了 default server 80 端口</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-enabled/default:22</span><br></pre></td></tr></table></figure>
+
 <p>使用以下命令搜索哪些地方用到了 <code>default_server</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">grep -R default_server /etc/nginx</span><br></pre></td></tr></table></figure>
+
 <p>原因是 nginx 的默认配置文件也定义了 80 端口</p>
 <p>备份一下 <code>/etc/nginx/sites-enabled/default</code></p>
 <p>然后删除该文件。</p>

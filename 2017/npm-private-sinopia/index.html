@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -82,11 +82,14 @@
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>部署参考上面的官方文档，和下面的参考文档。</p>
 <h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>配置文件里的</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">crypto.createHash(&apos;sha1&apos;).update(&apos;pass&apos;).digest(&apos;hex&apos;)</span><br></pre></td></tr></table></figure>
+
 <p>在终端里输入 <code>node</code>,然后输入上面的命令。注：把pass换成 你的密码，然后生成加密的密码。</p>
 <p>设置 <code>npm</code> 包源，这个是会写入 <code>.npmrc</code> 的</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm set registry &quot;http://localhost:4873/&quot;</span><br></pre></td></tr></table></figure>
+
 <p>公司内部的私有包的 <code>package.json</code> 里可以添加</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;publishConfig&quot;: &#123;</span><br><span class="line">    &quot;registry&quot;: &quot;http://localhost:4873/&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://zhuanlan.zhihu.com/p/20892656" target="_blank" rel="noopener">Sinopia | 从零开始搭建npm仓库</a></p>
 <p>2、<a href="http://m.blog.csdn.net/article/details?id=50938611" target="_blank" rel="noopener">使用sinopia搭建自己的npm服务</a></p>
 <p>3、<a href="http://blog.3gcnbeta.com/2016/04/28/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84npm%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="noopener">npm自建服务器</a></p>
