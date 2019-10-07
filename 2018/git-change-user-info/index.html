@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-09-19T11:44:04.000Z" itemprop="dateUpdated">2018-09-19</time>
+    更新 <time datetime="2018-10-02T10:29:04.000Z" itemprop="dateUpdated">2018-10-02</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -78,20 +78,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter <span class="string">'</span></span><br><span class="line"><span class="string">an="$GIT_AUTHOR_NAME"</span></span><br><span class="line"><span class="string">am="$GIT_AUTHOR_EMAIL"</span></span><br><span class="line"><span class="string">cn="$GIT_COMMITTER_NAME"</span></span><br><span class="line"><span class="string">cm="$GIT_COMMITTER_EMAIL"</span></span><br><span class="line"><span class="string">if [ "$GIT_COMMITTER_EMAIL" = "这里写你原来的邮箱" ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">	cn="你想替换成的用户名"</span></span><br><span class="line"><span class="string">	cm="你想替换成的邮箱"</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ "$GIT_AUTHOR_EMAIL" = "这里写你原来的邮箱" ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">	an="你想替换成的用户名"</span></span><br><span class="line"><span class="string">	am="你想替换成的邮箱"</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">	export GIT_AUTHOR_NAME="$an"</span></span><br><span class="line"><span class="string">	export GIT_AUTHOR_EMAIL="$am"</span></span><br><span class="line"><span class="string">	export GIT_COMMITTER_NAME="$cn"</span></span><br><span class="line"><span class="string">	export GIT_COMMITTER_EMAIL="$cm"</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
 
 <p>在 <code>git</code> 仓库(项目)下运行一下，该脚本即可。</p>
-<h2 id="如果避免上面的问题？"><a href="#如果避免上面的问题？" class="headerlink" title="如果避免上面的问题？"></a>如果避免上面的问题？</h2><h3 id="分目录配置-git-用户信息"><a href="#分目录配置-git-用户信息" class="headerlink" title="分目录配置 git 用户信息"></a>分目录配置 git 用户信息</h3><p><code>git</code> 可以设置全局的用户信息，然后可以再单独为每个仓库设置用户信息。如果忘记了给项目重置用户信息，可能就会发生上面的问题 — 提交时的邮箱和用户名错了。😓</p>
-<p>如果你喜欢用不同的目录区分个人和公司的项目，可以使用下面的方法配置自己的 <code>git</code> 用户信息。😀</p>
-<p>比如，你把公司的项目都放在了 <code>Company</code> 目录下，个人的项目都放在了 <code>Personal</code> 目录下下面。</p>
-<p>那你可以这么做：</p>
-<p>在 <code>Company</code> 下新建一个 <code>.gitconfig_include</code> 文件，配置你想在该目录下给所有 <code>git</code> 仓库设置的用户信息。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[user]</span><br><span class="line">  name = 用户名</span><br><span class="line">  email = 邮箱</span><br></pre></td></tr></table></figure>
-
-<p>然后在 <code>~/.gitconfig</code> 内添加</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[includeIf &quot;gitdir:~/Company/&quot;]</span><br><span class="line">  path = ~/Company/.gitconfig_include</span><br></pre></td></tr></table></figure>
-
-<p>⚠️ 复制提醒。<code>Company</code> 要替换成你自己的目录</p>
-<p>这样，之后 <code>Company</code> 目录下的 <code>git</code> 仓库都会使用对应的 <code>git</code> 用户信息。💪</p>
-<p>这是 git 的一个用法，感兴趣的同学可以看这里 <a href="https://git-scm.com/docs/git-config#_conditional_includes" target="_blank" rel="noopener">conditional includes </a> </p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://stackoverflow.com/questions/21307793/set-git-config-values-for-all-child-folders" target="_blank" rel="noopener">Set git config values for all child folders</a></p>
+<h2 id="如果避免上面的问题？"><a href="#如果避免上面的问题？" class="headerlink" title="如果避免上面的问题？"></a>如果避免上面的问题？</h2><p>可以看我的这篇博文 <a href="https://hufangyun.com/2019/multi-git-account/">如何管理多个 git 账号</a></p>
 
       </div>
         <div class="support-author">

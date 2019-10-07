@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2019-05-19T16:00:00.000Z" itemprop="dateUpdated">2019-05-20</time>
+    更新 <time datetime="2019-09-16T16:00:00.000Z" itemprop="dateUpdated">2019-09-17</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -92,7 +92,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo -i -u postgres</span><br><span class="line">psql</span><br></pre></td></tr></table></figure>
 
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><a href="http://blog.everlose.com/mac-homebrew-postgresql.html" target="_blank" rel="noopener">Mac 下使用 homebrew 安装 postgresql 及配置</a> </p>
-<h5 id="mac-启动-postgreSQL-服务"><a href="#mac-启动-postgreSQL-服务" class="headerlink" title="mac 启动 postgreSQL 服务"></a>mac 启动 postgreSQL 服务</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pg_ctl -D /usr/local/var/postgres start</span><br></pre></td></tr></table></figure>
+<h5 id="mac-启动-postgreSQL-服务"><a href="#mac-启动-postgreSQL-服务" class="headerlink" title="mac 启动 postgreSQL 服务"></a>mac 启动 postgreSQL 服务</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pg_ctl -D /usr/local/var/postgres start</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 服务在后台运行</span></span><br><span class="line">brew services start postgresql</span><br></pre></td></tr></table></figure>
 
 <h5 id="连接远程数据库"><a href="#连接远程数据库" class="headerlink" title="连接远程数据库"></a>连接远程数据库</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">psql -h IP或者主机地址 -p 端口 -U 用户 -d 数据库</span><br><span class="line"></span><br><span class="line">psql -h 117.12.116.18 -p 5432 -U web -d test</span><br></pre></td></tr></table></figure>
 

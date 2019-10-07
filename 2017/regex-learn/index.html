@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2018-11-23T16:00:00.000Z" itemprop="dateUpdated">2018-11-24</time>
+    更新 <time datetime="2019-09-14T16:00:00.000Z" itemprop="dateUpdated">2019-09-15</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -85,10 +85,11 @@
 <p>3、平常的使用过程中，再查漏补缺。</p>
 <h2 id="文档选择"><a href="#文档选择" class="headerlink" title="文档选择"></a>文档选择</h2><p>文档的话，可以从下面根据喜好任选一款。</p>
 <p><a href="http://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">正则表达式教程</a></p>
-<p><a href="https://github.com/ziishaned/learn-regex/blob/master/README-cn.md" target="_blank" rel="noopener">学习正则表达式的简单方法</a></p>
+<p><a href="https://github.com/ziishaned/learn-regex/" target="_blank" rel="noopener">学习正则表达式的简单方法</a></p>
 <p><a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">正则表达式30分钟入门教程</a></p>
 <h2 id="正则题库"><a href="#正则题库" class="headerlink" title="正则题库"></a>正则题库</h2><p><a href="https://alf.nu/RegexGolf" target="_blank" rel="noopener">RegexGolf</a></p>
-<p><a href="https://gist.github.com/jonathanmorley/8058871" target="_blank" rel="noopener">RegexGolf 答案</a></p>
+<p><a href="https://github.com/Youthink/Regex-Golf-Answer" target="_blank" rel="noopener">我整理的答案</a></p>
+<p><a href="https://gist.github.com/jonathanmorley/8058871" target="_blank" rel="noopener">RegexGolf 答案</a></p>
 <p><a href="https://blog.csdn.net/NJYR21/article/details/79600217" target="_blank" rel="noopener">答案二</a></p>
 <p>如果有更好的题库，希望能分享给我。😄</p>
 <h2 id="正则工具"><a href="#正则工具" class="headerlink" title="正则工具"></a>正则工具</h2><p>正则网站</p>
@@ -102,129 +103,171 @@
 <tr>
 <th>语法</th>
 <th>含义 </th>
+<th>遗忘</th>
 <th>语法</th>
 <th>含义</th>
+<th>遗忘</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>[abc]</td>
 <td>单个字符 a或b或c</td>
+<td></td>
 <td>[^abc]</td>
 <td>a,b,c以外的单个字符</td>
+<td></td>
 </tr>
 <tr>
 <td>[a-zA-Z0-9]</td>
 <td>字符范围</td>
+<td></td>
 <td>.</td>
 <td>任意字符</td>
+<td></td>
 </tr>
 <tr>
 <td>\s</td>
 <td>空字符</td>
+<td></td>
 <td>\S</td>
 <td>非空字符</td>
+<td></td>
 </tr>
 <tr>
 <td>\d</td>
 <td>数字字符</td>
+<td></td>
 <td>\D</td>
 <td>非数字字符</td>
+<td></td>
 </tr>
 <tr>
 <td>\w</td>
 <td>单词(字母，数字，下划线)</td>
+<td></td>
 <td>\W</td>
 <td>非单词</td>
+<td></td>
 </tr>
 <tr>
 <td>\b</td>
 <td>单词边界</td>
+<td>+1</td>
 <td>\B</td>
 <td>非单词边界</td>
+<td></td>
 </tr>
 <tr>
 <td>^</td>
 <td>开头</td>
+<td></td>
 <td>$</td>
 <td>结尾</td>
+<td></td>
 </tr>
 <tr>
 <td>(…)</td>
 <td>分组</td>
+<td></td>
 <td>(a|b)</td>
 <td>a或b</td>
+<td></td>
 </tr>
 <tr>
 <td>a*</td>
 <td>重复0次或多次</td>
+<td></td>
 <td>a?</td>
 <td>重复0次或1次</td>
+<td></td>
 </tr>
 <tr>
 <td>a+</td>
 <td>重复1次或多次</td>
+<td>+1</td>
 <td>a{3}</td>
 <td>重复3次</td>
+<td></td>
 </tr>
 <tr>
 <td>a{3,}</td>
 <td>重复3次或多次</td>
+<td></td>
 <td>a{3,5}</td>
 <td>重复3到5次</td>
+<td></td>
 </tr>
 <tr>
 <td>?</td>
 <td>非贪婪匹配</td>
+<td></td>
 <td>(?:abc)</td>
 <td>非捕获分组</td>
+<td></td>
 </tr>
 <tr>
 <td>(?=abc)</td>
 <td>正向匹配abc</td>
+<td></td>
 <td>(?!abc)</td>
 <td>正向不匹配abc</td>
+<td>+1</td>
 </tr>
 <tr>
 <td>\xhh</td>
 <td>十六进制hh字符</td>
+<td></td>
 <td>\uhhhh</td>
 <td>十六进制hhhh字符</td>
+<td></td>
 </tr>
 <tr>
 <td>\u{hhhh}</td>
 <td>(仅当设置了u标志时)十六进制hhhh字符</td>
+<td></td>
 <td>\cX</td>
 <td>控制字符</td>
+<td></td>
 </tr>
 <tr>
 <td>\0</td>
 <td>空字符</td>
+<td></td>
 <td>\数字（n）</td>
 <td> 匹配第 n 个（）内的值</td>
+<td>+1</td>
 </tr>
 <tr>
 <td>\a</td>
 <td>alert字符</td>
+<td></td>
 <td>\t</td>
 <td>制表符</td>
+<td></td>
 </tr>
 <tr>
 <td>\n</td>
 <td>换行符</td>
+<td></td>
 <td>\v</td>
 <td>垂直制表符</td>
+<td></td>
 </tr>
 <tr>
 <td>\f</td>
 <td>换页符</td>
+<td></td>
 <td>\r</td>
 <td>回车符</td>
+<td></td>
 </tr>
 <tr>
 <td>\e</td>
 <td>escape字符</td>
+<td></td>
 <td>[\b]</td>
 <td>退格符</td>
+<td></td>
 </tr>
 </tbody></table>
 <h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><h3 id="num"><a href="#num" class="headerlink" title="\num"></a><code>\num</code></h3><p>如下，顺序执行，<code>\1</code> 代表重复第一个 <code>()</code> 内的元素，<code>\2</code> 代表重复第二个 <code>()</code> 内的元素</p>
@@ -235,12 +278,17 @@
 
 <p>因为在看到’b’之后我们必须倒数 x 次以确保它是回文。但是正则表达式，无法计算 x。</p>
 <p>详情<a href="https://stackoverflow.com/questions/233243/how-to-check-that-a-string-is-a-palindrome-using-regular-expressions" target="_blank" rel="noopener">看这里</a></p>
+<h3 id="非"><a href="#非" class="headerlink" title="非"></a>非</h3><p><code>(?!)</code></p>
+<p>比如匹配非 <code>abba</code> 格式的字符串</p>
+<p><code>^(?!.*(.)(.)\2\1)</code></p>
 <h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>匹配手机号</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">isMobileValid(number) &#123;</span><br><span class="line">  <span class="keyword">return</span> number &amp;&amp; (<span class="regexp">/^1[345678]\d&#123;9&#125;$/</span>).test(number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Js-字符处理"><a href="#Js-字符处理" class="headerlink" title="Js 字符处理"></a>Js 字符处理</h2><p>截取字符串的第一位和最后一位</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'abc'</span>;</span><br><span class="line">str.substring(<span class="number">1</span>, str.length<span class="number">-1</span>); <span class="comment">// b</span></span><br></pre></td></tr></table></figure>
 
+<p>文章</p>
+<p><a href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md" target="_blank" rel="noopener">https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md</a></p>
 
       </div>
         <div class="support-author">

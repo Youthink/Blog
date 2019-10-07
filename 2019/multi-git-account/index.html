@@ -24,7 +24,7 @@
   <link rel="stylesheet" type="text/css" href="/./style/main.7d7039.css">
   <link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <title>关于我</title>
+  <title>如何管理多个 git 账号</title>
   
   <script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?ae46047b557574a12bba544bea130043";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();
   </script>
@@ -47,7 +47,7 @@
     
   
   <h1 class="title">
-    关于我
+    如何管理多个 git 账号
   </h1>
   
 
@@ -55,11 +55,11 @@
     <ul class="article-info">
       <li>
         发布
-        <time datetime="2014-01-14T16:00:00.000Z" itemprop="datePublished">2014-01-15</time>
+        <time datetime="2019-10-02T07:35:16.000Z" itemprop="datePublished">2019-10-02</time>
       </li>
       <li>
         
-    更新 <time datetime="2019-10-02T05:24:00.000Z" itemprop="dateUpdated">2019-10-02</time>
+    更新 <time datetime="2019-10-02T07:35:16.000Z" itemprop="dateUpdated">2019-10-02</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -71,14 +71,23 @@
     <div class="article">
       <div class="content">
         
-        <img alt="图片来自国风美唐“家”" src="https://static.hufangyun.com/hexo/img/hello-world-home-img.jpg"><span class="img-alt">图片来自国风美唐“家”</span>
-
-<blockquote>
-<p>年轻无为，卖码为生</p>
+        <blockquote>
+<p>如果你有多个 git 账户，有没有遇到过提交代码的用户信息混乱的情况？ 如果一劳永逸的解决这个问题那？</p>
 </blockquote>
-<p><a href="https://github.com/Youthink/ideas" target="_blank" rel="noopener">我有很多项目想写</a></p>
-<p><a href="https://hufangyun.com/2016/booklist-my/">我的书单</a></p>
-<p><a href="https://hufangyun.com/2016/books-and-me/">与书相伴，时间为线</a></p>
+<h2 id="分目录配置-git-用户信息"><a href="#分目录配置-git-用户信息" class="headerlink" title="分目录配置 git 用户信息"></a>分目录配置 git 用户信息</h2><p><code>git</code> 可以设置全局的用户信息，然后可以再单独为每个仓库设置用户信息。如果忘记了给项目重置用户信息，可能就会发生上面的问题 — 提交时的邮箱和用户名错了。😓</p>
+<p>如果你喜欢用不同的目录区分个人和公司的项目，可以使用下面的方法配置自己的 <code>git</code> 用户信息。😀</p>
+<p>比如，你把公司的项目都放在了 <code>Company</code> 目录下，个人的项目都放在了 <code>Personal</code> 目录下下面。</p>
+<p>那你可以这么做：</p>
+<p>在 <code>Company</code> 下新建一个 <code>.gitconfig_include</code> 文件，配置你想在该目录下给所有 <code>git</code> 仓库设置的用户信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[user]</span><br><span class="line">  name = 用户名</span><br><span class="line">  email = 邮箱</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>~/.gitconfig</code> 内添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[includeIf &quot;gitdir:~/Company/&quot;]</span><br><span class="line">  path = ~/Company/.gitconfig_include</span><br></pre></td></tr></table></figure>
+
+<p>⚠️ 复制提醒。<code>Company</code> 要替换成你自己的目录</p>
+<p>这样，之后 <code>Company</code> 目录下的 <code>git</code> 仓库都会使用对应的 <code>git</code> 用户信息。💪</p>
+<p>这是 git 的一个用法，感兴趣的同学可以看这里 <a href="https://git-scm.com/docs/git-config#_conditional_includes" target="_blank" rel="noopener">conditional includes </a> </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://stackoverflow.com/questions/21307793/set-git-config-values-for-all-child-folders" target="_blank" rel="noopener">Set git config values for all child folders</a></p>
 
       </div>
         <div class="support-author">
