@@ -107,7 +107,8 @@
 <h3 id="算法一"><a href="#算法一" class="headerlink" title="算法一"></a>算法一</h3><p><strong>自增序列算法</strong> 也叫永不重复算法</p>
 <p>设置 id 自增，一个 10进制 id 对应一个 62进制的数值，1对1，也就不会出现重复的情况。这个利用的就是低进制转化为高进制时，字符数会减少的特性。</p>
 <p>如下图：十进制 10000，对应不同进制的字符表示。 </p>
-<p><img src="/media/WX20171116-143044@2x.png" alt="WX20171116-143044@2x"><span class="img-alt">WX20171116-143044@2x</span></p>
+<img src="https://static.hufangyun.com/hexo/img/short-url.png?imageView2/2/w/300">
+
 <p>短址的长度一般设为 6 位，而每一位是由 <code>[a - z, A - Z, 0 - 9]</code> 总共 62 个字母组成的，所以 6 位的话，总共会有 62^6 ~= 568亿种组合，基本上够用了。</p>
 <p>哈哈，这里附上一个进制转换工具 <a href="http://tool.lu/hexconvert/" target="_blank" rel="noopener">http://tool.lu/hexconvert/</a> 上图的数据就是用这个工具生成的。</p>
 <p>具体的算法实现，自行谷歌。</p>
