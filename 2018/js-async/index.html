@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2019-03-06T23:32:06.000Z" itemprop="dateUpdated">2019-03-07</time>
+    更新 <time datetime="2019-10-16T16:00:00.000Z" itemprop="dateUpdated">2019-10-17</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -85,7 +85,8 @@
 <p>3、如果 <code>&lt;script&gt;</code> 标签引用了外部脚本，就下载该脚本再执行，否则就直接执行代码。</p>
 <p>4、JavaScript 引擎执行完毕，控制权交还渲染引擎，继续解析 HTML 网页。</p>
 <p>加载外部脚本时，浏览器会暂停页面渲染，等待脚本下载并执行完成后再继续渲染。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g0u4n0mieqj30it04y3yb.jpg" alt=""></p>
+<img src="https://static.hufangyun.com/hexo/img/js-async-2.jpg?imageView2/2/w/600">
+
 <p>这就是为什么我们一般建议把 <code>&lt;script&gt;</code> 标签放在 <code>&lt;/body&gt;</code> 之前，而不是放在 <code>&lt;head&gt;&lt;/head&gt;</code> 中，因为加载 <code>&lt;script&gt;</code> 中的脚本并执行会阻塞 HTML 页面的渲染，当 JavaScript 文件很大的时候，甚至会长时间出现白屏。</p>
 <p>有没有什么办法可以优化 JavaScript 文件的加载执行，提高页面加载的效率？</p>
 <h2 id="解读-async-和-defer-属性"><a href="#解读-async-和-defer-属性" class="headerlink" title="解读 async 和 defer 属性"></a>解读 async 和 defer 属性</h2><p>翻阅 <a href="https://www.w3.org/TR/html51/semantics-scripting.html" target="_blank" rel="noopener">HTML5 的文档</a> 就会发现，<code>&lt;script&gt;</code> 还有 <code>async</code> 和 <code>defer</code> 两个和脚本加载执行有关的属性。</p>
@@ -105,7 +106,8 @@
 <p>2、必须设置了 <code>src</code> 属性，不然 defer 和 async 也无效。</p>
 <p>3、defer 和 async 这两个值是布尔类型的。</p>
 <p>4、如果设置了 async 属性，会并行加载脚本文件并执行，下载时不会阻塞 HTML 的解析，但是脚本执行的时候会阻塞 HTML 的解析。如果没有设置 async 属性，但是设置了 defer 属性，也会并行加载脚本文件，但是会等到页面完成解析再去执行。如果这两个属性都没有设置，会阻塞页面解析，加载并执行脚本文件。三种方式的对比图如下：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g0u4yijbn8j315s082q2z.jpg" alt="图片来源：www.w3c.org"><span class="img-alt">图片来源：www.w3c.org</span></p>
+<img alt="图片来源：www.w3c.org" src="https://static.hufangyun.com/hexo/img/js-async-1.jpg?imageView2/2/w/600"><span class="img-alt">图片来源：www.w3c.org</span>
+
 <p><a href="https://www.w3.org/TR/html53/semantics-scripting.html#element-attrdef-script-defer" target="_blank" rel="noopener">HTML5.3</a>的文档把第四条补充了一下。。。</p>
 <p>1、defer 对 module 脚本是无效的，但是 async 是有效的</p>
 <p>2、如果同时设置了 defer 和 async 为 true， 以 defer 为准</p>
