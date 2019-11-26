@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2017-12-08T16:00:00.000Z" itemprop="dateUpdated">2017-12-09</time>
+    更新 <time datetime="2019-11-25T16:00:00.000Z" itemprop="dateUpdated">2019-11-26</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -109,8 +109,13 @@
 <p>最后，先退出 <code>root</code> 用户登录，再用新用户的身份登录。</p>
 <h2 id="配置-SSH-服务"><a href="#配置-SSH-服务" class="headerlink" title="配置 SSH 服务"></a>配置 SSH 服务</h2><p>把自己电脑的 <code>ssh</code> 公钥，保存到服务器的 <code>~/.ssh/authorized_keys</code> 文件中</p>
 <p>直接使用下面的命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@123.456.78</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 默认端口 22</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@123.456.78</span><br><span class="line"></span><br><span class="line">// 带端口 25000</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub -p 25000 root@123.456.78</span><br></pre></td></tr></table></figure>
 
+<p>本地电脑配置 ssh config</p>
+<p>修改 <code>~/.ssh/config</code> 文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Host 字段后面的名称自定义</span><br><span class="line">Host day-root</span><br><span class="line">  hostname 132.111.111.111</span><br><span class="line">  port 25000</span><br><span class="line">  user root</span><br><span class="line"></span><br><span class="line">Host day</span><br><span class="line">  hostname 132.111.111.111</span><br><span class="line">  port 25000</span><br><span class="line">  user www</span><br></pre></td></tr></table></figure>
+
+<p>之后 <code>ssh day</code> 无须输入密码，就可以登入服务器了。</p>
 <p>然后，进入服务器，编辑SSH配置文件/etc/ssh/sshd_config。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/ssh/sshd_config ~     (备份，复原时使用)</span><br><span class="line">sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 
@@ -142,8 +147,8 @@
 <td>使用密码授权登录</td>
 </tr>
 <tr>
-<td>RSAAuthentication yes</td>
-<td>使用RSA算法进行安全验证</td>
+<td>GSSAPIAuthentication no</td>
+<td>加快连接</td>
 </tr>
 <tr>
 <td>PubkeyAuthentication yes</td>
@@ -202,6 +207,13 @@
 <blockquote>
 <p>安全组是一个逻辑上的分组，这个分组是由同一个地域（Region）内具有相同安全保护需求并相互信任的实例组成。每个实例至少属于一个安全组，在创建的时候就需要指定。同一安全组内的实例之间网络互通，不同安全组的实例之间默认内网不通。可以授权两个安全组之间互访。</p>
 </blockquote>
+<h3 id="腾讯云服务器"><a href="#腾讯云服务器" class="headerlink" title="腾讯云服务器"></a>腾讯云服务器</h3><p>默认账户是 ubuntu，初始密码是自己设置的。忘记的话可以重置密码。</p>
+<p>修改 root 密码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<p>切换用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">su www</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.ruanyifeng.com/blog/2014/03/server_setup.html" target="_blank" rel="noopener">Linux服务器的初步配置流程</a></p>
 
       </div>
