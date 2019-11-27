@@ -24,7 +24,7 @@
   <link rel="stylesheet" type="text/css" href="/./style/main.dfb631.css">
   <link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <title>nginx 端口转发 使用域名访问不显示端口</title>
+  <title>如何给网站添加免费的 https 证书</title>
   
   <script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?ae46047b557574a12bba544bea130043";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();
   </script>
@@ -47,7 +47,7 @@
     
   
   <h1 class="title">
-    nginx 端口转发 使用域名访问不显示端口
+    如何给网站添加免费的 https 证书
   </h1>
   
 
@@ -55,11 +55,11 @@
     <ul class="article-info">
       <li>
         发布
-        <time datetime="2017-07-09T13:42:15.000Z" itemprop="datePublished">2017-07-09</time>
+        <time datetime="2019-11-26T16:00:00.000Z" itemprop="datePublished">2019-11-27</time>
       </li>
       <li>
         
-    更新 <time datetime="2019-11-27T13:42:15.000Z" itemprop="dateUpdated">2019-11-27</time>
+    更新 <time datetime="2019-11-26T16:00:00.000Z" itemprop="dateUpdated">2019-11-27</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -71,36 +71,29 @@
     <div class="article">
       <div class="content">
         
-        <p>开发的项目使用的 3000 端口，现在部署到服务器上，想使用主域名直接访问。我们就需要做一个转发，当用户访问域名（默认 80端口）的时候，转发到3000端口,就可以直接访问我们的项目了。</p>
-<p>端口转发的方式有很多种，我这里选择使用的 <code>nginx</code></p>
-<p>服务器使用的 <code>ubuntu</code> 首先安装 <code>nginx</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+        <img alt="https" src="https://static.hufangyun.com/hexo/img/https-config.jpg"><span class="img-alt">https</span>
 
-<p>进入 <code>/etc/nginx</code> 目录，<code>conf.d</code> 文件夹下添加 <code>server.conf</code> 文件，内容如下：</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#root /var/www/html;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#index index.html index.htm index.nginx-debian.html;</span></span><br><span class="line"></span><br><span class="line">        <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">location</span> / &#123;</span><br><span class="line">                <span class="attribute">proxy_pass</span> http://localhost:3000;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最近部署了一个新服务，想给域名启用 <code>https</code>，结果搜了半天，在我的博客里只发现了这一篇笔记：<a href="https://hufangyun.com/2017/https-aliyun-free/">阿里云免费证书域名启用 https</a></p>
+<p>😹 只能说给网站启用 <code>https</code> 太简单了，之前都没留下笔记，为了之后方便，简单记录一下。</p>
+<p>我使用的是 <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> 的免费证书。</p>
+<p>按照下面的操作一步步来就行了。</p>
+<p>1、去 <a href="https://certbot.eff.org/" target="_blank" rel="noopener">certbot</a> 官网。</p>
+<p>2、在页面上选择一下你用的 <code>Web</code> 服务器和操作系统。比如，我选的 <code>Nginx</code> 和 <code>Ubuntu 18.04</code></p>
+<p>3、页面上会出现操作步骤，按照提示的步骤一步步执行命令就可以了。</p>
+<p>需要注意执行到 <code>sudo certbot --nginx</code> 的时候，会出现两个协议：</p>
+<p>第一个，是问你要不要同意他们的服务协议，选择“同意”。</p>
+<p>第二个，是问你要不要共享你的邮箱给他们，他们偶尔会发一些他们基金会的新闻一类的。我选了“不同意”（因为我不知道以后有没有退订选项 😂）。</p>
+<p>之后 <code>certbot</code> 会自动扫描你的 <code>Nginx</code> 的配置，寻找域名列表然后让你选择想配置 <code>https</code> 证书的域名（好像可以同时配置多个域名）。</p>
+<p>如果没找到域名的话，会让你手动输入一个域名。</p>
+<p>之后会问你，要不要强制把 <code>http</code> 的链接跳转到 <code>https</code> 上，当然选“是”了。</p>
+<p>之后 <code>certbot</code> 会帮你把 <code>Nginx</code> 一切都配置好。你直接访问域名看一下效果即可。服务真是相当的贴心。。。。🎉</p>
+<p>耗叔的这篇文章 <a href="https://coolshell.cn/articles/18094.html" target="_blank" rel="noopener">如何免费的让网站启用HTTPS|酷 壳 - CoolShell</a> 提到配置<code>http2</code> 传输性能更好。</p>
+<blockquote>
+<p>要求 <code>Nginx</code> 版本要大于 <code>1.9.5</code>。<code>HTTP2</code> 具有更快的 <code>HTTPS</code> 传输性能，非常值得开启。需要开启 <code>HTTP/2</code> 其实很简单，只需要在 <code>nginx.conf</code> 的 <code>listen 443 ssl;</code> 后面加上 <code>http2</code> 就好了。如下所示：</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">listen</span> <span class="number">443</span> ssl http2; <span class="comment"># managed by Certbot </span></span><br><span class="line"><span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/coolshell.cn/fullchain.pem; <span class="comment"># managed by Certbot </span></span><br><span class="line"><span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/coolshell.cn/privkey.pem; <span class="comment"># managed by Certbot </span></span><br><span class="line"><span class="attribute">include</span> /etc/letsencrypt/options-ssl-nginx.conf; <span class="comment"># managed by Certbot</span></span><br></pre></td></tr></table></figure>
 
-<p>重启 <code>nginx</code> 服务,不加 <code>sudo</code> 可能会报莫名的错误</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
-
-<p>如果 <code>nginx</code> 启动失败，可以查看错误日志，检查原因</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
-
-<p>或者使用以下命令查看 nginx 状态，会输出报错信息</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl status -l nginx.service</span><br></pre></td></tr></table></figure>
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>按照上面配置完后，<code>nginx</code> 启动失败 🙈，报错如下：</p>
-<p>重复的定义了 default server 80 端口</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-enabled/default:22</span><br></pre></td></tr></table></figure>
-
-<p>使用以下命令搜索哪些地方用到了 <code>default_server</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">grep -R default_server /etc/nginx</span><br></pre></td></tr></table></figure>
-
-<p>原因是 nginx 的默认配置文件也定义了 80 端口</p>
-<p>备份一下 <code>/etc/nginx/sites-enabled/default</code></p>
-<p>然后删除该文件。</p>
-<p>再次重启 nginx 服务，成功 🦊。</p>
-<h2 id="接下来"><a href="#接下来" class="headerlink" title="接下来"></a>接下来</h2><p>客官，要不要再来个小绿锁 🔐，免费的哟！</p>
-<p>详情点击我的这篇文章<a href="https://hufangyun.com/2019/https-config/">如何给网站添加免费的 https 证书</a> </p>
+<p>然后，<code>nginx -s reload</code> 就好了。</p>
 
       </div>
         <div class="support-author">
