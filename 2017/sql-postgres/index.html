@@ -59,7 +59,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2019-09-16T16:00:00.000Z" itemprop="dateUpdated">2019-09-17</time>
+    更新 <time datetime="2019-12-01T16:00:00.000Z" itemprop="dateUpdated">2019-12-02</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -123,6 +123,13 @@
 
 <p><strong>解决</strong></p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">psql -d postgres</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> postgres <span class="keyword">WITH</span> OWNER postgres;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> postgres SUPERUSER;</span><br></pre></td></tr></table></figure>
+
+<p>2、升级版本后，数据库无法启动</p>
+<p>报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">could not connect to server: No such file or directory</span><br><span class="line">Is the server running locally and accepting</span><br><span class="line">connections on Unix domain socket &quot;/tmp/.s.PGSQL.5432&quot;?</span><br><span class="line"></span><br><span class="line">FATAL:  database files are incompatible with server</span><br></pre></td></tr></table></figure>
+
+<p>解决：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">brew postgresql-upgrade-database</span><br></pre></td></tr></table></figure>
 
 <h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p><a href="http://www.infoq.com/cn/news/2013/12/mysql-vs-postgresql" target="_blank" rel="noopener">MySQL与PostgreSQL：该选择哪个开源数据库？哪一个更好？</a></p>
 <p><a href="http://www.infoq.com/cn/news/2015/03/why-postgresql-not-mysql" target="_blank" rel="noopener">为什么选择PostgreSQL而不是MySQL</a></p>
