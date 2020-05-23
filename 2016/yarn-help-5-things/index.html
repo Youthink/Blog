@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="胡方运,小猿大圣,编程,程序员,个人博客,Youthink,Web">
+  <meta name="description" content="小猿大圣的个人博客,胡方运的博客,编程随想">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  
+  <link rel="dns-prefetch" href="https://widget.daovoice.io">
+  <link rel="dns-prefetch" href="https://widget-static-cdn.daovoice.io">
+  <link rel="dns-prefetch" href="https://im.daovoice.io">
+  
+  
+  <link rel="dns-prefetch" href="https://hm.baidu.com/">
+  
+  
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://api.github.com">
+  <link rel="dns-prefetch" href="https://avatars3.githubusercontent.com">
+  
+  <link rel="stylesheet" type="text/css" href="/./style/main.dfb631.css">
+  <link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <title>Yarn能帮你解决的五件事</title>
+  
+  <script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?ae46047b557574a12bba544bea130043";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();
+  </script>
+  
+  
+    <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/1ff30348.js","daovoice");daovoice('init',{app_id: "1ff30348"});daovoice('update');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+  </head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/">胡方运的博客</a>
+  <a class="face-img" href="/">
+    <img src="https://static.hufangyun.com/face.jpg">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    Yarn能帮你解决的五件事
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2016-12-14T09:20:31.000Z" itemprop="datePublished">2016-12-14</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2016-12-14T09:20:31.000Z" itemprop="dateUpdated">2016-12-14</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <div class="overdue-remind">
+          本文最后更新于$day天前，文中所描述的信息可能已发生改变。
+        </div>
+        
+        <blockquote>
+<p>我在<a href="http://zcfy.cc/article/5-things-you-can-do-with-yarn-2055.html" target="_blank" rel="noopener">众成翻译</a>上翻译的一篇文章。<br><a href="https://auth0.com/blog/five-things-you-can-do-with-yarn/" target="_blank" rel="noopener">查看原文</a></p>
+</blockquote>
+<p><strong>长话短说（TL;DR）：</strong> 在 JavaScript 领域有多个包管理器，举几个来说： <strong>npm</strong>，<strong>bower</strong>，<strong>component</strong> 和 <strong>volo</strong>。 截至写本文，最流行的 JavaScript 包管理器是  <strong>npm</strong>。npm 客户端可以访问 npm 源里成千上万的代码库。只是最近，Facebook 推出了新的 JavaScript 包管理器 <strong>Yarn</strong>， 号称是更快，更可靠，比现有的 npm 客户端更安全。 在这篇文章，你将学习到你能用 Yarn 做的五件事情。</p>
+<hr>
+<p><strong>Yarn</strong> 是 Facebook 推出的新的 JavaScript 包管理器。 她为开发者使用 JavaScript 开发应用提供了快速、安全、可靠性高的依赖管理。你可以用 Yarn 处理这五件事。</p>
+<a id="more"></a>
+
+<h2 id="1-离线工作"><a href="#1-离线工作" class="headerlink" title="1. 离线工作"></a>1. 离线工作</h2><p>Yarn 为你提供离线工作的能力。如果你之前安装过一个包，你可以在没有网络连接的情况下，再次安装。下面展示一个典型的例子：</p>
+<p>当我联网的时候，我用Yarn安装了两个包，如下：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fhtxr00bfaj31kw0b9q5f.jpg" alt="Yarn 初始化"><span class="img-alt">Yarn 初始化</span><em>用 Yarn 初始化 package.json 文件</em></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fhtxrsb0x2j31kw09odi6.jpg" alt="用 Yarn 安装 express 和 jsonwebtoken 包"><span class="img-alt">用 Yarn 安装 express 和 jsonwebtoken 包</span><em>用 Yarn 安装 express 和 jsonwebtoken 包</em></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fhtxs8305rj31kw0eudhx.jpg" alt="用 Yarn 安装完成"><span class="img-alt">用 Yarn 安装完成</span><em>安装完成</em></p>
+<p>安装完成后, 我在我的项目里删除了 <em>node_modules</em> 文件夹，并且断开了网络连接。我运行 Yarn ，如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fhtxsh1g5aj31kw08jjtb.jpg" alt="用 Yarn 离线安装包"><span class="img-alt">用 Yarn 离线安装包</span><em>Yarn 离线安装包</em></p>
+<p>就这样！ 所有的包不到两秒钟的时间内再次安装完。 显然，下载的时候 Yarn 缓存了所有的包以至于不需要再次从网络下载。 她通过并行操作最大限度地提高资源利用率，以至于再次下载的时候安装时间比之前更快。</p>
+<h2 id="2-从多个源安装"><a href="#2-从多个源安装" class="headerlink" title="2. 从多个源安装"></a>2. 从多个源安装</h2><p>Yarn 为你提供从多个源下载 JavaScript 包的能力。例如 <a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm</a>, <a href="https://bower.io/" target="_blank" rel="noopener">bower</a>，你的 git 源， 甚至是你本地的文件系统。</p>
+<p>对于你需要的包，Yarn 默认扫描 npm 源，命令如下:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add &lt;pkg-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从远程 gzip 压缩文件安装一个包，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add &lt;https://thatproject.code/package.tgz&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从本地文件系统安装一个包，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add file:/path/to/local/folder</span><br></pre></td></tr></table></figure>
+
+<p>对于持续发布 JavaScript 包的开发者，这是特别有用的。你可以通过这个功能，在发布包之前测试你的包。</p>
+<p>从远程 git 源安装一个包，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add &lt;git remote-url&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fhtxsnk9iyj31kw0afwgy.jpg" alt="Yarn 从 Github 源安装"><span class="img-alt">Yarn 从 Github 源安装</span><em>Yarn 从 Github 源安装</em></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fhtxsvzso4j31kw0olgn3.jpg" alt="Yarn 检测到在 bower 源存在 Github Rep "><span class="img-alt">Yarn 检测到在 bower 源存在 Github Rep </span><em>Yarn 检测到在 bower 源存在 Github Rep 并且添加到文件里，像这样</em></p>
+<h2 id="3-迅速的下载-Javascript-包"><a href="#3-迅速的下载-Javascript-包" class="headerlink" title="3. 迅速的下载 Javascript 包"></a>3. 迅速的下载 Javascript 包</h2><p>如果你已经用了一段时间的 <strong>npm</strong> ， 你一定有这样的经历，当你运行<code>npm install</code>后，就可以去看电影了，回来之后再检查你需要的所有依赖包是否安装完成了。好吧，可能有点夸张，但是 npm 遍历所需要的依赖包并下载它们真的需要花费很长的时间。使用 Yarn，安装时间真的被削减到从等待几分钟到几秒。</p>
+<p>Yarn 优化了排队请求并且最大化的利用网络避免请求阻塞。她先请求源，然后递归查找每个依赖。接下来，在全局缓存文件里查找是否有依赖之前被下载过。如果没有，Yarn 会下载依赖压缩包，放在全局缓存里，当离线的时候使它能够生效。之后消除需要重新下载的请求。</p>
+<p>安装期间， Yarn 并行操作, 使安装过程更快。我分别用<strong>npm</strong> 和 <strong>yarn</strong>新安装了三个包，<strong>jsonwebtoken</strong>、 <strong>express</strong> 和 <strong>lodash</strong>。</p>
+<p><em>Yarn_安装完后， _npm</em> 还在安装中。<br><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fhtxt4o5e4j31kw0scqba.jpg" alt="Yarn 和 Npm 比较"><span class="img-alt">Yarn 和 Npm 比较</span></p>
+<h2 id="4-自动锁定包版本"><a href="#4-自动锁定包版本" class="headerlink" title="4. 自动锁定包版本"></a>4. 自动锁定包版本</h2><p>Npm 有一个叫做 <strong>shrinkwrap</strong> 的特性, 它的作用是在生产环境锁定包依赖。<strong>shrinkwrap</strong> 的局限在于使用该功能，开发者必须手动运行 <code>npm shrinkwrap</code> 命令，生成一个<code>npm-shrinkwrap.json</code> 文件。但是，开发者也是人，也会忘记!</p>
+<p>用 Yarn 就完全不一样了。安装期间, 会自动生成一个 <code>yarn.lock</code> 文件。这和 PHP 开发者熟悉的<code>composer.lock</code> 文件类似。<code>yarn.lock</code> 文件准确的锁定了所有被下载和项目依赖的包版本。通过这个文件，你能确定你的工程师团队的每一位成员都能安装准确的包，并且可以更容易的部署，而没有意外 bug出现。</p>
+<h2 id="5-在不同机器上以相同方法安装依赖"><a href="#5-在不同机器上以相同方法安装依赖" class="headerlink" title="5. 在不同机器上以相同方法安装依赖"></a>5. 在不同机器上以相同方法安装依赖</h2><p><strong>npm 客户端</strong> 安装依赖的方式可能使 A 开发者与 B 开发者的<code>node_modules</code> 文件夹内容的结构不同。它用一种不确定的方式安装这些包依赖。这种方式因为一些系统问题，在生产环境部署重现并不容易，有时也是导致 bug 的原因。</p>
+<p>Yarn 有一个锁文件，并且她的安装算法能够确保在不同的开发者机器上部署应用到生产环境时，安装的依赖包是相同的文件和文件夹结构。</p>
+<p><strong>注:</strong> 虽然我标题说好的是五件事，但是这根本表达不完 <strong>Yarn</strong> 给我的感觉有多棒。所以我还要再补充一点, 企业环境要求能够列出依赖证书类型的能力。而 Yarn 提供了这种能力，只要在你的根目录运行命令  <code>yarn licenses ls</code> 。如下:</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fhtxtdx19mj31kw10l46q.jpg" alt="Yarn 许可证"><span class="img-alt">Yarn 许可证</span></p>
+<h2 id="题外话-在-Yarn-中使用-Auth0"><a href="#题外话-在-Yarn-中使用-Auth0" class="headerlink" title="题外话: 在 Yarn 中使用 Auth0"></a>题外话: 在 Yarn 中使用 Auth0</h2><p>为你的用户的每一次登录提供 <strong>Auth0</strong> <a href="https://jwt.io/" target="_blank" rel="noopener">JSON Web 口令</a>。 这意味着你可以拥有一个可靠的<a href="https://auth0.com/docs/identityproviders" target="_blank" rel="noopener">身份基础设施</a>，包括<a href="https://auth0.com/docs/sso/single-sign-on" target="_blank" rel="noopener">独立的登录</a>, 用户管理, 支持社交账号登录（Facebook、Github、 Twitter等），企业身份登录（Active Directory、LDAP、SAML等）。并且只需要几行代码就可以融合到你自己的用户数据库。</p>
+<p>通过 <a href="https://auth0.com/lock" target="_blank" rel="noopener">Lock Widget</a> 我们能够很容易的在我们的 JavaScript 应用中安装认证。 你可以用 Yarn 很容易的从终端安装 Auth0 锁装置，像这样:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add auth0-lock</span><br></pre></td></tr></table></figure>
+
+<p>几秒内就可以安装完这个部件，并且在<code>yarn.lock</code>文件的帮助下会准确的锁定版本。如果你之前没有 Auth0 账户, 现在就可以<a href="https://auth0.com/signup" target="_blank" rel="noopener">注册</a>一个。 进入 Auth0 <a href="https://manage.auth0.com/" target="_blank" rel="noopener">管理面板</a>，从导航菜单栏选择<strong>应用</strong>， 然后选择你想使用你选择的JavaScript框架连接的应用程序。现在前往<a href="https://auth0.com/docs/quickstarts" target="_blank" rel="noopener">快速开始文档</a>，选择你想构建的应用类型，并且根据提示的步骤操作。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>Yarn 在刚开始出现的时候，就已经展现出了她在从远程仓库下载包到本地环境管理 JavaScript 包方面的显著优势，尤其引人注意的是安全和速度方面。她会成长成为 JavaScript 开发者的最流行的选择吗？你已经换了吗？你对 Yarn 的想法是什么？欢迎在文章下方留下你的评论！</p>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+            <a href="https://hufangyun.com/2018/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+        <div class="otherLink">
+          <div class="previous">
+          </div>
+          <div class="next">
+          </div>
+        </div>
+        <div class="comments" id="comments">
+          
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const gitalk = new Gitalk({
+    clientID: '3b064dc018768ed172b8',
+    clientSecret: '403c6f397465f7fa14cfb02668011929102421d1',
+    repo: 'Youthink.github.io',
+    owner: 'Youthink',
+    admin: ['Youthink'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('comments');
+</script>
+
+
+        </div>
+      </div>
+    </div>
+   
+</main>
+<div class="footer">
+  <div class="info">
+    <p>
+    七牛云加速 | <a href="https://hexo.io"> Hexo </a> 强力驱动 |
+      <a href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>
+      主题
+    </p>
+      <p>&copy;2013-2018 胡方运的博客 鲁ICP备15009509号</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问 https://hufangyun.com ，围观我的博客(づ｡◕‿‿◕｡)づ！\n,\n本博客使用 %cHexo%c 搭建，博客主题为本人开发的 %chexo-themes-yearn%c ~~~ 🎉🎉🎉 \n\n源码 https://github.com/Youthink/hexo-themes-yearn \n\n如果喜欢可以 star 支持一下 ❤️~\n,\n扫描下面的二维码，在手机上查看博客！\n,https://static.hufangyun.com/blog-url-qrcode-180-180.png,\n 想知道这个效果如何实现的？博客内搜索 console 彩蛋 🚀 ！\n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/./js/main.dfb631.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
+
