@@ -78,7 +78,7 @@
 <p>超文本传输安全协议（Hypertext Transfer Protocol Secure）是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。</p>
 </blockquote>
 <p>一句话，就是更加安全。比如电信运营商的广告劫持，https 就可以杜绝。</p>
-<p>** 有利必有弊，使用 https 的缺点 **  😭</p>
+<p><strong>有利必有弊，使用 https 的缺点</strong>  😭</p>
 <p>1、增加额外费用：虽然也有免费的SSL证书，但是要想长期的运营网站，还是要购买收费的SSL。</p>
 <p>2、网站访问速度变慢：据 ACM CoNEXT 数据显示，使用HTTPS协议会使页面的加载时间延长近50%（可以使用 CDN 加速部分解决 😘 ），增加10%到20%的耗电。此外，HTTPS协议还会影响缓存，增加数据开销和功耗。HTTPS 连接服务器端资源占用高很多。</p>
 <p>3、不能调用http的资源：https网站无法调用任何http的资源。</p>
@@ -95,7 +95,7 @@
 <p>然后根据阿里云的提示配置 <code>nginx</code></p>
 <p>下载证书，然后将证书上传到服务器 <code>/etc/nginx/cert</code> 目录下。<br>（文件上传服务器可以参考我这篇<a href="https://hufangyun.com/2015/linux-file-upload/">文章</a><br>）😃</p>
 <h4 id="访问-http-自动跳转到-https"><a href="#访问-http-自动跳转到-https" class="headerlink" title="访问 http 自动跳转到 https"></a>访问 <code>http</code> 自动跳转到 <code>https</code></h4><p>我是使用 <code>nginx 497</code> 错误码处理的,但是这种方式耗费服务器资源，如果想使用其他的方式可以参考文章末尾的<a href="#扩展阅读">扩展阅读</a> 。 😋</p>
-<p>** 思路 **</p>
+<p><strong>思路</strong></p>
 <p>当站点只允许 <code>https</code> 访问时，用 <code>http</code> 访问 <code>nginx</code> 会报出497错误码，然后我们利用 <code>error_page</code> 命令将497状态码的链接重定向到我们的域名上</p>
 <p>配置 nginx 如下：</p>
 <figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">	<span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">	<span class="attribute">listen</span> [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">  <span class="attribute">listen</span> <span class="number">443</span>;</span><br><span class="line">    <span class="comment">#为一个server&#123;......&#125;开启ssl支持</span></span><br><span class="line">  	<span class="attribute">ssl</span> <span class="literal">on</span>;</span><br><span class="line">  	<span class="attribute">root</span> html;</span><br><span class="line">  	<span class="attribute">index</span> index.html index.htm;</span><br><span class="line">    <span class="comment">#指定PEM格式的证书文件</span></span><br><span class="line">  	<span class="attribute">ssl_certificate</span>   cert/<span class="number">214190650300318</span>.pem;</span><br><span class="line">    <span class="comment">#指定PEM格式的私钥文件</span></span><br><span class="line">  	<span class="attribute">ssl_certificate_key</span>  cert/<span class="number">214190650300318</span>.key;</span><br><span class="line">  	<span class="attribute">ssl_session_timeout</span> <span class="number">5m</span>;</span><br><span class="line">  	<span class="attribute">ssl_ciphers</span> ECDHE-R-SHA256:ECRC4;</span><br><span class="line">  	<span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">  	<span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">	<span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#http =&gt; https 让http请求重定向到https请求</span></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
